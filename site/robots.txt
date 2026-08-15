@@ -2,4 +2,4 @@ User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
-Sitemap: https://massage4you.com.pl/sitemap.xml
+Sitemap: https://massage-4-you.com/sitemap.xml

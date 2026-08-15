@@ -182,7 +182,7 @@ The site is static — no build step. `wrangler.toml` at the repo root sets `pag
 
 Cloudflare Pages serves `foo.html` at `/foo` and 308-redirects `/foo.html` → `/foo`, which is exactly what the `rel="canonical"` tags and `sitemap.xml` declare — so no rewrites are needed. `site/_headers` adds baseline security headers and a one-week revalidating cache for `/images/*` (filenames are not content-hashed, so nothing is marked `immutable`).
 
-Before pointing the production domain at it, confirm `massage4you.com.pl` is correct in `site/robots.txt` and `site/sitemap.xml`.
+The production domain is **massage-4-you.com** (apex). Attach it via the Pages project's **Custom domains** tab — never by hand-adding DNS records; Cloudflare creates the CNAME and certificate itself. The domain is hardcoded in `site/robots.txt`, `site/sitemap.xml` and the three `rel="canonical"` tags; change all five together if it ever moves.
 
 ## Files
 Design references included in this bundle:
@@ -193,7 +193,7 @@ Design references included in this bundle:
 - `site/_headers` — security headers + image caching for Cloudflare Pages
 - `site/site.webmanifest` — PWA/Android icon manifest
 - `site/robots.txt` — crawling allowed; `Content-Signal` permits search indexing and AI input (RAG/grounding) but opts out of AI training; points at the sitemap
-- `site/sitemap.xml` — the three live URLs on `massage4you.com.pl`, matching each page's canonical. Add a `<url>` block per service page as it ships, and update `<lastmod>` when a page's content changes
+- `site/sitemap.xml` — the three live URLs on `massage-4-you.com`, matching each page's canonical. Add a `<url>` block per service page as it ships, and update `<lastmod>` when a page's content changes
 - `site/zabiegi/` — services hub + `masaz-klasyczny-poznan.html`
 - `site/images/` — photography plus the brand/favicon set above
 - `Massage4you.dc.html` — homepage (Design Component version)
