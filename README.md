@@ -177,11 +177,20 @@ All derived from `images/Logo-massage4you.png` (2040×2042, white background) �
 
 Icons put the cream mark on a forest-green field (`#2E4B37`, also the `theme-color`) so they read on any tab bar and need no separate maskable art.
 
+## Deployment (Cloudflare Pages)
+The site is static — no build step. `wrangler.toml` at the repo root sets `pages_build_output_dir = "site"`, so Cloudflare publishes that directory as-is; leave **Build command** empty in the dashboard. The `name` field must match the Pages project name (Cloudflare defaults it to the repo name).
+
+Cloudflare Pages serves `foo.html` at `/foo` and 308-redirects `/foo.html` → `/foo`, which is exactly what the `rel="canonical"` tags and `sitemap.xml` declare — so no rewrites are needed. `site/_headers` adds baseline security headers and a one-week revalidating cache for `/images/*` (filenames are not content-hashed, so nothing is marked `immutable`).
+
+Before pointing the production domain at it, confirm `massage4you.com.pl` is correct in `site/robots.txt` and `site/sitemap.xml`.
+
 ## Files
 Design references included in this bundle:
 - `site/index.html` — homepage, plain semantic HTML (**best starting point**)
 - `site/styles.css` — all homepage styles + **design-token block at `:root`** (source of truth)
 - `site/script.js` — mobile-nav toggle, scrolled-header state, booking-form handling (`FORM_ENDPOINT`), footer year
+- `wrangler.toml` — Cloudflare Pages config (publishes `site/`, no build step)
+- `site/_headers` — security headers + image caching for Cloudflare Pages
 - `site/site.webmanifest` — PWA/Android icon manifest
 - `site/robots.txt` — crawling allowed; `Content-Signal` permits search indexing and AI input (RAG/grounding) but opts out of AI training; points at the sitemap
 - `site/sitemap.xml` — the three live URLs on `massage4you.com.pl`, matching each page's canonical. Add a `<url>` block per service page as it ships, and update `<lastmod>` when a page's content changes

@@ -1,0 +1,14 @@
+# Cloudflare Pages response headers.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Photography and brand assets change rarely. Filenames are NOT content-hashed,
+# so no `immutable` here — a week of caching with revalidation means a replaced
+# photo goes live without visitors being stuck on a stale copy for a year.
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

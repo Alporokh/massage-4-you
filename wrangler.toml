@@ -1,0 +1,13 @@
+# Cloudflare Pages configuration.
+#
+# `name` must match the Pages project name in the dashboard — Cloudflare
+# defaults it to the repo name when you connect the repo. If you pick a
+# different project name, change it here too or the deploy will fail.
+#
+# There is no build step: the site is plain HTML/CSS/JS and Cloudflare
+# publishes the site/ directory as-is. Leave "Build command" empty in the
+# dashboard; this file supplies the output directory.
+
+name = "massage-4-you"
+compatibility_date = "2026-08-15"
+pages_build_output_dir = "site"
