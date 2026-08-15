@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+*.swp
+*~
+
+# Dependencies / build output (none today, but keep them out if tooling arrives)
+node_modules/
+dist/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*

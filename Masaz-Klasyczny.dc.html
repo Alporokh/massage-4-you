@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F6F3EC; font-family: 'Jost', system-ui, sans-serif; color: #2E4B37; font-weight: 300; -webkit-font-smoothing: antialiased; }
+  a { color: #C08B4E; text-decoration: none; }
+  a:hover { color: #2E4B37; }
+  .sv-nav a { color: #F6F3EC; opacity: .85; transition: opacity .3s ease; }
+  .sv-nav a:hover { opacity: 1; }
+  .sv-faq { border-top: 1px solid rgba(46,75,55,.16); }
+  .sv-rel:hover { transform: translateY(-4px); box-shadow: 0 24px 44px -26px rgba(46,75,55,.5); }
+  .sv-rel { transition: transform .25s ease, box-shadow .25s ease; }
+</style>
+</helmet>
+
+<div style="overflow-x: hidden;">
+
+  <!-- NAV -->
+  <header style="background: #2E4B37; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(24px,5vw,72px);">
+    <a href="Massage4you.dc.html" style="color: #F6F3EC; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; letter-spacing: .02em;">Massage<span style="color:#C08B4E; font-style:italic;">4</span>you</a>
+    <nav class="sv-nav" style="display: flex; gap: 30px; align-items: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;">
+      <a href="Oferta.dc.html">Oferta</a>
+      <a href="Massage4you.dc.html#zespol">O nas</a>
+      <a href="Massage4you.dc.html#opinie">Opinie</a>
+      <a href="Massage4you.dc.html#blog">Blog</a>
+      <a href="Massage4you.dc.html#kontakt">Kontakt</a>
+    </nav>
+    <a href="Massage4you.dc.html#kontakt" style="color: #F6F3EC; border: 1px solid rgba(246,243,236,.5); padding: 11px 22px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; border-radius: 100px;">Rezerwacja</a>
+  </header>
+
+  <!-- breadcrumb -->
+  <div style="padding: 18px clamp(24px,5vw,72px); font-size: 12px; letter-spacing: .08em; color: #8C9080;">
+    <a href="Massage4you.dc.html">Strona główna</a> &nbsp;/&nbsp; <a href="Oferta.dc.html">Oferta</a> &nbsp;/&nbsp; <span style="color:#2E4B37;">Masaż klasyczny</span>
+  </div>
+
+  <!-- 1 · HERO -->
+  <section style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; align-items: stretch; min-height: 74vh;">
+    <div style="padding: clamp(48px,6vw,96px) clamp(24px,5vw,72px); display: flex; flex-direction: column; justify-content: center;">
+      <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 22px; font-weight: 500;">Masaż ciała · Poznań</p>
+      <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(40px,5vw,74px); line-height: 1.02; margin: 0 0 24px; letter-spacing: -.01em; text-wrap: balance;">Masaż klasyczny — Poznań</h1>
+      <p style="font-size: clamp(16px,1.3vw,19px); line-height: 1.7; color: #55594C; max-width: 520px; margin: 0 0 36px;">Uniwersalny masaż całego ciała, który rozluźnia napięte mięśnie, poprawia krążenie i przywraca lekkość. Podstawa dobrego samopoczucia — dla ciała pracującego i odpoczywającego.</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <a href="Massage4you.dc.html#kontakt" style="background: #C08B4E; color: #2E4B37; padding: 16px 36px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 100px;">Umów wizytę</a>
+        <a href="#cennik" style="color: #2E4B37; padding: 16px 6px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-bottom: 1px solid #2E4B37;">Czas i cena</a>
+      </div>
+    </div>
+    <div style="position: relative; min-height: 340px;">
+      <img src="images/feature.jpg" alt="Masaż klasyczny w Poznaniu" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+    </div>
+  </section>
+
+  <!-- 2 · KORZYŚCI -->
+  <section style="background: #2E4B37; color: #F6F3EC; padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="display: grid; grid-template-columns: repeat(12,1fr); gap: clamp(32px,4vw,64px); align-items: start;">
+      <div style="grid-column: 1 / span 4;">
+        <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px;">Korzyści</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(30px,3.4vw,48px); line-height: 1.06; margin: 0; letter-spacing: -.01em;">Dla kogo jest ten&nbsp;masaż</h2>
+      </div>
+      <div style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(22px,3vw,44px);">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <div>
+            <div style="color: #C08B4E; font-family: 'Cormorant Garamond', serif; font-size: 15px; margin-bottom: 12px;">{{ b.num }}</div>
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(20px,1.8vw,26px); margin: 0 0 10px;">{{ b.title }}</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: #C4C7B5; margin: 0;">{{ b.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · JAK PRZEBIEGA -->
+  <section style="padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="max-width: 560px; margin-bottom: clamp(40px,5vw,64px);">
+      <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px;">Jak przebiega zabieg</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(30px,4vw,52px); line-height: 1.05; margin: 0; letter-spacing: -.01em;">Cztery kroki do&nbsp;pełnego odprężenia</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 1px; background: rgba(46,75,55,.14); border: 1px solid rgba(46,75,55,.14);">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="background: #F6F3EC; padding: clamp(26px,3vw,40px); min-height: 220px; display: flex; flex-direction: column;">
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500; color: #C08B4E; line-height: 1;">{{ s.num }}</div>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(20px,1.8vw,25px); margin: 16px 0 10px;">{{ s.title }}</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #55594C; margin: 0;">{{ s.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 4 · CZAS I CENA -->
+  <section id="cennik" style="background: #EDE7DA; padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="display: grid; grid-template-columns: repeat(12,1fr); gap: clamp(32px,4vw,64px); align-items: center;">
+      <div style="grid-column: 1 / span 5;">
+        <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px;">Czas trwania i cena</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(30px,3.6vw,52px); line-height: 1.05; margin: 0 0 20px; letter-spacing: -.01em;">Wybierz długość, jakiej&nbsp;potrzebujesz</h2>
+        <p style="font-size: 16px; line-height: 1.75; color: #55594C; margin: 0;">Nie wiesz, ile czasu wybrać? Podczas rezerwacji doradzimy wariant najlepszy dla Twojego ciała i planu dnia.</p>
+      </div>
+      <div style="grid-column: 7 / span 6;">
+        <sc-for list="{{ pricing }}" as="p" hint-placeholder-count="3">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; background: #fff; border-radius: 12px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 10px 26px -22px rgba(46,75,55,.6);">
+            <div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500;">{{ p.time }}</div>
+              <div style="font-size: 13px; color: #8C9080; letter-spacing: .04em; margin-top: 3px;">{{ p.note }}</div>
+            </div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #C08B4E;">{{ p.price }}</div>
+          </div>
+        </sc-for>
+        <a href="Massage4you.dc.html#kontakt" style="display: inline-block; margin-top: 14px; background: #2E4B37; color: #F6F3EC; padding: 16px 34px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 100px;">Zarezerwuj termin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PRZECIWWSKAZANIA -->
+  <section style="padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="display: grid; grid-template-columns: repeat(12,1fr); gap: clamp(32px,4vw,64px); align-items: start;">
+      <div style="grid-column: 1 / span 4;">
+        <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px;">Przeciwwskazania</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(28px,3.2vw,44px); line-height: 1.08; margin: 0; letter-spacing: -.01em;">Kiedy zabieg warto&nbsp;odłożyć</h2>
+      </div>
+      <div style="grid-column: 6 / span 7;">
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 14px 40px;">
+          <sc-for list="{{ contra }}" as="c" hint-placeholder-count="6">
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(46,75,55,.12);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span style="font-size: 15px; line-height: 1.5; color: #55594C;">{{ c }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size: 14px; line-height: 1.7; color: #8C9080; margin: 24px 0 0; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 16px;">W razie wątpliwości skonsultuj wizytę z terapeutą — dobierzemy bezpieczny wariant zabiegu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · OPINIE -->
+  <section style="background: #2E4B37; color: #F6F3EC; padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: clamp(40px,5vw,64px);">
+      <div>
+        <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 18px;">Opinie klientów</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(28px,3.6vw,50px); line-height: 1.05; margin: 0; letter-spacing: -.01em;">Co mówią po masażu&nbsp;klasycznym</h2>
+      </div>
+      <div style="text-align: right;"><div style="color: #C08B4E; letter-spacing: 4px; font-size: 18px;">★★★★★</div><div style="font-size: 13px; color: #C4C7B5; margin-top: 6px;">5,0 · Google i Booksy</div></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: clamp(18px,2.4vw,32px);">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+        <div style="border: 1px solid rgba(246,243,236,.16); border-radius: 12px; padding: clamp(26px,3vw,38px); display: flex; flex-direction: column;">
+          <div style="color: #C08B4E; letter-spacing: 3px; font-size: 14px; margin-bottom: 20px;">★★★★★</div>
+          <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(19px,1.5vw,23px); line-height: 1.45; margin: 0 0 auto; color: #F6F3EC;">„{{ r.text }}”</p>
+          <div style="display: flex; justify-content: space-between; margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(246,243,236,.16);"><span style="font-size: 14px;">{{ r.author }}</span><span style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #C4C7B5;">{{ r.source }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 7 · POWIĄZANE -->
+  <section style="padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: clamp(36px,4vw,56px);">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(28px,3.6vw,48px); margin: 0; letter-spacing: -.01em;">Powiązane masaże</h2>
+      <a href="Oferta.dc.html" style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-bottom: 1px solid #C08B4E; padding-bottom: 4px;">Cała oferta</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: clamp(16px,2vw,28px);">
+      <sc-for list="{{ related }}" as="rl" hint-placeholder-count="3">
+        <a href="{{ rl.href }}" class="sv-rel" style="display: block; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 28px -22px rgba(46,75,55,.6); color: #2E4B37;">
+          <img src="{{ rl.img }}" alt="{{ rl.name }}" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+          <div style="padding: 20px 22px 24px;">
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 23px; margin: 0 0 6px;">{{ rl.name }}</h3>
+            <div style="font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #8C9080;">{{ rl.meta }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 8 · FAQ -->
+  <section style="background: #EDE7DA; padding: clamp(64px,9vw,120px) clamp(24px,5vw,72px);">
+    <div style="max-width: 860px; margin: 0 auto;">
+      <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px; text-align: center;">FAQ</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(30px,4vw,52px); line-height: 1.05; margin: 0 0 clamp(36px,4vw,56px); letter-spacing: -.01em; text-align: center;">Masaż klasyczny — częste&nbsp;pytania</h2>
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="4">
+        <div class="sv-faq" style="padding: 26px 0;">
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(20px,1.9vw,26px); margin: 0 0 12px;">{{ f.q }}</h3>
+          <p style="font-size: 16px; line-height: 1.75; color: #55594C; margin: 0;">{{ f.a }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 9 · CTA -->
+  <section style="background: #2E4B37; color: #F6F3EC; text-align: center; padding: clamp(72px,10vw,140px) clamp(24px,5vw,72px);">
+    <p style="font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #C08B4E; margin: 0 0 20px;">Rezerwacja online</p>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px,4.5vw,62px); line-height: 1.04; margin: 0 auto 20px; max-width: 720px; letter-spacing: -.01em;">Zarezerwuj masaż klasyczny w&nbsp;Poznaniu</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #C4C7B5; max-width: 520px; margin: 0 auto 36px;">Wybierz dogodny termin online — potwierdzenie otrzymasz od razu.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="Massage4you.dc.html#kontakt" style="background: #C08B4E; color: #2E4B37; padding: 17px 40px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 100px;">Umów wizytę</a>
+      <a href="tel:+48533681901" style="color: #F6F3EC; border: 1px solid rgba(246,243,236,.5); padding: 17px 34px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 100px;">+48 533 681 901</a>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const K = 'Masaz-Klasyczny.dc.html';
+    return {
+      benefits: [
+        { num: '01', title: 'Napięte mięśnie', desc: 'Rozluźnia spięcia karku, barków i pleców po pracy przy biurku i wysiłku.' },
+        { num: '02', title: 'Lepsze krążenie', desc: 'Pobudza przepływ krwi i limfy, dotlenia tkanki, dodaje energii.' },
+        { num: '03', title: 'Redukcja stresu', desc: 'Obniża poziom napięcia nerwowego i poprawia jakość snu.' },
+        { num: '04', title: 'Regeneracja', desc: 'Wspiera powrót do formy po treningu i codziennym przeciążeniu.' },
+      ],
+      steps: [
+        { num: '1', title: 'Rozmowa', desc: 'Poznajemy Twoje potrzeby, dolegliwości i oczekiwania wobec wizyty.' },
+        { num: '2', title: 'Przygotowanie', desc: 'Dobieramy naturalny olejek i technikę do kondycji Twojego ciała.' },
+        { num: '3', title: 'Masaż', desc: 'Pracujemy nad całym ciałem, dostosowując nacisk i tempo na bieżąco.' },
+        { num: '4', title: 'Wyciszenie', desc: 'Chwila odpoczynku i wskazówki, jak przedłużyć efekt zabiegu.' },
+      ],
+      pricing: [
+        { time: '30 minut', note: 'Masaż częściowy — plecy i kark', price: '120 zł' },
+        { time: '60 minut', note: 'Masaż całego ciała', price: '180 zł' },
+        { time: '90 minut', note: 'Pełny relaks bez pośpiechu', price: '250 zł' },
+      ],
+      contra: [
+        'Gorączka i infekcje', 'Świeże urazy i złamania', 'Zakrzepica i choroby żył',
+        'Choroby skóry w miejscu zabiegu', 'Zaawansowana choroba nowotworowa', 'I trymestr ciąży (konsultacja)',
+      ],
+      reviews: [
+        { text: 'Po godzinnym masażu klasycznym kark przestał mnie boleć po raz pierwszy od miesięcy.', author: 'Katarzyna M.', source: 'Google' },
+        { text: 'Idealny nacisk, spokojna atmosfera i pełen profesjonalizm. Wracam co dwa tygodnie.', author: 'Tomasz W.', source: 'Booksy' },
+        { text: 'Najlepszy masaż w Poznaniu. Terapeutka wyczuła dokładnie te miejsca, które tego potrzebowały.', author: 'Magdalena R.', source: 'Google' },
+      ],
+      related: [
+        { name: 'Masaż leczniczy', meta: 'od 150 zł · 45–60 min', img: 'images/interior-3.jpg', href: K },
+        { name: 'Masaż relaksacyjny', meta: 'od 160 zł · 60–90 min', img: 'images/hero.jpg', href: K },
+        { name: 'Masaż tkanek głębokich', meta: 'od 170 zł · 60 min', img: 'images/interior-1.jpg', href: K },
+      ],
+      faq: [
+        { q: 'Jak często warto korzystać z masażu klasycznego?', a: 'Dla utrzymania efektu polecamy wizytę co 2–3 tygodnie, a przy nasilonych napięciach — raz w tygodniu przez pierwszy miesiąc.' },
+        { q: 'Czy masaż klasyczny boli?', a: 'Nie. Nacisk dobieramy indywidualnie — masaż powinien być odczuwalny, ale komfortowy. Zawsze reagujemy na Twoje sygnały.' },
+        { q: 'Co zabrać na wizytę?', a: 'Nic specjalnego — zapewniamy ręczniki i olejki. Wystarczy przyjść kilka minut wcześniej, by spokojnie się przygotować.' },
+        { q: 'Czy mogę skorzystać z masażu w ciąży?', a: 'Tak, po konsultacji. W ciąży stosujemy delikatniejsze techniki i odpowiednie ułożenie ciała.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

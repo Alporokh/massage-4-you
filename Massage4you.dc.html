@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  @keyframes m4y-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes m4y-fade { from { opacity: 0; } to { opacity: 1; } }
+  ::selection { background: #2e4b37; color: #f6f3ec; }
+  @keyframes m4y-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  </style>
+<script src="./image-slot.js"></script>
+<style>
+  a.m4y-navlink:hover { opacity: 1 !important; }
+  .m4y-svc:hover { background: #2E4B37 !important; color: #F6F3EC !important; }
+  .m4y-svc:hover .m4y-svc-desc { color: #C4C7B5 !important; }
+  .m4y-post image-slot { transition: transform 0.7s ease; }
+  .m4y-post:hover image-slot { transform: scale(1.04); }
+  .m4y-post:hover h3 { color: #C08B4E; }
+</style>
+</helmet>
+
+<div style="background: #F6F3EC; color: #2E4B37; font-family: 'Jost', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
+
+  <!-- ============ NAV ============ -->
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 22px clamp(24px, 5vw, 72px); mix-blend-mode: difference;">
+    <a href="#top" style="text-decoration: none; color: #F6F3EC; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.02em; line-height: 1;">Massage<span style="font-style: italic; font-weight: 500;">4</span>you</a>
+    <nav style="display: flex; gap: 34px; align-items: center;">
+      <a href="#oferta" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Oferta</a>
+      <a href="#zespol" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Zespół</a>
+      <a href="#galeria" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Galeria</a>
+      <a href="#opinie" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Opinie</a>
+      <a href="#blog" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Blog</a>
+      <a href="#kontakt" style="text-decoration: none; color: #F6F3EC; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; opacity: 0.85;" class="m4y-navlink">Kontakt</a>
+    </nav>
+    <a href="#kontakt" style="text-decoration: none; color: #F6F3EC; border: 1px solid rgba(251,245,236,0.6); padding: 11px 22px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 100px;">Rezerwacja</a>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding: clamp(28px, 5vw, 72px); padding-bottom: clamp(48px, 7vh, 96px);">
+    <image-slot id="m4y-hero" src="images/hero.jpg" shape="rect" fit="cover" placeholder="Zdjęcie główne" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;"></image-slot>
+    <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(30,25,18,0.55) 0%, rgba(30,25,18,0.15) 35%, rgba(30,25,18,0.35) 70%, rgba(30,25,18,0.78) 100%); pointer-events: none;"></div>
+
+    <div style="position: relative; z-index: 2; max-width: 900px; color: #F6F3EC; animation: m4y-rise 1s ease both;">
+      <p style="font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase; margin: 0 0 26px; font-weight: 400; opacity: 0.9;">Studio masażu · Poznań</p>
+      <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(44px, 7vw, 96px); line-height: 1.02; margin: 0; letter-spacing: -0.01em; text-wrap: balance;">Chwila spokoju, której&nbsp;potrzebuje <span style="font-style: italic;">Twoje ciało</span></h1>
+      <p style="max-width: 520px; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; margin: 30px 0 40px; font-weight: 300; opacity: 0.92;">Profesjonalne masaże klasyczne, zdrowotne i relaksacyjne w kameralnym studiu w sercu miasta. Indywidualne podejście do każdego ciała.</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <a href="#kontakt" style="text-decoration: none; background: {{ accent }}; color: #F6F3EC; padding: 16px 34px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 100px; font-weight: 400;">Zarezerwuj wizytę</a>
+        <a href="#oferta" style="text-decoration: none; color: #F6F3EC; padding: 16px 8px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400; border-bottom: 1px solid rgba(251,245,236,0.5);">Zobacz ofertę</a>
+      </div>
+    </div>
+
+    <div style="position: absolute; right: clamp(28px,5vw,72px); bottom: clamp(48px,7vh,96px); z-index: 2; color: #F6F3EC; text-align: right; font-size: 13px; line-height: 1.9; opacity: 0.85; letter-spacing: 0.03em;">
+      <div>Pon – Czw &nbsp; 09:00 – 20:30</div>
+      <div>Pt – Nd &nbsp; 09:00 – 21:00</div>
+      <div style="margin-top: 8px; font-size: 15px; letter-spacing: 0.06em;">+48 533 681 901</div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST STRIP ============ -->
+  <div style="background: #2E4B37; color: #E6E2D6; overflow: hidden; padding: 20px 0; white-space: nowrap;">
+    <div style="display: inline-flex; gap: 0; animation: m4y-marquee 34s linear infinite;">
+      <span class="m4y-marq" style="font-family:'Cormorant Garamond',serif; font-style: italic; font-size: 22px;">Certyfikowani terapeuci &nbsp;·&nbsp; Indywidualne podejście &nbsp;·&nbsp; Kameralna atmosfera &nbsp;·&nbsp; Naturalne olejki &nbsp;·&nbsp;&nbsp;</span>
+      <span class="m4y-marq" style="font-family:'Cormorant Garamond',serif; font-style: italic; font-size: 22px;">Certyfikowani terapeuci &nbsp;·&nbsp; Indywidualne podejście &nbsp;·&nbsp; Kameralna atmosfera &nbsp;·&nbsp; Naturalne olejki &nbsp;·&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ============ O NAS ============ -->
+  <section id="o-nas" style="padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center;">
+    <div style="grid-column: 1 / span 6;">
+      <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 24px; font-weight: 500;">O nas</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; margin: 0 0 28px; letter-spacing: -0.01em; text-wrap: balance;">Miejsce stworzone z pasją do&nbsp;Twojego dobrostanu</h2>
+      <p style="font-size: 17px; line-height: 1.8; color: #55594C; margin: 0 0 20px; max-width: 520px;">Massage 4 You to kameralne studio, w którym doświadczeni terapeuci łączą wiedzę z troską o każdego gościa. Powstało z prostej potrzeby — stworzenia miejsca, gdzie można odzyskać równowagę, ulgę i spokój.</p>
+      <p style="font-size: 17px; line-height: 1.8; color: #55594C; margin: 0 0 40px; max-width: 520px;">Stawiamy na profesjonalizm i indywidualne podejście, dobierając technikę do potrzeb Twojego ciała — od masażu klasycznego, przez zdrowotny, po relaksacyjny i kosmetyczny.</p>
+      <div style="display: flex; gap: clamp(28px, 4vw, 56px);">
+        <div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 500; line-height: 1; color: #2E4B37;">8+</div>
+          <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8C9080; margin-top: 8px;">Lat doświadczenia</div>
+        </div>
+        <div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 500; line-height: 1; color: #2E4B37;">5</div>
+          <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8C9080; margin-top: 8px;">Rodzajów masażu</div>
+        </div>
+        <div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 500; line-height: 1; color: #2E4B37;">100%</div>
+          <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8C9080; margin-top: 8px;">Naturalne olejki</div>
+        </div>
+      </div>
+    </div>
+    <div style="grid-column: 8 / span 5; position: relative;">
+      <image-slot id="m4y-about1" src="images/interior-2.jpg" shape="rect" fit="cover" placeholder="Wnętrze studia" style="width: 100%; height: clamp(420px, 40vw, 620px); display: block;"></image-slot>
+      <image-slot id="m4y-about2" src="images/feature.jpg" shape="rect" fit="cover" placeholder="Detal" style="position: absolute; bottom: -48px; left: -48px; width: 46%; height: clamp(190px, 18vw, 280px); display: block; border: 10px solid #F6F3EC;"></image-slot>
+    </div>
+  </section>
+
+  <!-- ============ OFERTA ============ -->
+  <section id="oferta" style="background: #EDE7DA; padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(48px, 7vh, 88px);">
+      <div>
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 20px; font-weight: 500;">Oferta</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.05; margin: 0; letter-spacing: -0.01em; max-width: 640px; text-wrap: balance;">Masaż dobrany do&nbsp;tego, czego potrzebujesz</h2>
+      </div>
+      <a href="#cennik" style="text-decoration: none; color: #2E4B37; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid #2E4B37; padding-bottom: 4px;">Pełny cennik</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: rgba(42,37,30,0.14); border: 1px solid rgba(42,37,30,0.14);">
+      <sc-for list="{{ services }}" as="svc" hint-placeholder-count="5">
+        <div class="m4y-svc" style="background: #EDE7DA; padding: clamp(28px, 3vw, 44px); display: flex; flex-direction: column; min-height: 300px; transition: background 0.5s ease, color 0.5s ease;">
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; opacity: 0.5;">{{ svc.num }}</div>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(24px, 2vw, 30px); line-height: 1.15; margin: 18px 0 14px; letter-spacing: -0.005em;">{{ svc.name }}</h3>
+          <p style="font-size: 15px; line-height: 1.7; color: #55594C; margin: 0 0 auto;" class="m4y-svc-desc">{{ svc.desc }}</p>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 32px; padding-top: 18px; border-top: 1px solid rgba(42,37,30,0.16);">
+            <span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8C9080;">{{ svc.time }}</span>
+            <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500;">{{ svc.price }}</span></sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <p style="font-size: 13px; color: #8C9080; margin: 24px 0 0; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 16px;">Ceny orientacyjne — dokładny cennik ustalamy podczas rezerwacji.</p>
+  </section>
+
+  <!-- ============ DLACZEGO MY ============ -->
+  <section id="dlaczego" data-screen-label="Dlaczego my" style="padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start;">
+      <div style="grid-column: 1 / span 4;">
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 24px; font-weight: 500;">Dlaczego my</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.08; margin: 0 0 32px; letter-spacing: -0.01em; text-wrap: balance;">Cztery powody, dla których wracają&nbsp;goście</h2>
+        <div style="display: flex; align-items: center; gap: 14px; padding: 20px 24px; background: #EDE7DA; border-radius: 6px;">
+          <span style="font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; line-height: 1;">5,0</span>
+          <div>
+            <div style="color: {{ accent }}; letter-spacing: 3px; font-size: 15px;">★★★★★</div>
+            <div style="font-size: 12px; color: #8C9080; letter-spacing: 0.06em; margin-top: 4px;">Ocena w Google i Booksy</div>
+          </div>
+        </div>
+      </div>
+      <div style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(24px, 3vw, 48px) clamp(32px, 4vw, 56px);">
+        <sc-for list="{{ whyPoints }}" as="p" hint-placeholder-count="4">
+          <div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; color: {{ accent }}; margin-bottom: 14px;">{{ p.num }}</div>
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(21px, 1.9vw, 27px); margin: 0 0 12px; letter-spacing: -0.005em;">{{ p.title }}</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: #55594C; margin: 0;">{{ p.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZESPÓŁ ============ -->
+  <section id="zespol" data-screen-label="Zespół" style="background: #EDE7DA; padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="text-align: center; max-width: 640px; margin: 0 auto clamp(48px, 7vh, 80px);">
+      <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 20px; font-weight: 500;">Zespół</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.05; margin: 0; letter-spacing: -0.01em; text-wrap: balance;">Terapeuci, którym powierzysz&nbsp;swoje ciało</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(24px, 3vw, 44px); max-width: 1100px; margin: 0 auto;">
+      <sc-for list="{{ team }}" as="m" hint-placeholder-count="3">
+        <div>
+          <image-slot src="{{ m.img }}" shape="rect" fit="cover" placeholder="Zdjęcie terapeuty" style="width: 100%; height: clamp(300px, 34vw, 400px); display: block; border-radius: 4px;"></image-slot>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 24px; margin: 22px 0 6px; letter-spacing: -0.005em;">{{ m.name }}</h3>
+          <p style="font-size: 13px; letter-spacing: 0.06em; color: #8C9080; margin: 0; text-transform: uppercase;">{{ m.role }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED / QUOTE BAND ============ -->
+  <section style="position: relative; min-height: 74vh; display: flex; align-items: center; justify-content: center; padding: clamp(60px, 10vh, 140px) clamp(24px, 6vw, 100px); text-align: center;">
+    <image-slot id="m4y-feature" src="images/interior-3.jpg" shape="rect" fit="cover" placeholder="Zdjęcie atmosfery" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;"></image-slot>
+    <div style="position: absolute; inset: 0; z-index: 1; background: rgba(30,25,18,0.55);"></div>
+    <blockquote style="position: relative; z-index: 2; color: #F6F3EC; max-width: 900px; margin: 0; display: flex; flex-direction: column; align-items: center;">
+      <button aria-label="Odtwórz film" style="width: 76px; height: 76px; border-radius: 100px; border: 1px solid rgba(251,245,236,0.6); background: rgba(251,245,236,0.08); color: #F6F3EC; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-bottom: 40px; backdrop-filter: blur(2px);">
+        <span style="display: block; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid #F6F3EC; margin-left: 4px;"></span>
+      </button>
+      <p style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(28px, 4vw, 52px); line-height: 1.3; margin: 0; text-wrap: balance;">„Dotyk, który przywraca ciału pamięć spokoju.”</p>
+      <footer style="font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; margin-top: 32px; opacity: 0.8;">Zespół Massage4you</footer>
+    </blockquote>
+  </section>
+
+  <!-- ============ GALERIA ============ -->
+  <section id="galeria" data-screen-label="Galeria" style="padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(40px, 6vh, 72px);">
+      <div>
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 20px; font-weight: 500;">Galeria</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.05; margin: 0; letter-spacing: -0.01em; max-width: 620px; text-wrap: balance;">Zajrzyj do wnętrza naszego&nbsp;studia</h2>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(160px, 15vw, 220px); gap: clamp(10px, 1vw, 16px);">
+      <div style="grid-column: span 2; grid-row: span 2;"><image-slot src="images/interior-1.jpg" shape="rect" fit="cover" placeholder="Wnętrze" style="width:100%; height:100%; display:block; border-radius:4px;"></image-slot></div>
+      <div><image-slot src="images/interior-4.jpg" shape="rect" fit="cover" placeholder="Detal" style="width:100%; height:100%; display:block; border-radius:4px;"></image-slot></div>
+      <div><image-slot src="images/interior-2.jpg" shape="rect" fit="cover" placeholder="Detal" style="width:100%; height:100%; display:block; border-radius:4px;"></image-slot></div>
+      <div style="grid-column: span 2;"><image-slot src="images/interior-3.jpg" shape="rect" fit="cover" placeholder="Wnętrze" style="width:100%; height:100%; display:block; border-radius:4px;"></image-slot></div>
+    </div>
+  </section>
+
+  <!-- ============ OPINIE ============ -->
+  <section id="opinie" data-screen-label="Opinie" style="background: #2E4B37; color: #E6E2D6; padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(48px, 7vh, 80px);">
+      <div>
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 20px; font-weight: 500;">Opinie</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4.5vw, 58px); line-height: 1.05; margin: 0; color: #F6F3EC; letter-spacing: -0.01em; max-width: 640px; text-wrap: balance;">Co mówią o nas w&nbsp;Google i Booksy</h2>
+      </div>
+      <div style="text-align: right;">
+        <div style="color: {{ accent }}; letter-spacing: 4px; font-size: 18px;">★★★★★</div>
+        <div style="font-size: 13px; color: #8C9080; letter-spacing: 0.06em; margin-top: 6px;">5,0 średnia ocen</div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(20px, 2.5vw, 36px);">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+        <div style="border: 1px solid rgba(232,221,203,0.16); border-radius: 6px; padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column;">
+          <div style="color: {{ accent }}; letter-spacing: 3px; font-size: 14px; margin-bottom: 22px;">★★★★★</div>
+          <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(19px, 1.6vw, 24px); line-height: 1.45; color: #F6F3EC; margin: 0 0 auto;">„{{ r.text }}”</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(232,221,203,0.16);">
+            <span style="font-size: 14px; color: #E6E2D6;">{{ r.author }}</span>
+            <span style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #8C9080;">{{ r.source }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ VOUCHERY ============ -->
+  <section id="vouchery" style="padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center;">
+    <div style="grid-column: 1 / span 5; position: relative;">
+      <div style="aspect-ratio: 1.6/1; background: linear-gradient(135deg, #2E4B37 0%, #3E5A46 100%); border-radius: 6px; padding: clamp(28px,3vw,44px); display: flex; flex-direction: column; justify-content: space-between; color: #F6F3EC; box-shadow: 0 30px 60px -30px rgba(42,37,30,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;">Massage<span style="font-style:italic;">4</span>you</span>
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7;">Voucher</span>
+        </div>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px;">Podarunek</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: clamp(26px,3vw,40px); font-weight: 500; line-height: 1.1;">Chwila relaksu dla&nbsp;bliskiej osoby</div>
+        </div>
+      </div>
+    </div>
+    <div style="grid-column: 7 / span 6;">
+      <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 24px; font-weight: 500;">Vouchery</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; margin: 0 0 28px; letter-spacing: -0.01em; text-wrap: balance;">Podaruj spokój, który&nbsp;zostaje w pamięci</h2>
+      <p style="font-size: 17px; line-height: 1.8; color: #55594C; margin: 0 0 36px; max-width: 520px;">Voucher upominkowy Massage4you to gotowy pomysł na prezent na każdą okazję. Wybierz kwotę lub konkretny zabieg — resztą zajmiemy się my.</p>
+      <a href="#kontakt" style="text-decoration: none; background: {{ accent }}; color: #F6F3EC; padding: 16px 34px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 100px; display: inline-block;">Zamów voucher</a>
+    </div>
+  </section>
+
+  <!-- ============ BLOG ============ -->
+  <section id="blog" data-screen-label="Blog" style="background: #EDE7DA; padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 72px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(40px, 6vh, 72px);">
+      <div>
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 20px; font-weight: 500;">Blog</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.05; margin: 0; letter-spacing: -0.01em; max-width: 620px; text-wrap: balance;">Wiedza, która pomaga zadbać o&nbsp;siebie</h2>
+      </div>
+      <a href="#blog" style="text-decoration: none; color: #2E4B37; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid #2E4B37; padding-bottom: 4px;">Wszystkie artykuły</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(24px, 3vw, 44px);">
+      <sc-for list="{{ posts }}" as="post" hint-placeholder-count="3">
+        <a href="#blog" class="m4y-post" style="text-decoration: none; color: inherit; display: block;">
+          <div style="overflow: hidden; border-radius: 4px;">
+            <image-slot src="{{ post.img }}" shape="rect" fit="cover" placeholder="Zdjęcie artykułu" style="width: 100%; height: clamp(200px, 22vw, 260px); display: block;"></image-slot>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center; margin: 20px 0 12px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #8C9080;">
+            <span style="color: {{ accent }};">{{ post.cat }}</span><span>·</span><span>{{ post.read }}</span>
+          </div>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; margin: 0; letter-spacing: -0.005em;">{{ post.title }}</h3>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section id="kontakt" style="background: #2E4B37; color: #E6E2D6; padding: clamp(80px, 12vh, 150px) clamp(24px, 5vw, 72px) clamp(48px,6vh,80px);">
+    <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(32px, 5vw, 64px);">
+      <div id="cennik" style="grid-column: 1 / span 6;">
+        <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: {{ accent }}; margin: 0 0 24px; font-weight: 500;">Kontakt · Rezerwacja</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(34px, 4.5vw, 64px); line-height: 1.05; margin: 0 0 40px; color: #F6F3EC; letter-spacing: -0.01em; text-wrap: balance;">Umów wizytę w&nbsp;naszym studiu</h2>
+        <a href="tel:+48533681901" style="text-decoration: none; color: #F6F3EC; font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,3vw,40px); font-weight: 500; display: inline-block; margin-bottom: 8px;">+48 533 681 901</a>
+        <br>
+        <a href="mailto:massage4youpoznan@gmail.com" style="text-decoration: none; color: #E6E2D6; font-size: 17px; letter-spacing: 0.02em; border-bottom: 1px solid rgba(232,221,203,0.35); padding-bottom: 3px;">massage4youpoznan@gmail.com</a>
+      </div>
+      <div style="grid-column: 8 / span 3;">
+        <div style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: {{ accent }}; margin-bottom: 18px;">Godziny otwarcia</div>
+        <div style="font-size: 16px; line-height: 2; color: #E6E2D6;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(232,221,203,0.14); padding: 6px 0;"><span>Pon – Czw</span><span>09:00 – 20:30</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 0;"><span>Pt – Nd</span><span>09:00 – 21:00</span></div>
+        </div>
+      </div>
+      <div style="grid-column: 11 / span 2;">
+        <div style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: {{ accent }}; margin-bottom: 18px;">Adres</div>
+        <div style="font-size: 16px; line-height: 1.8; color: #E6E2D6;">ul. Zeylanda 3/1<br>60-808 Poznań</div>
+      </div>
+    </div>
+
+    <footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: clamp(64px,9vh,120px); padding-top: 32px; border-top: 1px solid rgba(232,221,203,0.16);">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #F6F3EC;">Massage<span style="font-style:italic;">4</span>you</div>
+      <div style="font-size: 12px; letter-spacing: 0.1em; color: #8C9080;">© {{ year }} Massage4you · Studio masażu w Poznaniu</div>
+    </footer>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 6400}, &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#C08B4E&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#C08B4E&quot;, &quot;#A9673F&quot;, &quot;#8C7A5B&quot;, &quot;#9A6B5A&quot;], &quot;section&quot;: &quot;Wygląd&quot;}, &quot;showPrices&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Oferta&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#C08B4E';
+    const showPrices = this.props.showPrices ?? true;
+    const services = [
+      { num: '01', name: 'Masaż klasyczny', desc: 'Uniwersalny masaż całego ciała, który rozluźnia mięśnie, poprawia krążenie i przywraca lekkość.', time: '30 / 60 / 90 min', price: 'od 120 zł' },
+      { num: '02', name: 'Masaż zdrowotny', desc: 'Ukierunkowana praca z napięciami i bólem — wsparcie dla kręgosłupa, karku i przeciążonych partii.', time: '45 / 60 min', price: 'od 150 zł' },
+      { num: '03', name: 'Masaż relaksacyjny', desc: 'Spokojny, głęboko odprężający rytuał z naturalnymi olejkami, który wycisza ciało i umysł.', time: '60 / 90 min', price: 'od 160 zł' },
+      { num: '04', name: 'Masaż kosmetyczny', desc: 'Pielęgnacyjny masaż twarzy i ciała poprawiający kondycję i wygląd skóry.', time: '45 / 60 min', price: 'od 140 zł' },
+      { num: '05', name: 'Masaż sprzętowy', desc: 'Specjalistyczny masaż modelujący sylwetkę, wspierający ujędrnienie i redukcję cellulitu.', time: '30 / 45 min', price: 'od 130 zł' },
+    ];
+    const whyPoints = [
+      { num: '01', title: 'Certyfikowani terapeuci', desc: 'Zespół z wieloletnim doświadczeniem i stałym doskonaleniem technik — od masażu klasycznego po pracę z tkankami głębokimi.' },
+      { num: '02', title: 'Indywidualne podejście', desc: 'Każdą wizytę zaczynamy od rozmowy. Technikę, tempo i nacisk dobieramy do potrzeb Twojego ciała.' },
+      { num: '03', title: 'Kameralna atmosfera', desc: 'Ciche, zadbane wnętrze z dala od zgiełku — miejsce stworzone po to, by naprawdę odpocząć.' },
+      { num: '04', title: 'Naturalne olejki', desc: 'Pracujemy wyłącznie na naturalnych, hipoalergicznych olejkach o subtelnych, kojących zapachach.' },
+    ];
+    const team = [
+      { name: 'Anna Kowalczyk', role: 'Masaż zdrowotny i klasyczny', img: 'images/team-1.jpg' },
+      { name: 'Marek Zieliński', role: 'Masaż sportowy i tkanek głębokich', img: 'images/team-2.jpg' },
+      { name: 'Julia Nowak', role: 'Masaż relaksacyjny i kosmetyczny', img: 'images/team-3.jpg' },
+    ];
+    const gallery = [
+      'images/interior-1.jpg',
+      'images/interior-4.jpg',
+      'images/interior-2.jpg',
+      'images/interior-3.jpg',
+      'images/feature.jpg',
+    ];
+    const reviews = [
+      { text: 'Najlepszy masaż w Poznaniu. Profesjonalizm i spokój od progu. Wychodzę odmieniona za każdym razem.', author: 'Katarzyna M.', source: 'Google', stars: 5 },
+      { text: 'Masaż zdrowotny pomógł mi z bólem karku po miesiącach pracy przy biurku. Serdecznie polecam.', author: 'Tomasz W.', source: 'Booksy', stars: 5 },
+      { text: 'Kameralne, czyste, pachnące miejsce. Widać pasję i dbałość o szczegóły. Wrócę na pewno.', author: 'Magdalena R.', source: 'Google', stars: 5 },
+    ];
+    const posts = [
+      { cat: 'Zdrowie', title: 'Jak masaż wspiera regenerację po treningu', read: '4 min czytania', img: 'images/hero.jpg' },
+      { cat: 'Relaks', title: '5 sygnałów, że Twoje ciało potrzebuje masażu', read: '3 min czytania', img: 'images/interior-1.jpg' },
+      { cat: 'Pielęgnacja', title: 'Naturalne olejki — co warto o nich wiedzieć', read: '5 min czytania', img: 'images/feature.jpg' },
+    ];
+    return { accent, showPrices, services, whyPoints, team, gallery, reviews, posts, year: new Date().getFullYear() };
+  }
+}
+</script>
+</body>
+</html>

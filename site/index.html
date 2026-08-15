@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Massage4you — Studio masażu w Poznaniu</title>
+  <meta name="description" content="Profesjonalne masaże klasyczne, zdrowotne i relaksacyjne w kameralnym studiu w sercu Poznania. Indywidualne podejście do każdego ciała.">
+  <link rel="canonical" href="/">
+
+  <!-- Favicon / ikony aplikacji -->
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2E4B37">
+  <meta name="apple-mobile-web-app-title" content="Massage4you">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <a href="#top" class="logo">
+      <img class="logo__mark" src="images/logo-mark-light.png" alt="" width="44" height="32">
+      <span class="logo__word">Massage<i>4</i>you</span>
+    </a>
+    <nav class="nav">
+      <a href="#o-nas">O nas</a>
+      <a href="#zespol">Zespół</a>
+      <a href="#cennik">Cennik</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#opinie">Opinie</a>
+      <a href="#kontakt">Kontakt</a>
+      <!-- the pill CTA is hidden on phones; this stands in inside the folded menu -->
+      <a href="#rezerwacja" class="nav__book">Rezerwacja</a>
+    </nav>
+    <a href="#rezerwacja" class="nav-cta">Rezerwacja</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="hero">
+    <!-- new studio photo; falls back to the previous hero until the file is added to images/ -->
+    <img class="hero__img" src="images/hero-studio.jpg" onerror="this.onerror=null;this.src='images/hero.jpg'" alt="Gabinet Massage 4 You w Poznaniu — stoły do masażu dla dwojga">
+    <div class="hero__scrim"></div>
+    <div class="hero__body">
+      <p class="hero__kicker">Studio masażu · Poznań</p>
+      <h1>Chwila spokoju, której&nbsp;potrzebuje <i>Twoje ciało</i></h1>
+      <p class="hero__text">Profesjonalne masaże klasyczne, zdrowotne i relaksacyjne w kameralnym studiu w sercu miasta. Indywidualne podejście do każdego ciała.</p>
+      <div class="hero__actions">
+        <a href="#rezerwacja" class="btn btn--solid">Zarezerwuj wizytę</a>
+        <a href="#cennik" class="btn btn--ghost">Zobacz ofertę</a>
+      </div>
+    </div>
+    <div class="hero__hours">
+      <div>Pon – Czw &nbsp; 09:00 – 20:30</div>
+      <div>Pt – Nd &nbsp; 09:00 – 21:00</div>
+      <div class="phone">+48 533 681 901</div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee">
+    <div class="marquee__track">
+      <span>Certyfikowani terapeuci &nbsp;·&nbsp; Indywidualne podejście &nbsp;·&nbsp; Kameralna atmosfera &nbsp;·&nbsp; Naturalne olejki &nbsp;·&nbsp;&nbsp;</span>
+      <span>Certyfikowani terapeuci &nbsp;·&nbsp; Indywidualne podejście &nbsp;·&nbsp; Kameralna atmosfera &nbsp;·&nbsp; Naturalne olejki &nbsp;·&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ============ O NAS ============ -->
+  <section id="o-nas" class="section wrap grid12">
+    <div class="about__copy">
+      <p class="eyebrow">O nas</p>
+      <h2 class="h2">Miejsce stworzone z pasją do&nbsp;Twojego dobrostanu</h2>
+      <p class="lead" style="margin:28px 0 20px; max-width:520px;">Massage 4 You to kameralne studio, w którym doświadczeni terapeuci łączą wiedzę z troską o każdego gościa. Powstało z prostej potrzeby — stworzenia miejsca, gdzie można odzyskać równowagę, ulgę i spokój.</p>
+      <p class="lead" style="margin:0 0 8px; max-width:520px;">Stawiamy na profesjonalizm i indywidualne podejście, dobierając technikę do potrzeb Twojego ciała — od masażu klasycznego, przez zdrowotny, po relaksacyjny i kosmetyczny.</p>
+      <div class="stats">
+        <div><div class="stat__n">8+</div><div class="stat__l">Lat doświadczenia</div></div>
+        <div><div class="stat__n">16</div><div class="stat__l">Rodzajów masażu</div></div>
+        <div><div class="stat__n">100%</div><div class="stat__l">Naturalne olejki</div></div>
+      </div>
+    </div>
+    <div class="about__media">
+      <img class="about__img" src="images/interior-2.jpg" alt="Wnętrze studia">
+      <img class="about__inset" src="images/feature.jpg" alt="Detal — naturalne olejki">
+    </div>
+  </section>
+
+  <!-- ============ CENNIK / OFERTA ============ -->
+  <section id="cennik" class="section wrap offer">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Cennik</p>
+        <h2 class="h2">Masaż dobrany do&nbsp;tego, czego potrzebujesz</h2>
+      </div>
+      <a href="zabiegi/index.html" class="link-underline">Wszystkie zabiegi</a>
+    </div>
+
+    <!-- ---- 01 · Masaże ciała ---- -->
+    <div class="price-group">
+      <div class="hub-group__head">
+        <span class="hub-group__n">01</span>
+        <h3 class="h2" style="font-size:clamp(26px,3vw,40px);">Masaże ciała</h3>
+      </div>
+      <div class="svc-grid">
+
+        <article class="svc">
+          <div class="svc__num">01</div>
+          <h3 class="svc__name">Masaż klasyczny</h3>
+          <p class="svc__desc">Uniwersalny masaż całego ciała, który rozluźnia mięśnie, poprawia krążenie i przywraca lekkość.</p>
+          <div class="svc__foot"><span class="svc__time">30 / 60 / 90 min</span><span class="svc__price">od 120 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż klasyczny">Rezerwacja</a>
+            <a href="zabiegi/masaz-klasyczny-poznan.html" class="svc__more">Więcej &rarr;</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">02</div>
+          <h3 class="svc__name">Masaż leczniczy</h3>
+          <p class="svc__desc">Ukierunkowana praca z napięciem i bólem — wsparcie dla kręgosłupa, karku i przeciążonych partii.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 150 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż leczniczy">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">03</div>
+          <h3 class="svc__name">Masaż relaksacyjny</h3>
+          <p class="svc__desc">Spokojny, głęboko odprężający rytuał z naturalnymi olejkami, który wycisza ciało i umysł.</p>
+          <div class="svc__foot"><span class="svc__time">60 / 90 min</span><span class="svc__price">od 160 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż relaksacyjny">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">04</div>
+          <h3 class="svc__name">Masaż tkanek głębokich</h3>
+          <p class="svc__desc">Intensywna praca na głębszych warstwach mięśni i powięzi — dla uporczywych, nawracających napięć.</p>
+          <div class="svc__foot"><span class="svc__time">60 / 90 min</span><span class="svc__price">od 180 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż tkanek głębokich">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">05</div>
+          <h3 class="svc__name">Drenaż limfatyczny</h3>
+          <p class="svc__desc">Delikatny masaż wspierający przepływ limfy, redukujący obrzęki i uczucie ciężkich nóg.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 150 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Drenaż limfatyczny">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">06</div>
+          <h3 class="svc__name">Masaż antycellulitowy</h3>
+          <p class="svc__desc">Modelujący masaż wspierający ujędrnienie skóry i widoczną redukcję cellulitu.</p>
+          <div class="svc__foot"><span class="svc__time">30 / 45 min</span><span class="svc__price">od 130 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż antycellulitowy">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">07</div>
+          <h3 class="svc__name">Masaż gorącymi kamieniami</h3>
+          <p class="svc__desc">Ciepło bazaltowych kamieni rozluźnia mięśnie głębiej i szybciej niż same dłonie.</p>
+          <div class="svc__foot"><span class="svc__time">60 / 90 min</span><span class="svc__price">od 200 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż gorącymi kamieniami">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">08</div>
+          <h3 class="svc__name">Masaż sprzętowy</h3>
+          <p class="svc__desc">Specjalistyczny masaż modelujący sylwetkę, wspierający ujędrnienie i redukcję tkanki tłuszczowej.</p>
+          <div class="svc__foot"><span class="svc__time">30 / 45 min</span><span class="svc__price">od 130 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż sprzętowy">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">09</div>
+          <h3 class="svc__name">Masaż cztery ręce</h3>
+          <p class="svc__desc">Dwóch terapeutów pracujących w jednym rytmie — najgłębsze odprężenie w krótkim czasie.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 320 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż cztery ręce">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">10</div>
+          <h3 class="svc__name">Masaż dla dwojga</h3>
+          <p class="svc__desc">Dwa stoły w jednym gabinecie — wspólna chwila oddechu dla pary lub przyjaciółek.</p>
+          <div class="svc__foot"><span class="svc__time">60 / 90 min</span><span class="svc__price">od 340 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż dla dwojga">Rezerwacja</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ---- 02 · Masaże tajskie ---- -->
+    <div class="price-group">
+      <div class="hub-group__head">
+        <span class="hub-group__n">02</span>
+        <h3 class="h2" style="font-size:clamp(26px,3vw,40px);">Masaże tajskie</h3>
+      </div>
+      <div class="svc-grid">
+
+        <article class="svc">
+          <div class="svc__num">11</div>
+          <h3 class="svc__name">Masaż tajski</h3>
+          <p class="svc__desc">Tradycyjna praca na macie — rozciąganie, ucisk punktów energetycznych i praca z oddechem.</p>
+          <div class="svc__foot"><span class="svc__time">60 / 90 min</span><span class="svc__price">od 190 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż tajski">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">12</div>
+          <h3 class="svc__name">Masaż tajski stóp</h3>
+          <p class="svc__desc">Refleksologiczna praca na stopach i podudziach — ulga po całym dniu na nogach.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 150 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż tajski stóp">Rezerwacja</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ---- 03 · Masaże twarzy ---- -->
+    <div class="price-group">
+      <div class="hub-group__head">
+        <span class="hub-group__n">03</span>
+        <h3 class="h2" style="font-size:clamp(26px,3vw,40px);">Masaże twarzy</h3>
+      </div>
+      <div class="svc-grid">
+
+        <article class="svc">
+          <div class="svc__num">13</div>
+          <h3 class="svc__name">Kobido</h3>
+          <p class="svc__desc">Japoński lifting bez skalpela — intensywny masaż twarzy, szyi i dekoltu.</p>
+          <div class="svc__foot"><span class="svc__time">60 min</span><span class="svc__price">od 220 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Kobido">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">14</div>
+          <h3 class="svc__name">Masaż skulpturalny twarzy</h3>
+          <p class="svc__desc">Modelowanie owalu twarzy i wygładzenie napięć mimicznych.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 180 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż skulpturalny twarzy">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">15</div>
+          <h3 class="svc__name">Masaż transbukalny</h3>
+          <p class="svc__desc">Praca od wewnątrz jamy ustnej — rozluźnia żuchwę i mięśnie odpowiedzialne za bruksizm.</p>
+          <div class="svc__foot"><span class="svc__time">45 min</span><span class="svc__price">od 190 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż transbukalny">Rezerwacja</a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__num">16</div>
+          <h3 class="svc__name">Masaż kosmetyczny twarzy</h3>
+          <p class="svc__desc">Pielęgnacyjny masaż twarzy poprawiający kondycję, nawilżenie i wygląd skóry.</p>
+          <div class="svc__foot"><span class="svc__time">45 / 60 min</span><span class="svc__price">od 140 zł</span></div>
+          <div class="svc__cta">
+            <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż kosmetyczny twarzy">Rezerwacja</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <p class="note">Ceny orientacyjne — dokładny koszt zależy od długości zabiegu i potwierdzamy go przy rezerwacji.</p>
+  </section>
+
+  <!-- ============ DLACZEGO MY ============ -->
+  <section id="dlaczego" class="section wrap grid12" style="align-items:start;">
+    <div class="why__head">
+      <p class="eyebrow">Dlaczego my</p>
+      <h2 class="h2" style="font-size:clamp(32px,3.6vw,52px);">Cztery powody, dla których wracają&nbsp;goście</h2>
+      <div class="rating-badge">
+        <span class="num">5,0</span>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div class="stat__l" style="margin-top:4px;">Ocena w Google i Booksy</div>
+        </div>
+      </div>
+    </div>
+    <div class="why__grid">
+      <div class="why__item"><div class="n">01</div><h3>Certyfikowani terapeuci</h3><p>Zespół z wieloletnim doświadczeniem i stałym doskonaleniem technik — od masażu klasycznego po pracę z tkankami głębokimi.</p></div>
+      <div class="why__item"><div class="n">02</div><h3>Indywidualne podejście</h3><p>Każdą wizytę zaczynamy od rozmowy. Technikę, tempo i nacisk dobieramy do potrzeb Twojego ciała.</p></div>
+      <div class="why__item"><div class="n">03</div><h3>Kameralna atmosfera</h3><p>Ciche, zadbane wnętrze z dala od zgiełku — miejsce stworzone po to, by naprawdę odpocząć.</p></div>
+      <div class="why__item"><div class="n">04</div><h3>Naturalne olejki</h3><p>Pracujemy wyłącznie na naturalnych, hipoalergicznych olejkach o subtelnych, kojących zapachach.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ ZESPÓŁ ============ -->
+  <section id="zespol" class="section wrap team">
+    <div class="center-head">
+      <p class="eyebrow" style="color:var(--accent);">Zespół</p>
+      <h2 class="h2">Terapeuci, którym powierzysz&nbsp;swoje ciało</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><img src="images/team-1.jpg" alt="Anna Kowalczyk"><h3>Anna Kowalczyk</h3><p>Masaż zdrowotny i klasyczny</p></div>
+      <div class="team-card"><img src="images/team-2.jpg" alt="Marek Zieliński"><h3>Marek Zieliński</h3><p>Masaż sportowy i tkanek głębokich</p></div>
+      <div class="team-card"><img src="images/team-3.jpg" alt="Julia Nowak"><h3>Julia Nowak</h3><p>Masaż relaksacyjny i kosmetyczny</p></div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED / QUOTE ============ -->
+  <section class="feature">
+    <img src="images/interior-3.jpg" alt="Atmosfera studia">
+    <div class="scrim"></div>
+    <blockquote>
+      <button class="play" aria-label="Odtwórz film"><i></i></button>
+      <q>Dotyk, który przywraca ciału pamięć spokoju.</q>
+      <footer>Zespół Massage4you</footer>
+    </blockquote>
+  </section>
+
+  <!-- ============ GALERIA ============ -->
+  <section id="galeria" class="section wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Galeria</p>
+        <h2 class="h2">Zajrzyj do wnętrza naszego&nbsp;studia</h2>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <img class="g-tall" src="images/interior-1.jpg" alt="Wnętrze studia">
+      <img src="images/interior-4.jpg" alt="Detal wnętrza">
+      <img src="images/interior-2.jpg" alt="Detal wnętrza">
+      <img class="g-wide" src="images/interior-3.jpg" alt="Wnętrze studia">
+    </div>
+  </section>
+
+  <!-- ============ OPINIE ============ -->
+  <section id="opinie" class="section wrap reviews">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Opinie</p>
+        <h2 class="h2">Co mówią o nas w&nbsp;Google i Booksy</h2>
+      </div>
+      <div style="text-align:right;">
+        <div class="stars-lg">★★★★★</div>
+        <div class="stat__l" style="margin-top:6px;">5,0 średnia ocen</div>
+      </div>
+    </div>
+    <div class="review-grid">
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <q>Najlepszy masaż w Poznaniu. Profesjonalizm i spokój od progu. Wychodzę odmieniona za każdym razem.</q>
+        <div class="review__foot"><span class="author">Katarzyna M.</span><span class="src">Google</span></div>
+      </article>
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <q>Masaż zdrowotny pomógł mi z bólem karku po miesiącach pracy przy biurku. Serdecznie polecam.</q>
+        <div class="review__foot"><span class="author">Tomasz W.</span><span class="src">Booksy</span></div>
+      </article>
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <q>Kameralne, czyste, pachnące miejsce. Widać pasję i dbałość o szczegóły. Wrócę na pewno.</q>
+        <div class="review__foot"><span class="author">Magdalena R.</span><span class="src">Google</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ VOUCHERY ============ -->
+  <section id="vouchery" class="section wrap grid12">
+    <div class="voucher__media">
+      <div class="voucher-card">
+        <div class="top">
+          <span class="brand">Massage<i>4</i>you</span>
+          <span class="tag">Voucher</span>
+        </div>
+        <div>
+          <div class="kicker">Podarunek</div>
+          <div class="title">Chwila relaksu dla&nbsp;bliskiej osoby</div>
+        </div>
+      </div>
+    </div>
+    <div class="voucher__copy">
+      <p class="eyebrow">Vouchery</p>
+      <h2 class="h2" style="font-size:clamp(32px,4vw,56px);">Podaruj spokój, który&nbsp;zostaje w pamięci</h2>
+      <p class="lead" style="margin:28px 0 36px; max-width:520px;">Voucher upominkowy Massage4you to gotowy pomysł na prezent na każdą okazję. Wybierz kwotę lub konkretny zabieg — resztą zajmiemy się my.</p>
+      <a href="#rezerwacja" class="btn btn--solid" data-service="Voucher upominkowy">Zamów voucher</a>
+    </div>
+  </section>
+
+  <!-- ============ BLOG ============ -->
+  <section id="blog" class="section wrap blog">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Blog</p>
+        <h2 class="h2">Wiedza, która pomaga zadbać o&nbsp;siebie</h2>
+      </div>
+      <a href="#blog" class="link-underline">Wszystkie artykuły</a>
+    </div>
+    <div class="post-grid">
+      <a href="#blog" class="post">
+        <div class="post__thumb"><img src="images/hero.jpg" alt=""></div>
+        <div class="post__meta"><span class="cat">Zdrowie</span><span>·</span><span>4 min czytania</span></div>
+        <h3>Jak masaż wspiera regenerację po treningu</h3>
+      </a>
+      <a href="#blog" class="post">
+        <div class="post__thumb"><img src="images/interior-1.jpg" alt=""></div>
+        <div class="post__meta"><span class="cat">Relaks</span><span>·</span><span>3 min czytania</span></div>
+        <h3>5 sygnałów, że Twoje ciało potrzebuje masażu</h3>
+      </a>
+      <a href="#blog" class="post">
+        <div class="post__thumb"><img src="images/feature.jpg" alt=""></div>
+        <div class="post__meta"><span class="cat">Pielęgnacja</span><span>·</span><span>5 min czytania</span></div>
+        <h3>Naturalne olejki — co warto o nich wiedzieć</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ REZERWACJA ============ -->
+  <section id="rezerwacja" class="section wrap booking grid12">
+    <div class="booking__copy">
+      <p class="eyebrow">Rezerwacja</p>
+      <h2 class="h2" style="font-size:clamp(30px,4vw,52px);">Zarezerwuj swój&nbsp;zabieg</h2>
+      <p class="lead" style="margin:26px 0 32px; max-width:460px;">Wypełnij formularz — odezwiemy się, żeby potwierdzić termin i doradzić długość zabiegu. Zwykle odpowiadamy tego samego dnia.</p>
+      <div class="booking__aside">
+        <div class="booking__label">Wolisz szybciej?</div>
+        <a href="tel:+48533681901" class="booking__phone">+48 533 681 901</a>
+        <a href="mailto:massage4youpoznan@gmail.com" class="booking__mail">massage4youpoznan@gmail.com</a>
+        <div class="booking__hours">
+          <div class="hours-row"><span>Pon – Czw</span><span>09:00 – 20:30</span></div>
+          <div class="hours-row"><span>Pt – Nd</span><span>09:00 – 21:00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking__form">
+      <form class="form" id="booking-form" novalidate>
+        <div class="field">
+          <label for="bk-name">Imię i nazwisko *</label>
+          <input id="bk-name" name="name" type="text" autocomplete="name" required placeholder="Anna Kowalska">
+        </div>
+        <div class="field">
+          <label for="bk-phone">Telefon *</label>
+          <input id="bk-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+48 600 000 000">
+        </div>
+        <div class="field field--full">
+          <label for="bk-email">E-mail</label>
+          <input id="bk-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com">
+        </div>
+        <div class="field field--full">
+          <label for="bk-service">Zabieg *</label>
+          <select id="bk-service" name="service" required>
+            <option value="" disabled selected>Wybierz zabieg</option>
+            <optgroup label="Masaże ciała">
+              <option>Masaż klasyczny</option>
+              <option>Masaż leczniczy</option>
+              <option>Masaż relaksacyjny</option>
+              <option>Masaż tkanek głębokich</option>
+              <option>Drenaż limfatyczny</option>
+              <option>Masaż antycellulitowy</option>
+              <option>Masaż gorącymi kamieniami</option>
+              <option>Masaż sprzętowy</option>
+              <option>Masaż cztery ręce</option>
+              <option>Masaż dla dwojga</option>
+            </optgroup>
+            <optgroup label="Masaże tajskie">
+              <option>Masaż tajski</option>
+              <option>Masaż tajski stóp</option>
+            </optgroup>
+            <optgroup label="Masaże twarzy">
+              <option>Kobido</option>
+              <option>Masaż skulpturalny twarzy</option>
+              <option>Masaż transbukalny</option>
+              <option>Masaż kosmetyczny twarzy</option>
+            </optgroup>
+            <optgroup label="Inne">
+              <option>Voucher upominkowy</option>
+              <option>Nie wiem — proszę o doradztwo</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bk-duration">Długość zabiegu</label>
+          <select id="bk-duration" name="duration">
+            <option value="" selected>Bez preferencji</option>
+            <option>30 min</option>
+            <option>45 min</option>
+            <option>60 min</option>
+            <option>90 min</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bk-therapist">Terapeuta</label>
+          <select id="bk-therapist" name="therapist">
+            <option value="" selected>Bez preferencji</option>
+            <option>Anna Kowalczyk</option>
+            <option>Marek Zieliński</option>
+            <option>Julia Nowak</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bk-date">Preferowana data</label>
+          <input id="bk-date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label for="bk-time">Preferowana godzina</label>
+          <input id="bk-time" name="time" type="time" step="900">
+        </div>
+        <div class="field field--full">
+          <label for="bk-note">Wiadomość</label>
+          <textarea id="bk-note" name="note" rows="4" placeholder="Napisz, na czym Ci zależy — bolące partie, przeciwwskazania, okazja…"></textarea>
+        </div>
+        <label class="consent field--full" for="bk-consent">
+          <input id="bk-consent" name="consent" type="checkbox" required>
+          <span>Wyrażam zgodę na kontakt telefoniczny lub mailowy w celu potwierdzenia rezerwacji. *</span>
+        </label>
+        <div class="field--full form__actions">
+          <button type="submit" class="btn btn--solid">Wyślij zgłoszenie</button>
+          <span class="form__hint">* pola wymagane</span>
+        </div>
+        <p class="form__status" id="booking-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section id="kontakt" class="contact">
+    <div class="grid12">
+      <div class="contact__main">
+        <p class="eyebrow" style="color:var(--accent);">Kontakt · Rezerwacja</p>
+        <h2 class="h2" style="font-size:clamp(34px,4.5vw,64px);">Umów wizytę w&nbsp;naszym studiu</h2>
+        <a href="tel:+48533681901" class="contact__phone">+48 533 681 901</a><br>
+        <a href="mailto:massage4youpoznan@gmail.com" class="contact__mail">massage4youpoznan@gmail.com</a>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Godziny otwarcia</div>
+        <div class="hours-row"><span>Pon – Czw</span><span>09:00 – 20:30</span></div>
+        <div class="hours-row"><span>Pt – Nd</span><span>09:00 – 21:00</span></div>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Adres</div>
+        <div class="address">ul. Zeylanda 3/1<br>60-808 Poznań</div>
+      </div>
+    </div>
+    <footer class="footer">
+      <img class="footer__logo" src="images/logo-light.png" alt="Massage 4 You — Healthy &amp; Relax">
+      <div class="copy">© <span data-year>2026</span> Massage4you · Studio masażu w Poznaniu</div>
+    </footer>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

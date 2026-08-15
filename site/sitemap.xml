@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  URLs mirror the <link rel="canonical"> tags in each page (extensionless),
+  so the host must serve /zabiegi and /zabiegi/masaz-klasyczny-poznan without
+  the .html suffix. Add a new <url> block for each service page as it ships.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://massage4you.com.pl/</loc>
+    <lastmod>2026-08-15</lastmod>
+  </url>
+
+  <url>
+    <loc>https://massage4you.com.pl/zabiegi</loc>
+    <lastmod>2026-08-15</lastmod>
+  </url>
+
+  <url>
+    <loc>https://massage4you.com.pl/zabiegi/masaz-klasyczny-poznan</loc>
+    <lastmod>2026-08-15</lastmod>
+  </url>
+
+</urlset>

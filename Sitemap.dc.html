@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F6F3EC; font-family: 'Jost', system-ui, sans-serif; color: #22271F; }
+  .sm-node { transition: transform .2s ease, box-shadow .2s ease; }
+  a { color: #C08B4E; }
+  a:hover { color: #2E4B37; }
+</style>
+</helmet>
+
+<div style="max-width: 1400px; margin: 0 auto; padding: clamp(48px,7vw,96px) clamp(24px,5vw,72px) 140px;">
+
+  <!-- header -->
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; border-bottom: 1px solid rgba(34,39,31,0.14); padding-bottom: 36px; margin-bottom: clamp(48px,6vw,80px);">
+    <div>
+      <div style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: #C08B4E; margin-bottom: 16px; font-weight: 500;">Mapa strony · Local SEO</div>
+      <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(38px,5vw,64px); line-height: 1.02; letter-spacing: -0.01em; margin: 0;">Massage 4 You — struktura&nbsp;serwisu</h1>
+    </div>
+    <div style="text-align: right; font-size: 13px; line-height: 1.8; color: #6B6355;">
+      <div>ul. Zeylanda 3/1, Poznań</div>
+      <div>26 stron · 14 dedykowanych usług</div>
+      <div style="display:flex; gap:14px; justify-content:flex-end; margin-top:12px;">
+        <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:12px; height:12px; border-radius:3px; background:#2E4B37; display:inline-block;"></span>Strony główne</span>
+        <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:12px; height:12px; border-radius:3px; background:#C08B4E; display:inline-block;"></span>Usługi (SEO)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- root -->
+  <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 12px;">
+    <div class="sm-node" style="background: #2E4B37; color: #F6F3EC; border-radius: 14px; padding: 22px 44px; text-align: center; box-shadow: 0 20px 40px -22px rgba(46,75,55,0.7);">
+      <div style="font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.7;">massage4you.com.pl</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; margin-top: 2px;">Strona główna</div>
+    </div>
+    <div style="width: 1px; height: 40px; background: rgba(34,39,31,0.22);"></div>
+  </div>
+
+  <!-- core row -->
+  <sc-for list="{{ coreGroups }}" as="col" hint-placeholder-count="1">
+    <div></div>
+  </sc-for>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: clamp(40px,5vw,72px);">
+    <sc-for list="{{ core }}" as="p" hint-placeholder-count="10">
+      <div class="sm-node" style="background: #fff; border: 1px solid rgba(46,75,55,0.16); border-radius: 12px; padding: 18px 20px; box-shadow: 0 8px 22px -18px rgba(34,39,31,0.6);">
+        <div style="display:flex; align-items:baseline; gap:8px;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:15px; color:#C08B4E;">{{ p.num }}</span>
+          <span style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:500; line-height:1.15;">{{ p.name }}</span>
+        </div>
+        <div style="font-size:12.5px; line-height:1.55; color:#6B6355; margin-top:8px;">{{ p.sub }}</div>
+        <div style="font-size:11px; letter-spacing:0.04em; color:#A79C89; margin-top:10px; font-family:monospace;">{{ p.url }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- oferta hub connector -->
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <div class="sm-node" style="background: #2E4B37; color: #F6F3EC; border-radius: 14px; padding: 18px 40px; text-align: center; box-shadow: 0 20px 40px -22px rgba(46,75,55,0.7);">
+      <div style="font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.7;">Hub — linkuje do wszystkich usług</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; margin-top: 2px;">Oferta</div>
+    </div>
+    <div style="width: 1px; height: 40px; background: rgba(34,39,31,0.22);"></div>
+  </div>
+
+  <!-- service groups -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px,2vw,28px); align-items: start;">
+    <sc-for list="{{ serviceGroups }}" as="g" hint-placeholder-count="3">
+      <div>
+        <div style="text-align:center; margin-bottom:16px;">
+          <span style="display:inline-block; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#2E4B37; font-weight:600; border:1px solid rgba(46,75,55,0.3); border-radius:100px; padding:8px 20px; background:#EDE7DA;">{{ g.title }}</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="5">
+            <div class="sm-node" style="background:#fff; border-left:3px solid #C08B4E; border-radius:8px; padding:13px 16px; box-shadow:0 6px 16px -14px rgba(34,39,31,0.6);">
+              <div style="font-size:15px; font-weight:500; line-height:1.25;">{{ s.name }}</div>
+              <div style="font-size:10.5px; color:#A79C89; margin-top:5px; font-family:monospace;">{{ s.url }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- service page template note -->
+  <div style="margin-top: clamp(48px,6vw,80px); background: #EDE7DA; border-radius: 16px; padding: clamp(28px,3vw,44px);">
+    <div style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C08B4E; font-weight: 600; margin-bottom: 8px;">Szablon każdej strony usługi</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size: clamp(22px,2.4vw,30px); font-weight: 500; margin-bottom: 22px;">H1: „Masaż [typ] — Poznań" · 9 sekcji SEO</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 10px;">
+      <sc-for list="{{ template }}" as="t" hint-placeholder-count="9">
+        <div style="background:#fff; border-radius:10px; padding:14px; display:flex; gap:10px; align-items:flex-start;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#C08B4E; line-height:1;">{{ t.n }}</span>
+          <span style="font-size:13.5px; line-height:1.4;">{{ t.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- footer utility -->
+  <div style="margin-top: 32px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+    <sc-for list="{{ utility }}" as="u" hint-placeholder-count="2">
+      <span style="font-size:12px; letter-spacing:0.1em; color:#6B6355; border:1px dashed rgba(34,39,31,0.3); border-radius:100px; padding:8px 18px;">{{ u }}</span>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const core = [
+      { num: '01', name: 'O nas', sub: 'Studio · zespół · dyplomy i certyfikaty', url: '/o-nas' },
+      { num: '02', name: 'Cennik', sub: 'Pełne ceny wszystkich zabiegów', url: '/cennik' },
+      { num: '03', name: 'Bony podarunkowe', sub: 'Vouchery kwotowe i na zabiegi', url: '/bony-podarunkowe' },
+      { num: '04', name: 'Blog / Poradnik', sub: 'Artykuły SEO o zdrowiu i relaksie', url: '/blog' },
+      { num: '05', name: 'Opinie', sub: 'Google i Booksy', url: '/opinie' },
+      { num: '06', name: 'Rezerwacja online', sub: 'Kalendarz i wybór terapeuty', url: '/rezerwacja' },
+      { num: '07', name: 'Kontakt', sub: 'Mapa, adres, godziny, formularz', url: '/kontakt' },
+      { num: '08', name: 'FAQ', sub: 'Najczęstsze pytania', url: '/faq' },
+    ];
+    const serviceGroups = [
+      { title: 'Masaże ciała', items: [
+        { name: 'Masaż klasyczny / zdrowotny', url: '/oferta/masaz-klasyczny-poznan' },
+        { name: 'Masaż leczniczy', url: '/oferta/masaz-leczniczy-poznan' },
+        { name: 'Masaż relaksacyjny', url: '/oferta/masaz-relaksacyjny-poznan' },
+        { name: 'Masaż tkanek głębokich', url: '/oferta/masaz-tkanek-glebokich-poznan' },
+        { name: 'Drenaż limfatyczny', url: '/oferta/drenaz-limfatyczny-poznan' },
+        { name: 'Masaż antycellulitowy', url: '/oferta/masaz-antycellulitowy-poznan' },
+        { name: 'Masaż kamieniami gorącymi', url: '/oferta/masaz-kamieniami-goracymi-poznan' },
+        { name: 'Masaż na cztery ręce', url: '/oferta/masaz-cztery-rece-poznan' },
+        { name: 'Masaż dla dwojga', url: '/oferta/masaz-dla-dwojga-poznan' },
+      ]},
+      { title: 'Masaże tajskie', items: [
+        { name: 'Tajski klasyczny na matach', url: '/oferta/masaz-tajski-poznan' },
+        { name: 'Tajski masaż stóp', url: '/oferta/masaz-tajski-stop-poznan' },
+      ]},
+      { title: 'Masaże twarzy', items: [
+        { name: 'Masaż Kobido', url: '/oferta/masaz-kobido-poznan' },
+        { name: 'Autorski masaż skulpturalny twarzy', url: '/oferta/masaz-skulpturalny-twarzy-poznan' },
+        { name: 'Mioplastyczny transbukalny twarzy', url: '/oferta/masaz-transbukalny-poznan' },
+      ]},
+    ];
+    const template = [
+      { n: '1', label: 'Hero: nazwa + „Poznań" + Umów wizytę' },
+      { n: '2', label: 'Korzyści / dla kogo' },
+      { n: '3', label: 'Jak przebiega zabieg' },
+      { n: '4', label: 'Czas trwania i cena' },
+      { n: '5', label: 'Przeciwwskazania' },
+      { n: '6', label: 'Opinie klientów' },
+      { n: '7', label: 'Powiązane masaże' },
+      { n: '8', label: 'FAQ tej usługi' },
+      { n: '9', label: 'CTA — rezerwacja online' },
+    ];
+    const utility = ['Polityka prywatności', 'Regulamin'];
+    return { core, serviceGroups, template, utility, coreGroups: [1] };
+  }
+}
+</script>
+</body>
+</html>
