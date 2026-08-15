@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  URLs mirror the <link rel="canonical"> tags in each page (extensionless),
-  so the host must serve /zabiegi and /zabiegi/masaz-klasyczny-poznan without
-  the .html suffix. Add a new <url> block for each service page as it ships.
+  Every URL here must return 200, not a redirect, and must match that page's
+  <link rel="canonical"> exactly.
+
+  Cloudflare serves foo.html at /foo, so service pages are extensionless. A
+  directory index is different: /zabiegi 307-redirects to /zabiegi/, so the
+  hub carries the trailing slash. Add a <url> block per service page as it
+  ships — those are files, so they take no trailing slash.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
@@ -12,7 +16,7 @@
   </url>
 
   <url>
-    <loc>https://massage-4-you.com/zabiegi</loc>
+    <loc>https://massage-4-you.com/zabiegi/</loc>
     <lastmod>2026-08-15</lastmod>
   </url>
 
