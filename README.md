@@ -177,20 +177,22 @@ All derived from `images/Logo-massage4you.png` (2040×2042, white background) �
 
 Icons put the cream mark on a forest-green field (`#2E4B37`, also the `theme-color`) so they read on any tab bar and need no separate maskable art.
 
-## Deployment (Cloudflare Pages)
-The site is static — no build step. `wrangler.toml` at the repo root sets `pages_build_output_dir = "site"`, so Cloudflare publishes that directory as-is; leave **Build command** empty in the dashboard. The `name` field must match the Pages project name (Cloudflare defaults it to the repo name).
+## Deployment (Cloudflare Workers + static assets)
+The site is static — no build step and no Worker script. `wrangler.toml` at the repo root points `[assets] directory` at `site/`, which `npx wrangler deploy` uploads as-is; leave **Build command** empty in the dashboard. The `name` field must match the Worker name.
 
-Cloudflare Pages serves `foo.html` at `/foo` and 308-redirects `/foo.html` → `/foo`, which is exactly what the `rel="canonical"` tags and `sitemap.xml` declare — so no rewrites are needed. `site/_headers` adds baseline security headers and a one-week revalidating cache for `/images/*` (filenames are not content-hashed, so nothing is marked `immutable`).
+New Git-connected Cloudflare projects default to **Workers**, not Pages — a Pages-style config (`pages_build_output_dir`) is silently ignored by `wrangler deploy` and the build fails with "Missing entry-point to Worker script or to assets directory".
 
-The production domain is **massage-4-you.com** (apex). Attach it via the Pages project's **Custom domains** tab — never by hand-adding DNS records; Cloudflare creates the CNAME and certificate itself. The domain is hardcoded in `site/robots.txt`, `site/sitemap.xml` and the three `rel="canonical"` tags; change all five together if it ever moves.
+Static assets serve `foo.html` at `/foo` and redirect `/foo.html` → `/foo` (the default `html_handling = "auto-trailing-slash"`), which is exactly what the `rel="canonical"` tags and `sitemap.xml` declare — so no rewrites are needed. `site/_headers` adds baseline security headers and a one-week revalidating cache for `/images/*` (filenames are not content-hashed, so nothing is marked `immutable`).
+
+The production domain is **massage-4-you.com** (apex). Attach it via the Worker's **Settings → Domains & Routes** tab — never by hand-adding DNS records; Cloudflare creates the CNAME and certificate itself. The domain is hardcoded in `site/robots.txt`, `site/sitemap.xml` and the three `rel="canonical"` tags; change all five together if it ever moves.
 
 ## Files
 Design references included in this bundle:
 - `site/index.html` — homepage, plain semantic HTML (**best starting point**)
 - `site/styles.css` — all homepage styles + **design-token block at `:root`** (source of truth)
 - `site/script.js` — mobile-nav toggle, scrolled-header state, booking-form handling (`FORM_ENDPOINT`), footer year
-- `wrangler.toml` — Cloudflare Pages config (publishes `site/`, no build step)
-- `site/_headers` — security headers + image caching for Cloudflare Pages
+- `wrangler.toml` — Cloudflare config: Worker with static assets, publishes `site/`, no build step
+- `site/_headers` — security headers + image caching, read by Cloudflare static assets
 - `site/site.webmanifest` — PWA/Android icon manifest
 - `site/robots.txt` — crawling allowed; `Content-Signal` permits search indexing and AI input (RAG/grounding) but opts out of AI training; points at the sitemap
 - `site/sitemap.xml` — the three live URLs on `massage-4-you.com`, matching each page's canonical. Add a `<url>` block per service page as it ships, and update `<lastmod>` when a page's content changes

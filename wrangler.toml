@@ -1,13 +1,17 @@
-# Cloudflare Pages configuration.
+# Cloudflare configuration — Worker with static assets.
 #
-# `name` must match the Pages project name in the dashboard — Cloudflare
-# defaults it to the repo name when you connect the repo. If you pick a
-# different project name, change it here too or the deploy will fail.
+# `name` must match the Worker name in the dashboard.
 #
-# There is no build step: the site is plain HTML/CSS/JS and Cloudflare
-# publishes the site/ directory as-is. Leave "Build command" empty in the
-# dashboard; this file supplies the output directory.
+# There is no build step and no Worker script: the site is plain HTML/CSS/JS,
+# and `[assets]` uploads site/ as-is. `npx wrangler deploy` is the deploy
+# command; leave "Build command" empty in the dashboard.
+#
+# html_handling defaults to "auto-trailing-slash", which serves
+# /zabiegi/masaz-klasyczny-poznan from masaz-klasyczny-poznan.html and
+# redirects the .html URL there — matching the canonical tags and sitemap.
 
 name = "massage-4-you"
 compatibility_date = "2026-08-15"
-pages_build_output_dir = "site"
+
+[assets]
+directory = "./site"
