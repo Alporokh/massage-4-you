@@ -45,23 +45,61 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---------------- Team video ---------------- */
+  // Held at poster + play button until asked for: preload="none" means the
+  // 1.5 MB clip is only fetched on a real click.
+  var vid = document.querySelector('[data-video]');
+  if (vid) {
+    var video = vid.querySelector('video');
+    var playBtn = vid.querySelector('.vid__play');
+    playBtn.addEventListener('click', function () {
+      vid.classList.add('is-playing');
+      video.controls = true;
+      video.play();
+    });
+    video.addEventListener('pause', function () {
+      if (video.currentTime === 0 || video.ended) vid.classList.remove('is-playing');
+    });
+    video.addEventListener('ended', function () {
+      vid.classList.remove('is-playing');
+      video.controls = false;
+      video.load();           // back to the poster frame
+    });
+  }
+
   /* ---------------- Booking ---------------- */
   var form = document.getElementById('booking-form');
   var status = document.getElementById('booking-status');
   var serviceSelect = document.getElementById('bk-service');
 
+  function selectService(wanted) {
+    if (!serviceSelect || !wanted) return false;
+    var match = Array.prototype.find.call(serviceSelect.options, function (o) {
+      return o.value === wanted || o.textContent.trim() === wanted;
+    });
+    if (!match) return false;
+    serviceSelect.value = match.value || match.textContent.trim();
+    serviceSelect.dispatchEvent(new Event('change'));
+    return true;
+  }
+
+  // Arriving from the cennik page: /?zabieg=Masaż%20klasyczny#rezerwacja
+  // preselects the treatment, so those buttons work across pages too.
+  if (serviceSelect) {
+    var wantedFromUrl = new URLSearchParams(window.location.search).get('zabieg');
+    if (wantedFromUrl && selectService(wantedFromUrl)) {
+      var target = document.getElementById('rezerwacja');
+      if (target && window.location.hash !== '#rezerwacja') {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
   // "Rezerwacja" button on a service card — preselect that treatment
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-service]');
     if (!trigger || !serviceSelect) return;
-    var wanted = trigger.getAttribute('data-service');
-    var match = Array.prototype.find.call(serviceSelect.options, function (o) {
-      return o.value === wanted || o.textContent.trim() === wanted;
-    });
-    if (match) {
-      serviceSelect.value = match.value || match.textContent.trim();
-      serviceSelect.dispatchEvent(new Event('change'));
-    }
+    selectService(trigger.getAttribute('data-service'));
     if (status) { status.textContent = ''; status.className = 'form__status'; }
     // let the anchor do the scrolling, then put the cursor in the first field
     setTimeout(function () {
