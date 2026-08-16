@@ -141,7 +141,9 @@ a:hover { color: var(--ink); }
 /* ---------- About ---------- */
 .about__media { grid-column: 8 / span 5; position: relative; }
 .about__copy { grid-column: 1 / span 6; }
-.about__img { width: 100%; height: clamp(420px, 40vw, 620px); object-fit: cover; }
+/* anchored near the top so the group shot keeps everyone's head in frame —
+   a centred cover crop clips the tallest of them */
+.about__img { width: 100%; height: clamp(420px, 40vw, 620px); object-fit: cover; object-position: 50% 6%; }
 .about__inset {
   position: absolute; bottom: -48px; left: -48px; width: 46%;
   height: clamp(190px, 18vw, 280px); object-fit: cover; border: 10px solid var(--cream);
@@ -505,6 +507,17 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---------- Responsive ---------- */
+/* Seven nav items collide with the logo and the CTA on small laptops, so the
+   header condenses here rather than dropping straight to a hamburger. */
+@media (max-width: 1100px) {
+  .nav { gap: 19px; }
+  .nav a { font-size: 12px; letter-spacing: .07em; }
+  .nav-cta { padding: 10px 16px; font-size: 11px; letter-spacing: .1em; }
+  .logo { font-size: 21px; gap: 9px; }
+  .logo__mark { height: 27px; }
+  .header--scrolled .logo__mark { height: 25px; }
+}
+
 @media (max-width: 860px) {
   .nav { display: none; }
   .nav-cta { display: none; }
