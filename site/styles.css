@@ -98,6 +98,56 @@ a:hover { color: var(--ink); }
 .nav-toggle { display: none; background: none; border: 0; color: var(--cream); cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--cream); margin: 5px 0; transition: .3s; }
 
+/* ---------- Nav dropdown — the "Zabiegi" folder ---------- */
+.menu { position: relative; display: flex; align-items: center; }
+.menu__label { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+.menu__label::after {
+  content: ''; width: 5px; height: 5px;
+  border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-1px); transition: transform .3s ease;
+}
+.menu:hover .menu__label::after, .menu.open .menu__label::after { transform: rotate(225deg) translateY(-2px); }
+.menu__panel {
+  position: absolute; top: 100%; left: 50%; z-index: 60;
+  transform: translateX(-50%) translateY(6px);
+  display: grid; grid-template-columns: repeat(3, minmax(172px, 1fr));
+  gap: 0 clamp(22px, 2.2vw, 40px);
+  margin-top: 18px; padding: 30px 34px 26px;
+  background: var(--cream); border-radius: 10px;
+  box-shadow: 0 34px 70px -34px rgba(46, 75, 55, .7);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+/* invisible bridge so the panel survives the cursor crossing the gap */
+.menu__panel::before { content: ''; position: absolute; left: 0; right: 0; top: -18px; height: 18px; }
+.menu:hover .menu__panel, .menu:focus-within .menu__panel, .menu.open .menu__panel {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.menu__title {
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
+  margin: 0 0 14px; font-weight: 500; white-space: nowrap;
+}
+.menu__col + .menu__col { border-left: 1px solid rgba(46, 75, 55, .12); padding-left: clamp(22px, 2.2vw, 40px); }
+.menu__panel a, .menu__soon {
+  display: block; font-family: var(--serif); font-size: 17px; font-weight: 500;
+  letter-spacing: 0; text-transform: none; color: var(--ink); text-decoration: none;
+  padding: 6px 0; opacity: 1; white-space: nowrap; transition: color .25s ease;
+}
+.menu__panel a:hover { color: var(--accent); }
+.menu__soon { color: var(--faint); }
+.menu__soon::after {
+  content: 'wkrótce'; font-family: var(--sans); font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid rgba(192, 139, 78, .45); border-radius: 100px;
+  padding: 2px 7px; margin-left: 10px; vertical-align: 2px;
+}
+.menu__all { grid-column: 1 / -1; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(46, 75, 55, .12); }
+.menu__all a {
+  font-family: var(--sans); font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink); padding: 0;
+}
+
+/* the head of the team gets her role in the accent tone */
+.team-card--chef p { color: var(--accent); }
 /* Solid header — used on every page that is not the homepage */
 .header--solid {
   position: sticky; top: 0; right: auto; bottom: auto; left: auto;
@@ -271,6 +321,16 @@ a:hover { color: var(--ink); }
 .voucher-card .tag { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
 .voucher-card .kicker { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .6; margin-bottom: 8px; }
 .voucher-card .title { font-family: var(--serif); font-size: clamp(26px,3vw,40px); font-weight: 500; line-height: 1.1; }
+
+/* ---------- Vouchers on the cennik page ---------- */
+.voucher-cennik { background: var(--cream-2); }
+.voucher-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  background: #fff; border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 10px 26px -22px rgba(46, 75, 55, .6);
+}
+.voucher-row__t { font-family: var(--serif); font-size: 24px; font-weight: 500; }
+.voucher-row__n { font-size: 13px; letter-spacing: .02em; color: var(--faint); margin-top: 3px; }
 
 /* ---------- Blog ---------- */
 .blog { background: var(--cream-2); }
@@ -533,6 +593,25 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
     margin-top: 4px; padding-top: 18px; width: 100%;
     border-top: 1px solid rgba(246, 243, 236, .2);
   }
+
+  /* the dropdown flattens into a nested list inside the folded panel */
+  .nav.open .menu { display: block; width: 100%; }
+  .nav.open .menu__label { color: var(--cream); }
+  .menu__panel {
+    position: static; transform: none; display: block; min-width: 0;
+    margin: 12px 0 0; padding: 0 0 0 14px; background: none; box-shadow: none;
+    border-left: 1px solid rgba(246, 243, 236, .2); border-radius: 0;
+    max-height: 42vh; overflow-y: auto;
+  }
+  /* hover must not open it on a touch screen — only the tap toggle may */
+  .menu:hover .menu__panel, .menu:focus-within .menu__panel { opacity: 0; visibility: hidden; pointer-events: none; }
+  .menu.open .menu__panel { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+  .menu__panel::before { display: none; }
+  .menu__col + .menu__col { border-left: 0; padding-left: 0; margin-top: 16px; }
+  .menu__panel a, .menu__soon { font-size: 15px; padding: 5px 0; color: var(--cream); white-space: normal; }
+  .menu__soon { color: rgba(246, 243, 236, .55); }
+  .menu__all { margin-top: 14px; padding-top: 12px; border-top-color: rgba(246, 243, 236, .2); }
+  .menu__all a { color: var(--accent); }
 
   .grid12 { grid-template-columns: 1fr; }
   .about__copy, .about__media,

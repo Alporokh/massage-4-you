@@ -22,6 +22,14 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     nav.addEventListener('click', function (e) {
+      // inside the folded panel the Zabiegi label expands its list instead of
+      // navigating away — there is no hover on a touch screen
+      var label = e.target.closest('.menu__label');
+      if (label && window.matchMedia('(max-width: 860px)').matches) {
+        e.preventDefault();
+        label.parentNode.classList.toggle('open');
+        return;
+      }
       if (e.target.tagName === 'A') {
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -86,12 +94,19 @@
   // Arriving from the cennik page: /?zabieg=Masaż%20klasyczny#rezerwacja
   // preselects the treatment, so those buttons work across pages too.
   if (serviceSelect) {
-    var wantedFromUrl = new URLSearchParams(window.location.search).get('zabieg');
+    var params = new URLSearchParams(window.location.search);
+    var wantedFromUrl = params.get('zabieg');
     if (wantedFromUrl && selectService(wantedFromUrl)) {
       var target = document.getElementById('rezerwacja');
       if (target && window.location.hash !== '#rezerwacja') {
         target.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+    // voucher rows on the cennik page also carry the chosen amount
+    var amount = params.get('kwota');
+    var note = document.getElementById('bk-note');
+    if (amount && note && !note.value) {
+      note.value = 'Voucher upominkowy na kwotę ' + amount + '.';
     }
   }
 
