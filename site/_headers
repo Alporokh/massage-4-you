@@ -12,3 +12,9 @@
 # photo goes live without visitors being stuck on a stale copy for a year.
 /images/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# Fonts are content-hashed by filename in practice — a weight never changes
+# once shipped — so they can be cached hard and marked immutable.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
