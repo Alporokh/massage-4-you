@@ -178,7 +178,11 @@ All derived from `images/Logo-massage4you.png` (2040×2042, white background) �
 Icons put the cream mark on a forest-green field (`#2E4B37`, also the `theme-color`) so they read on any tab bar and need no separate maskable art.
 
 ## Deployment (Cloudflare Workers + static assets)
-The site is static — no build step and no Worker script. `wrangler.toml` at the repo root points `[assets] directory` at `site/`, which `npx wrangler deploy` uploads as-is; leave **Build command** empty in the dashboard. The `name` field must match the Worker name.
+**Pushing to `main` deploys the site.** `.github/workflows/deploy.yml` runs `wrangler deploy` on every push and then fetches the four live URLs to confirm the change is actually serving, so a green tick means the site is updated. It needs two repository secrets — `CLOUDFLARE_API_TOKEN` (an "Edit Cloudflare Workers" token) and `CLOUDFLARE_ACCOUNT_ID` — and can be re-run by hand from the **Actions** tab via **Run workflow**.
+
+This workflow exists because deploys used to be manual, and GitHub and the live site drifted apart without any signal: between 15 and 17 Aug 2026 five pushed commits never reached production, so the homepage still served an inline cennik and `/cennik` 404'd while the repo looked perfectly healthy. If the site ever looks stale again, check the Actions tab first — not `git status`.
+
+The site is static — no build step and no Worker script. `wrangler.toml` at the repo root points `[assets] directory` at `site/`, which `npx wrangler deploy` uploads as-is (still the way to deploy from a laptop, after `npx wrangler login`); leave **Build command** empty in the dashboard. The `name` field must match the Worker name.
 
 New Git-connected Cloudflare projects default to **Workers**, not Pages — a Pages-style config (`pages_build_output_dir`) is silently ignored by `wrangler deploy` and the build fails with "Missing entry-point to Worker script or to assets directory".
 
@@ -192,6 +196,7 @@ Design references included in this bundle:
 - `site/styles.css` — all homepage styles + **design-token block at `:root`** (source of truth)
 - `site/script.js` — mobile-nav toggle, scrolled-header state, booking-form handling (`FORM_ENDPOINT`), footer year
 - `wrangler.toml` — Cloudflare config: Worker with static assets, publishes `site/`, no build step
+- `.github/workflows/deploy.yml` — deploys `site/` to Cloudflare on every push to `main`, then verifies the live URLs
 - `site/_headers` — security headers + image caching, read by Cloudflare static assets
 - `site/site.webmanifest` — PWA/Android icon manifest
 - `site/robots.txt` — crawling allowed; `Content-Signal` permits search indexing and AI input (RAG/grounding) but opts out of AI training; points at the sitemap
