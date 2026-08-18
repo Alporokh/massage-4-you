@@ -414,6 +414,40 @@ a:hover { color: var(--ink); }
 .post__meta .cat { color: var(--accent); }
 .post h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; margin: 0; letter-spacing: -.005em; transition: color .3s ease; }
 .post:hover h3 { color: var(--accent); }
+/* planned but unwritten, same treatment the unbuilt zabiegi get */
+.post--soon { opacity: .6; pointer-events: none; }
+.post--soon .cat { color: var(--faint); }
+
+/* ---------- Strefa wiedzy: article body ---------- */
+/* One column, ~68 characters per line — long-form reading, not a landing page. */
+.article { max-width: 740px; margin: 0 auto; padding: clamp(44px, 5vw, 76px) clamp(24px, 5vw, 40px) clamp(56px, 7vw, 96px); }
+.article__hero { width: 100%; height: clamp(240px, 42vw, 460px); object-fit: cover; border-radius: 6px; margin-bottom: clamp(32px, 4vw, 52px); }
+.article p { font-size: 17px; line-height: 1.85; color: var(--muted); margin: 0 0 24px; }
+.article p.article__lead { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.7; color: var(--ink); margin-bottom: 34px; }
+.article h2 {
+  font-family: var(--serif); font-weight: 500; color: var(--ink);
+  font-size: clamp(26px, 2.6vw, 34px); line-height: 1.2; letter-spacing: -.005em;
+  margin: clamp(40px, 4vw, 56px) 0 18px;
+}
+.article h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(21px, 1.9vw, 25px); margin: 32px 0 14px; color: var(--ink); }
+.article ul, .article ol { margin: 0 0 24px; padding-left: 22px; }
+.article li { font-size: 17px; line-height: 1.8; color: var(--muted); margin-bottom: 10px; }
+.article li::marker { color: var(--accent); }
+.article a { color: var(--accent); text-underline-offset: 3px; }
+.article blockquote {
+  margin: clamp(32px, 4vw, 44px) 0; padding: clamp(24px, 3vw, 34px);
+  background: var(--cream-2); border-radius: 8px;
+  font-family: var(--serif); font-style: italic; font-size: clamp(20px, 1.8vw, 25px);
+  line-height: 1.45; color: var(--ink);
+}
+.article blockquote p { font: inherit; color: inherit; margin: 0; }
+/* health-adjacent copy: the "talk to us first" line must not read as body text */
+.article__note {
+  margin-top: clamp(40px, 4vw, 56px); padding-top: 22px;
+  border-top: 1px solid rgba(46,75,55,.16);
+  font-size: 14px; line-height: 1.7; color: var(--faint);
+}
+.article__cta { margin-top: clamp(40px, 4vw, 56px); display: flex; gap: 16px; flex-wrap: wrap; }
 
 /* ---------- Booking form ---------- */
 .booking { align-items: start; }
@@ -647,6 +681,16 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .logo { font-size: 21px; gap: 9px; }
   .logo__mark { height: 27px; }
   .header--scrolled .logo__mark { height: 25px; }
+}
+
+/* Adding "Strefa wiedzy" made eight top-level items. Between the mobile
+   breakpoint (860px) and roughly 980px the 1100px step above is no longer
+   tight enough and the bar wraps onto a second line, which pushes the header
+   out of shape. One more step closes that gap. Below 860px the block that
+   follows takes over and folds the nav into the burger menu anyway. */
+@media (max-width: 980px) {
+  .nav { gap: 12px; }
+  .nav a { font-size: 11px; letter-spacing: .04em; }
 }
 
 @media (max-width: 860px) {

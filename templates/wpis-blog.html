@@ -1,0 +1,236 @@
+<!--
+  ============================================================================
+  SZABLON WPISU — Strefa wiedzy
+  ============================================================================
+
+  Ten plik NIE jest publikowany. wrangler.toml wysyła na serwer wyłącznie
+  katalog ./site, więc wszystko w templates/ zostaje w repozytorium. Dzięki
+  temu szablon nie trafia do Google jako pusta strona.
+
+  JAK DODAĆ NOWY WPIS
+  -------------------
+  1. Skopiuj ten plik do  site/strefa-wiedzy/<slug>.html
+     Slug bez polskich znaków, myślniki zamiast spacji, np.
+     "5-sygnalow-ze-twoje-cialo-potrzebuje-masazu".
+
+  2. Uzupełnij wszystkie miejsca oznaczone [[...]] — jest ich siedem:
+     [[TYTUL]]          tytuł wpisu (w <title>, <h1> i okruszkach)
+     [[OPIS]]           meta description, 140–160 znaków, pełne zdanie
+     [[SLUG]]           nazwa pliku bez .html — trafia do rel="canonical"
+     [[KATEGORIA]]      np. Regeneracja, Relaks, Pielęgnacja
+     [[CZAS]]           np. "5 min czytania"
+     [[ZDJECIE]]        plik z images/, proporcje ok. 3:2
+     [[ALT]]            opis zdjęcia dla czytników ekranu i Google
+
+  3. Napisz treść w <article class="article">. Dostępne style:
+     <p class="article__lead">   — akapit wprowadzający, większy
+     <h2> <h3>                   — śródtytuły (h1 jest tylko jeden, tytuł wpisu)
+     <ul> <ol> <li>              — listy
+     <blockquote><p>…</p></...>  — wyróżniony cytat
+     <p class="article__note">   — zastrzeżenie na końcu, mniejsze i szare
+
+  4. Dodaj kafelek wpisu w site/strefa-wiedzy/index.html (skopiuj istniejący
+     <a class="post">). Jeśli wpis był zapowiedziany — usuń z niego klasę
+     post--soon oraz aria-disabled i tabindex.
+
+  5. Dopisz adres w site/sitemap.xml z dzisiejszą datą w <lastmod>:
+     <url><loc>https://massage-4-you.com/strefa-wiedzy/<slug></loc>
+          <lastmod>RRRR-MM-DD</lastmod></url>
+     Bez rozszerzenia .html — Cloudflare serwuje foo.html pod /foo.
+
+  6. Jeśli wpis pojawia się też na stronie głównej, zaktualizuj kafelki
+     w sekcji <section id="blog"> w site/index.html.
+
+  TREŚĆ O ZDROWIU
+  ---------------
+  Studio masażu to nie gabinet lekarski. Nie obiecuj leczenia ani efektów
+  medycznych, pisz "może wspierać" zamiast "leczy", i zostaw na końcu akapit
+  article__note z informacją, że tekst nie zastępuje porady specjalisty.
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[[TYTUL]] | Massage 4 You Poznań</title>
+  <meta name="description" content="[[OPIS]]">
+  <link rel="canonical" href="https://massage-4-you.com/strefa-wiedzy/[[SLUG]]">
+
+  <!-- Favicon / ikony aplikacji -->
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta name="theme-color" content="#2E4B37">
+  <meta name="apple-mobile-web-app-title" content="Massage4you">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <!-- Nagłówek jest identyczny na każdej podstronie. Kopiuj bez zmian; jeśli
+       zmieniasz menu, zmień je we wszystkich plikach naraz. -->
+  <header class="header header--solid">
+    <a href="../index.html" class="logo">
+      <img class="logo__mark" src="../images/logo-mark-light.png" alt="" width="44" height="32">
+      <span class="logo__word">Massage<i>4</i>you</span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html#o-nas">O nas</a>
+      <a href="../index.html#zespol">Zespół</a>
+      <div class="menu">
+        <a href="../zabiegi/index.html" class="menu__label">Zabiegi</a>
+        <div class="menu__panel">
+          <div class="menu__col">
+            <p class="menu__title">Masaże ciała</p>
+            <a href="../zabiegi/masaz-relaksacyjny-poznan.html">Masaż relaksacyjny całego ciała</a>
+            <span class="menu__soon">Masaż zdrowotny całego ciała</span>
+            <span class="menu__soon">Masaż tkanek głębokich</span>
+            <span class="menu__soon">Masaż sportowy</span>
+            <span class="menu__soon">Masaż drenażu limfatycznego</span>
+            <span class="menu__soon">Masaż kamieniami gorącymi</span>
+            <span class="menu__soon">Masaż na 4 ręce</span>
+            <span class="menu__soon">Masaż karku i pleców</span>
+          </div>
+          <div class="menu__col">
+            <p class="menu__title">Masaże dla dwojga</p>
+            <span class="menu__soon">Relaksacyjny dla dwojga</span>
+            <span class="menu__soon">Zdrowotny dla dwojga</span>
+            <span class="menu__soon">Ciała + twarzy dla dwojga</span>
+            <span class="menu__soon">Kamieniami gorącymi</span>
+            <span class="menu__soon">Kobido dla dwojga</span>
+          </div>
+          <div class="menu__col">
+            <p class="menu__title">Masaże twarzy</p>
+            <span class="menu__soon">Masaż Kobido</span>
+            <span class="menu__soon">Masaż transbukalny twarzy</span>
+            <span class="menu__soon">Mioplastyczny + transbukalny</span>
+            <span class="menu__soon">Autorski skulpturalny twarzy</span>
+            <span class="menu__soon">Karku + mioplastyczny twarzy</span>
+          </div>
+          <div class="menu__col">
+            <p class="menu__title">Masaże tajskie</p>
+            <span class="menu__soon">Tajski klasyczny na matach</span>
+            <span class="menu__soon">Masaż tajski stóp</span>
+            <span class="menu__soon">Tajski stóp + głowy</span>
+          </div>
+          <div class="menu__col">
+            <p class="menu__title">Antycellulitowe</p>
+            <span class="menu__soon">Masaż antycellulitowy</span>
+            <span class="menu__soon">Antycellulitowy + presoterapia</span>
+          </div>
+          <div class="menu__col">
+            <p class="menu__title">Zabiegi na ciało</p>
+            <span class="menu__soon">Endosfera</span>
+            <span class="menu__soon">Presoterapia</span>
+            <span class="menu__soon">Lipolaser</span>
+            <span class="menu__soon">Kriolipoliza</span>
+            <span class="menu__soon">Fala radiowa z vacuum</span>
+            <span class="menu__soon">Endermologia (LPG)</span>
+          </div>
+          <div class="menu__all"><a href="../zabiegi/index.html">Wszystkie zabiegi &rarr;</a></div>
+        </div>
+      </div>
+      <a href="../cennik.html">Cennik</a>
+      <a href="index.html">Strefa wiedzy</a>
+      <a href="../index.html#galeria">Galeria</a>
+      <a href="../index.html#opinie">Opinie</a>
+      <a href="../index.html#kontakt">Kontakt</a>
+      <!-- the pill CTA is hidden on phones; this stands in inside the folded menu -->
+      <a href="../index.html#rezerwacja" class="nav__book">Rezerwacja</a>
+    </nav>
+    <a href="../index.html#rezerwacja" class="nav-cta">Rezerwacja</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ============ BREADCRUMB ============ -->
+  <nav class="crumbs" aria-label="Ścieżka nawigacji">
+    <a href="../index.html">Strona główna</a> &nbsp;/&nbsp;
+    <a href="index.html">Strefa wiedzy</a> &nbsp;/&nbsp;
+    <span class="here">[[TYTUL]]</span>
+  </nav>
+
+  <!-- ============ ARTYKUŁ ============ -->
+  <article class="article">
+    <p class="eyebrow">[[KATEGORIA]] · [[CZAS]]</p>
+    <h1 class="h2" style="font-size:clamp(32px,4vw,52px); margin-bottom:28px;">[[TYTUL]]</h1>
+
+    <img class="article__hero" src="../images/[[ZDJECIE]]" alt="[[ALT]]"
+         width="1200" height="800" loading="eager" decoding="async">
+
+    <p class="article__lead">Akapit wprowadzający. Dwa–trzy zdania, które mówią,
+    czego czytelnik dowie się z tekstu i dlaczego ma to dla niego znaczenie.</p>
+
+    <h2>Pierwszy śródtytuł</h2>
+    <p>Treść akapitu.</p>
+    <ul>
+      <li>Punkt listy.</li>
+      <li>Kolejny punkt.</li>
+    </ul>
+
+    <h2>Drugi śródtytuł</h2>
+    <p>Treść akapitu.</p>
+
+    <blockquote>
+      <p>Zdanie, które warto wyróżnić — jedna myśl, nie cały akapit.</p>
+    </blockquote>
+
+    <h2>Trzeci śródtytuł</h2>
+    <p>Treść akapitu.</p>
+
+    <!-- Zostaw to zastrzeżenie w każdym tekście dotyczącym zdrowia. -->
+    <p class="article__note">Ten tekst ma charakter informacyjny i nie zastępuje
+    porady lekarza ani fizjoterapeuty. Jeśli odczuwasz ostry ból, masz świeży
+    uraz albo chorobę przewlekłą, skonsultuj wizytę ze specjalistą — a przed
+    zabiegiem powiedz o tym terapeutce, dobierzemy bezpieczny wariant.</p>
+
+    <div class="article__cta">
+      <a href="../index.html#rezerwacja" class="btn btn--dark">Umów wizytę</a>
+      <a href="../cennik.html" class="btn btn--line">Zobacz cennik</a>
+    </div>
+  </article>
+
+  <!-- ============ CTA ============ -->
+  <section class="sv-cta">
+    <p class="eyebrow">Nie wiesz, co wybrać?</p>
+    <h2>Dobierzemy zabieg podczas&nbsp;rozmowy</h2>
+    <p class="lead">Napisz lub zadzwoń — zapytamy o kilka rzeczy i zaproponujemy masaż, którego naprawdę potrzebujesz.</p>
+    <div class="sv-actions">
+      <a href="../index.html#rezerwacja" class="btn btn--solid">Umów wizytę</a>
+      <a href="tel:+48533681901" class="btn btn--outline">+48 533 681 901</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <section class="contact" style="padding-top:clamp(56px,7vh,90px);">
+    <div class="grid12">
+      <div class="contact__main">
+        <p class="eyebrow" style="color:var(--accent);">Kontakt · Rezerwacja</p>
+        <h2 class="h2" style="font-size:clamp(30px,4vw,54px);">Umów wizytę w&nbsp;naszym studiu</h2>
+        <a href="tel:+48533681901" class="contact__phone">+48 533 681 901</a><br>
+        <a href="mailto:massage4youpoznan@gmail.com" class="contact__mail">massage4youpoznan@gmail.com</a>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Godziny otwarcia</div>
+        <div class="hours-row"><span>Pon – Czw</span><span>09:00 – 20:30</span></div>
+        <div class="hours-row"><span>Pt – Nd</span><span>09:00 – 21:00</span></div>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Adres</div>
+        <div class="address">ul. Zeylanda 3/1<br>60-808 Poznań</div>
+      </div>
+    </div>
+    <footer class="footer">
+      <img class="footer__logo" src="../images/logo-light.png" alt="Massage 4 You — Healthy &amp; Relax">
+      <div class="copy">© <span data-year>2026</span> Massage4you · Studio masażu w Poznaniu</div>
+    </footer>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>
