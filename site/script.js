@@ -75,6 +75,92 @@
     });
   }
 
+  /* ---------------- Gallery: parallax carousel ----------------
+     The strip itself is plain CSS scroll-snap and works with this script
+     switched off. What is added here is the parallax — each photo is 118%
+     of its frame and slides against the scroll direction, so the images
+     drift inside their frames instead of moving as flat tiles — plus the
+     arrows and the progress rule.
+  ------------------------------------------------------------------- */
+  var pcar = document.querySelector('[data-carousel]');
+  if (pcar) {
+    var vp = pcar.querySelector('.pcar__viewport');
+    var slides = Array.prototype.slice.call(pcar.querySelectorAll('.pcar__slide'));
+    var pPrev = pcar.querySelector('[data-pcar-prev]');
+    var pNext = pcar.querySelector('[data-pcar-next]');
+    var pBar = pcar.querySelector('.pcar__bar i');
+    // honour the OS setting, and keep honouring it if the visitor changes it
+    var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var queued = false;
+
+    // Percent of the IMAGE's own width, which is 118% of the frame — so 7%
+    // here is 7 * 1.18 = 8.3% of the frame, just inside the 9% of slack the
+    // overscan leaves on each side. Raising this past 7.6 tears a gap open.
+    var DRIFT = 7;
+
+    function paint() {
+      queued = false;
+      var box = vp.getBoundingClientRect();
+      var middle = box.left + box.width / 2;
+
+      if (!motionQuery.matches) {
+        for (var i = 0; i < slides.length; i++) {
+          var r = slides[i].getBoundingClientRect();
+          // -1 at the far left of the viewport, 0 dead centre, +1 far right
+          var p = (r.left + r.width / 2 - middle) / box.width;
+          p = Math.max(-1, Math.min(1, p));
+          var img = slides[i].querySelector('img');
+          if (img) img.style.transform = 'translate3d(' + (p * DRIFT).toFixed(2) + '%,0,0)';
+        }
+      }
+
+      var max = vp.scrollWidth - vp.clientWidth;
+      if (pBar) {
+        // the rule's length shows how much of the strip fits on screen,
+        // its position shows where you are in it
+        var w = vp.scrollWidth > 0 ? Math.max(12, (vp.clientWidth / vp.scrollWidth) * 100) : 100;
+        var ratio = max > 0 ? vp.scrollLeft / max : 0;
+        pBar.style.width = w + '%';
+        pBar.style.transform = 'translateX(' + (ratio * (100 - w) / w * 100).toFixed(2) + '%)';
+      }
+      if (pPrev) pPrev.disabled = vp.scrollLeft <= 2;
+      if (pNext) pNext.disabled = max <= 2 || vp.scrollLeft >= max - 2;
+    }
+
+    function schedule() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(paint);
+    }
+
+    function stride() {
+      // one slide plus the gap, measured rather than hard-coded
+      if (slides.length > 1) return slides[1].offsetLeft - slides[0].offsetLeft;
+      return slides.length ? slides[0].getBoundingClientRect().width : vp.clientWidth * 0.8;
+    }
+
+    function nudge(dir) {
+      vp.scrollBy({ left: dir * stride(), behavior: motionQuery.matches ? 'auto' : 'smooth' });
+    }
+
+    if (pPrev) pPrev.addEventListener('click', function () { nudge(-1); });
+    if (pNext) pNext.addEventListener('click', function () { nudge(1); });
+
+    vp.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    // addEventListener on a MediaQueryList is not in older Safari
+    if (motionQuery.addEventListener) motionQuery.addEventListener('change', schedule);
+    else if (motionQuery.addListener) motionQuery.addListener(schedule);
+
+    // lazy images have no width until they load, which would leave the
+    // progress rule wrong on first paint
+    Array.prototype.forEach.call(pcar.querySelectorAll('img'), function (img) {
+      if (!img.complete) img.addEventListener('load', schedule, { once: true });
+    });
+
+    schedule();
+  }
+
   /* ---------------- Booking ---------------- */
   var form = document.getElementById('booking-form');
   var status = document.getElementById('booking-status');
