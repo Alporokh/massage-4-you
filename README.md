@@ -178,7 +178,9 @@ All derived from `images/Logo-massage4you.png` (2040×2042, white background) �
 Icons put the cream mark on a forest-green field (`#2E4B37`, also the `theme-color`) so they read on any tab bar and need no separate maskable art.
 
 ## Deployment (Cloudflare Workers + static assets)
-**Pushing to `main` deploys the site.** `.github/workflows/deploy.yml` runs `wrangler deploy` on every push and then fetches the four live URLs to confirm the change is actually serving, so a green tick means the site is updated. It needs two repository secrets — `CLOUDFLARE_API_TOKEN` (an "Edit Cloudflare Workers" token) and `CLOUDFLARE_ACCOUNT_ID` — and can be re-run by hand from the **Actions** tab via **Run workflow**.
+**Pushing to `main` deploys the site** — but not through GitHub Actions. Cloudflare's own Git integration is connected to this repository and builds `site/` on every push, usually within a minute. Nothing in `.github/` performs the deploy.
+
+`.github/workflows/deploy.yml` verifies the result instead. It reads the URLs out of `site/sitemap.xml`, waits for the newest one to appear, checks every URL returns 200, and compares the live sitemap against the committed one so a stale or partial deploy fails the run. It needs no secrets. A green tick means the pages genuinely answer on the domain; a red one means the deploy did not land, so check the Cloudflare Workers dashboard rather than Actions.
 
 This workflow exists because deploys used to be manual, and GitHub and the live site drifted apart without any signal: between 15 and 17 Aug 2026 five pushed commits never reached production, so the homepage still served an inline cennik and `/cennik` 404'd while the repo looked perfectly healthy. If the site ever looks stale again, check the Actions tab first — not `git status`.
 
@@ -196,7 +198,7 @@ Design references included in this bundle:
 - `site/styles.css` — all homepage styles + **design-token block at `:root`** (source of truth)
 - `site/script.js` — mobile-nav toggle, scrolled-header state, booking-form handling (`FORM_ENDPOINT`), footer year
 - `wrangler.toml` — Cloudflare config: Worker with static assets, publishes `site/`, no build step
-- `.github/workflows/deploy.yml` — deploys `site/` to Cloudflare on every push to `main`, then verifies the live URLs
+- `.github/workflows/deploy.yml` — verifies the live site after Cloudflare deploys it; performs no deploy itself
 - `site/_headers` — security headers + image caching, read by Cloudflare static assets
 - `site/site.webmanifest` — PWA/Android icon manifest
 - `site/robots.txt` — crawling allowed; `Content-Signal` permits search indexing and AI input (RAG/grounding) but opts out of AI training; points at the sitemap

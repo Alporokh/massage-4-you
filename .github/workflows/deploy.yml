@@ -1,79 +1,101 @@
-name: Deploy site
+name: Verify live site
 
-# Every push to main publishes site/ to Cloudflare. Before this workflow existed,
-# deploys were manual (`npx wrangler deploy`), so pushing to GitHub changed
-# nothing on massage-4-you.com — the live site sat five commits behind for two days.
+# This workflow does NOT deploy. Cloudflare's own Git integration builds
+# massage-4-you.com on every push to main, and it works. An Actions workflow
+# that deployed as well would only race it.
 #
-# Requires two repository secrets (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN   — token with the "Edit Cloudflare Workers" permissions
-#   CLOUDFLARE_ACCOUNT_ID  — from any Cloudflare dashboard URL, or `wrangler whoami`
+# What this does instead is answer the question that actually caused trouble
+# here: "I pushed — is it really live?" It waits for Cloudflare to finish, then
+# checks the real domain over HTTP. A green tick means the pages answer; a red
+# one means the deploy did not land, rather than meaning a missing secret.
+#
+# No secrets required.
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Never let two deploys race; queue them instead of cancelling, so the newest
-# commit is always what ends up live.
 concurrency:
-  group: cloudflare-production
-  cancel-in-progress: false
+  group: verify-live
+  cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://massage-4-you.com
     steps:
-      - name: Check out the commit being deployed
+      - name: Check out the commit that was pushed
         uses: actions/checkout@v7
 
-      - name: Upload site/ to Cloudflare
-        id: deploy
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Pinned so a wrangler release can never change a deploy's behaviour
-          # without a commit here. Bump deliberately.
-          wranglerVersion: "4.123.0"
-          # There is no package.json or lockfile in this repo, so tell the action
-          # which package manager to install wrangler with instead of inferring.
-          packageManager: npm
+      - name: Collect the URLs this commit expects to be live
+        id: urls
+        run: |
+          grep -o '<loc>[^<]*</loc>' site/sitemap.xml \
+            | sed 's|</\?loc>||g' > urls.txt
+          echo "count=$(wc -l < urls.txt)" >> "$GITHUB_OUTPUT"
+          echo "This commit expects $(wc -l < urls.txt) live URLs:"
+          sed 's/^/  /' urls.txt
 
-      # The whole point of this workflow is that a green tick means the change is
-      # actually live. Fetch the real pages over the real domain and prove it.
-      - name: Verify the live pages
+      # Cloudflare needs about a minute. Poll rather than sleep a fixed time,
+      # and poll the LAST url in the sitemap — newly added pages go at the end,
+      # so it is the one most likely to still be missing.
+      - name: Wait for Cloudflare to finish deploying
+        run: |
+          last=$(tail -n1 urls.txt)
+          echo "Waiting for: $last"
+          for i in $(seq 1 30); do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "$last" || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "Live after ~$(( i * 10 ))s"
+              exit 0
+            fi
+            echo "  attempt $i: $code"
+            sleep 10
+          done
+          echo "::error::$last never came up (waited 5 minutes). The Cloudflare deploy probably failed — check the Workers dashboard."
+          exit 1
+
+      - name: Every page in the sitemap must answer 200
         run: |
           fail=0
-          for path in / /cennik /zabiegi/ /zabiegi/masaz-klasyczny-poznan; do
-            code=000
-            for attempt in 1 2 3; do
-              # No -f here: we want the status code itself, not a curl failure.
-              # The || only catches genuine connection errors.
-              code=$(curl -sS -o /dev/null -w '%{http_code}' "https://massage-4-you.com$path") || code=000
-              [ "$code" = "200" ] && break
-              sleep 5
-            done
+          while read -r url; do
+            [ -z "$url" ] && continue
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "$url") || code=000
             if [ "$code" = "200" ]; then
-              echo "ok   200  $path"
+              printf '  ok   %s\n' "$url"
             else
-              echo "::error::https://massage-4-you.com$path returned $code"
+              printf '::error::%s returned %s\n' "$url" "$code"
               fail=1
             fi
-          done
+          done < urls.txt
           exit $fail
+
+      # Catches the specific failure that started all this: the site serving an
+      # older commit. If a page was added and the live sitemap has not caught
+      # up, the deploy is stale even though every old URL still answers 200.
+      - name: The live sitemap must match this commit
+        run: |
+          curl -sS https://massage-4-you.com/sitemap.xml | tr -d '\r' > live-sitemap.xml
+          tr -d '\r' < site/sitemap.xml > repo-sitemap.xml
+          if diff -q live-sitemap.xml repo-sitemap.xml > /dev/null; then
+            echo "Live sitemap matches the repo."
+          else
+            echo "::error::The live sitemap differs from this commit — the deploy is stale or partial."
+            diff repo-sitemap.xml live-sitemap.xml || true
+            exit 1
+          fi
 
       - name: Summarise
         if: always()
         run: |
           {
-            echo "### Deploy of \`${GITHUB_SHA:0:7}\`"
+            echo "### Live check for \`${GITHUB_SHA:0:7}\`"
             echo
-            echo "- Worker URL: ${{ steps.deploy.outputs.deployment-url || 'n/a' }}"
-            echo "- Live site: <https://massage-4-you.com>"
+            echo "- Site: <https://massage-4-you.com>"
+            echo "- URLs checked: ${{ steps.urls.outputs.count }}"
+            echo
+            echo "Deploys are handled by Cloudflare's Git integration, not by this workflow."
           } >> "$GITHUB_STEP_SUMMARY"
