@@ -127,7 +127,12 @@ a:hover { color: var(--ink); }
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
   margin: 0 0 14px; font-weight: 500; white-space: nowrap;
 }
-.menu__col + .menu__col { border-left: 1px solid rgba(46, 75, 55, .12); padding-left: clamp(22px, 2.2vw, 40px); }
+/* Six categories flow into a 3x2 grid, so the divider follows column position
+   rather than source order — otherwise the first item of row two draws a rule
+   against nothing. .menu__all is child 7, which 3n+1 also clears. */
+.menu__col { border-left: 1px solid rgba(46, 75, 55, .12); padding-left: clamp(22px, 2.2vw, 40px); }
+.menu__col:nth-child(3n+1) { border-left: 0; padding-left: 0; }
+.menu__col:nth-child(n+4) { margin-top: 26px; }
 .menu__panel a, .menu__soon {
   display: block; font-family: var(--serif); font-size: 17px; font-weight: 500;
   letter-spacing: 0; text-transform: none; color: var(--ink); text-decoration: none;
@@ -206,6 +211,33 @@ a:hover { color: var(--ink); }
 .offer { background: var(--cream-2); }
 .price-group + .price-group { margin-top: clamp(48px, 6vw, 84px); }
 .price-group .hub-group__head { margin-bottom: clamp(20px, 2.4vw, 32px); }
+
+/* Price table — every duration and its exact price, so nothing hides behind "od".
+   Name on the left, duration/price pills on the right; they stack under the name
+   on narrow screens rather than wrapping into an unreadable column. */
+.ptab { border-top: 1px solid rgba(42,37,30,.16); }
+.ptab__row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 40px;
+  align-items: baseline; padding: 20px 6px;
+  border-bottom: 1px solid rgba(42,37,30,.12);
+}
+.ptab__row:hover { background: rgba(246,243,236,.6); }
+.ptab__name {
+  font-family: var(--serif); font-weight: 500; line-height: 1.2;
+  font-size: clamp(20px, 1.7vw, 26px); letter-spacing: -.005em; margin: 0;
+}
+.ptab__tag {
+  display: block; font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-top: 7px;
+}
+.ptab__opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.ptab__opt {
+  display: inline-flex; align-items: baseline; gap: 10px; white-space: nowrap;
+  background: #fff; border-radius: 100px; padding: 8px 18px;
+  box-shadow: 0 10px 26px -22px rgba(46,75,55,.6);
+}
+.ptab__min { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.ptab__zl { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--accent); }
 .section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(48px, 7vh, 88px); }
 .section-head .h2 { max-width: 640px; }
 .link-underline { text-decoration: none; color: var(--ink); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
@@ -607,7 +639,10 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .menu:hover .menu__panel, .menu:focus-within .menu__panel { opacity: 0; visibility: hidden; pointer-events: none; }
   .menu.open .menu__panel { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
   .menu__panel::before { display: none; }
-  .menu__col + .menu__col { border-left: 0; padding-left: 0; margin-top: 16px; }
+  /* stacked on phones: clear the desktop grid dividers on every column, not
+     just siblings, since the rule above now targets .menu__col directly */
+  .menu__col { border-left: 0; padding-left: 0; }
+  .menu__col + .menu__col, .menu__col:nth-child(n+4) { margin-top: 16px; }
   .menu__panel a, .menu__soon { font-size: 15px; padding: 5px 0; color: var(--cream); white-space: normal; }
   .menu__soon { color: rgba(246, 243, 236, .55); }
   .menu__all { margin-top: 14px; padding-top: 12px; border-top-color: rgba(246, 243, 236, .2); }
@@ -633,6 +668,10 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .g-tall, .g-wide { grid-column: span 2; grid-row: auto; }
   .booking__form { margin-top: 44px; }
   .footer__logo { height: 66px; }
+}
+@media (max-width: 720px) {
+  .ptab__row { grid-template-columns: 1fr; }
+  .ptab__opts { justify-content: flex-start; }
 }
 @media (max-width: 620px) {
   .sv-ben__grid, .sv-contra__grid { grid-template-columns: 1fr; }

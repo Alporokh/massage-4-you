@@ -1,0 +1,8 @@
+# Cloudflare static-assets redirects. One rule per line: from, to, status.
+# Paths are extensionless because html_handling = "auto-trailing-slash" serves
+# foo.html at /foo — see wrangler.toml.
+
+# "Masaż klasyczny" is not on the studio's price list; the page was rebuilt as
+# the relaxing full-body massage. 301 so the indexed URL keeps its ranking
+# instead of 404ing.
+/zabiegi/masaz-klasyczny-poznan  /zabiegi/masaz-relaksacyjny-poznan  301
