@@ -770,3 +770,51 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .stats { flex-wrap: wrap; gap: 28px 40px; }
   .sv-price__row { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
+
+/* ---------- Cookie consent ---------- */
+.cc-overlay { position: fixed; inset: 0; background: rgba(23,31,25,.55); z-index: 9998; display: none; }
+.cc-overlay[data-open] { display: block; }
+.cc {
+  position: fixed; z-index: 9999; inset-inline: 0; bottom: 0; display: none;
+  background: var(--cream); color: var(--ink); border-top: 1px solid rgba(46,75,55,.18);
+  box-shadow: 0 -18px 48px -28px rgba(23,31,25,.7);
+}
+.cc[data-open] { display: block; }
+.cc__inner { max-width: 940px; margin: 0 auto; padding: clamp(22px,3vw,32px) clamp(20px,4vw,36px); }
+.cc h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(21px,2vw,26px); margin: 0 0 10px; }
+.cc p { font-size: 15px; line-height: 1.7; color: var(--muted); margin: 0 0 18px; max-width: 72ch; }
+.cc__cats { margin: 0 0 18px; border-top: 1px solid rgba(46,75,55,.14); }
+.cc__cat { display: flex; gap: 14px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid rgba(46,75,55,.1); }
+.cc__cat input { margin-top: 3px; width: 18px; height: 18px; flex: none; accent-color: var(--ink); }
+.cc__cat label { display: block; font-weight: 500; margin-bottom: 2px; color: var(--ink); }
+.cc__cat p { font-size: 13.5px; margin: 0; }
+.cc__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cc__btn {
+  font: inherit; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 14px 26px; border-radius: 100px; cursor: pointer; transition: opacity .3s ease, background .3s ease;
+}
+/* Accept and Reject share one class on purpose: equal prominence is a legal
+   requirement, not a style choice. Do not demote one to a text link. */
+.cc__btn--primary { background: var(--ink); color: var(--cream); border: 1px solid var(--ink); }
+.cc__btn--primary:hover { opacity: .88; }
+.cc__btn--quiet { background: none; border: 1px solid rgba(46,75,55,.3); color: var(--muted); }
+.cc__btn--quiet:hover { border-color: var(--ink); color: var(--ink); }
+.cc__btn:focus-visible, .cc__cat input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* footer "cookie settings" trigger, styled as the link it behaves like */
+.linklike {
+  background: none; border: 0; padding: 0; font: inherit; color: var(--accent);
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.linklike:hover { color: var(--cream); }
+.article .linklike:hover { color: var(--ink); }
+
+/* ---------- Document pages (privacy policy) ---------- */
+.scroll-x { overflow-x: auto; margin: 0 0 24px; }
+.doc-table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 460px; }
+.doc-table th {
+  text-align: left; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--faint); font-weight: 600; padding: 0 14px 9px 0; border-bottom: 1px solid rgba(46,75,55,.2);
+}
+.doc-table td { padding: 10px 14px 10px 0; border-bottom: 1px solid rgba(46,75,55,.1); color: var(--muted); vertical-align: top; }
+.doc-table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--ink); }

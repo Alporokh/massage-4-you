@@ -4,13 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
+  <!-- Google Consent Mode v2 — defaults DENIED, set before any Google tag.
+       Required in the EEA since March 2024. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
 
+  <!-- Google tag (gtag.js) — type="text/plain" so the browser will NOT run it.
+       consent.js rewrites these into live scripts only after the visitor
+       accepts analytics. Nothing reaches Google before that. -->
+  <script type="text/plain" data-cc="analytics"
+          async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
+  <script type="text/plain" data-cc="analytics">
+    gtag('js', new Date());
     gtag('config', 'G-KWH7YY91FW');
   </script>
   <title>Jak masaż wspiera regenerację po treningu | Massage 4 You Poznań</title>
@@ -42,6 +59,50 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Jak masaż wspiera regenerację po treningu",
+        "description": "Kiedy umówić masaż po treningu, jak mocny powinien być i czym różni się masaż sportowy od relaksacyjnego.",
+        "image": "https://massage-4-you.com/images/massage-4-you-sport.jpg",
+        "inLanguage": "pl-PL",
+        "author": {
+          "@id": "https://massage-4-you.com/#business"
+        },
+        "publisher": {
+          "@id": "https://massage-4-you.com/#business"
+        },
+        "mainEntityOfPage": "https://massage-4-you.com/strefa-wiedzy/jak-masaz-wspiera-regeneracje-po-treningu"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Strona główna",
+            "item": "https://massage-4-you.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Strefa wiedzy",
+            "item": "https://massage-4-you.com/strefa-wiedzy/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Jak masaż wspiera regenerację po treningu",
+            "item": "https://massage-4-you.com/strefa-wiedzy/jak-masaz-wspiera-regeneracje-po-treningu"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -215,9 +276,34 @@
     <footer class="footer">
       <img class="footer__logo" src="../images/logo-light.png" alt="Massage 4 You — Healthy &amp; Relax">
       <div class="copy">© <span data-year>2026</span> Massage4you · Studio masażu w Poznaniu</div>
+      <div class="copy" style="margin-top:10px;"><a href="../polityka-prywatnosci">Polityka prywatności</a> &nbsp;·&nbsp; <button type="button" data-cc-open class="linklike">Ustawienia cookies</button></div>
     </footer>
   </section>
 
   <script src="../script.js"></script>
+  <!-- ============ COOKIE CONSENT ============ -->
+  <div class="cc-overlay" id="cc-overlay"></div>
+  <div class="cc" id="cc-banner" role="dialog" aria-modal="true" aria-labelledby="cc-title" aria-describedby="cc-desc">
+    <div class="cc__inner">
+      <h2 id="cc-title">Cookies na tej stronie</h2>
+      <p id="cc-desc">Używamy niezbędnych plików cookies, żeby strona działała. Za Twoją zgodą chcemy też korzystać z Google Analytics, żeby wiedzieć, które podstrony są przydatne. Wybór możesz zmienić w każdej chwili. Szczegóły w <a href="/polityka-prywatnosci">polityce prywatności</a>.</p>
+      <div class="cc__cats" id="cc-cats">
+        <div class="cc__cat">
+          <input type="checkbox" id="cc-necessary" checked disabled>
+          <div><label for="cc-necessary">Niezbędne</label><p>Potrzebne do działania strony i zapamiętania Twojego wyboru. Nie można ich wyłączyć.</p></div>
+        </div>
+        <div class="cc__cat">
+          <input type="checkbox" id="cc-analytics">
+          <div><label for="cc-analytics">Analityka</label><p>Google Analytics — zagregowane statystyki odwiedzin. Domyślnie wyłączone.</p></div>
+        </div>
+      </div>
+      <div class="cc__actions">
+        <button class="cc__btn cc__btn--primary" id="cc-accept" type="button">Akceptuję wszystkie</button>
+        <button class="cc__btn cc__btn--primary" id="cc-reject" type="button">Odrzucam</button>
+        <button class="cc__btn cc__btn--quiet" id="cc-save" type="button">Zapisz wybór</button>
+      </div>
+    </div>
+  </div>
+  <script src="/consent.js"></script>
 </body>
 </html>
