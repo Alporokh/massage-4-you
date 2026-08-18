@@ -53,6 +53,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KWH7YY91FW');
+  </script>
   <title>[[TYTUL]] | Massage 4 You Poznań</title>
   <meta name="description" content="[[OPIS]]">
   <link rel="canonical" href="https://massage-4-you.com/strefa-wiedzy/[[SLUG]]">
@@ -73,8 +83,10 @@
 <body>
 
   <!-- ============ HEADER ============ -->
-  <!-- Nagłówek jest identyczny na każdej podstronie. Kopiuj bez zmian; jeśli
-       zmieniasz menu, zmień je we wszystkich plikach naraz. -->
+  <!-- Nagłówek jest identyczny na każdej podstronie. UWAGA: to menu starzeje
+       się przy każdej nowej podstronie zabiegu. Zanim opublikujesz wpis,
+       skopiuj <header> z dowolnej aktualnej strony w site/strefa-wiedzy/
+       zamiast polegać na tej kopii. -->
   <header class="header header--solid">
     <a href="../index.html" class="logo">
       <img class="logo__mark" src="../images/logo-mark-light.png" alt="" width="44" height="32">
@@ -89,7 +101,7 @@
           <div class="menu__col">
             <p class="menu__title">Masaże ciała</p>
             <a href="../zabiegi/masaz-relaksacyjny-poznan.html">Masaż relaksacyjny całego ciała</a>
-            <span class="menu__soon">Masaż zdrowotny całego ciała</span>
+            <a href="../zabiegi/masaz-zdrowotny-poznan.html">Masaż zdrowotny całego ciała</a>
             <span class="menu__soon">Masaż tkanek głębokich</span>
             <span class="menu__soon">Masaż sportowy</span>
             <span class="menu__soon">Masaż drenażu limfatycznego</span>
