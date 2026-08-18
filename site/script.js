@@ -65,13 +65,20 @@
       video.controls = true;
       video.play();
     });
-    video.addEventListener('pause', function () {
-      if (video.currentTime === 0 || video.ended) vid.classList.remove('is-playing');
-    });
-    video.addEventListener('ended', function () {
+
+    // Back to the resting state: overlay button visible, native controls gone.
+    function rest() {
       vid.classList.remove('is-playing');
       video.controls = false;
-      video.load();           // back to the poster frame
+    }
+
+    // The clip loops, so 'ended' never fires and pausing is the only way back
+    // to rest — the old handler waited for an end that no longer arrives.
+    // 'ended' stays wired so pulling the loop attribute still behaves.
+    video.addEventListener('pause', rest);
+    video.addEventListener('ended', function () {
+      rest();
+      video.load();           // rewind to the poster frame
     });
   }
 

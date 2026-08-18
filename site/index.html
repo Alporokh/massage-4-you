@@ -281,9 +281,11 @@
     <div class="scrim"></div>
     <blockquote>
       <!-- vertical clip: poster + play button until the visitor asks for it,
-           so nobody downloads 1.5 MB of video they never watch -->
+           so nobody downloads 1.5 MB of video they never watch. `loop` means it
+           repeats until the visitor pauses it — so `ended` never fires and the
+           poster is never restored on its own; script.js handles the reset. -->
       <div class="vid" data-video>
-        <video class="vid__el" playsinline preload="none"
+        <video class="vid__el" playsinline preload="none" loop
                poster="images/zespol-video-poster.jpg"
                aria-label="Zespół Massage 4 You przy pracy">
           <source src="images/zespol-massage-4-you.mp4" type="video/mp4">
