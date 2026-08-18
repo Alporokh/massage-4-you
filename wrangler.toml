@@ -15,3 +15,6 @@ compatibility_date = "2026-08-15"
 
 [assets]
 directory = "./site"
+# Serve site/404.html for any path that does not match a file, with a real 404
+# status. Without this Cloudflare returns a bare, unstyled "Not Found".
+not_found_handling = "404-page"

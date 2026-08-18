@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nie znaleziono strony (404) | Massage 4 You Poznań</title>
+  <meta name="description" content="Ta strona nie istnieje. Przejdź do cennika, oferty zabiegów albo umów wizytę w studiu masażu Massage 4 You w Poznaniu.">
+  <!-- No canonical: this page is served under whatever URL was mistyped.
+       noindex keeps it out of the index even if something links to it. -->
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Every path here is root-absolute. Cloudflare serves this file for a miss
+       at ANY depth — /zabiegi/literowka as readily as /literowka — so relative
+       paths would break the stylesheet and every link. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#2E4B37">
+  <meta name="apple-mobile-web-app-title" content="Massage4you">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header header--solid">
+    <a href="/" class="logo">
+      <img class="logo__mark" src="/images/logo-mark-light.png" alt="" width="44" height="32">
+      <span class="logo__word">Massage<i>4</i>you</span>
+    </a>
+    <nav class="nav">
+      <a href="/#o-nas">O nas</a>
+      <a href="/#zespol">Zespół</a>
+      <a href="/zabiegi/">Zabiegi</a>
+      <a href="/cennik">Cennik</a>
+      <a href="/strefa-wiedzy/">Strefa wiedzy</a>
+      <a href="/#galeria">Galeria</a>
+      <a href="/#kontakt">Kontakt</a>
+      <a href="/#rezerwacja" class="nav__book">Rezerwacja</a>
+    </nav>
+    <a href="/#rezerwacja" class="nav-cta">Rezerwacja</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ============ 404 ============ -->
+  <section class="hub-hero">
+    <p class="eyebrow">Błąd 404</p>
+    <h1>Tej strony u nas&nbsp;<i>nie ma</i></h1>
+    <p class="lead">Adres jest nieaktualny albo zawiera literówkę. Nic straconego — poniżej wszystko, czego zwykle się tu szuka.</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="post-grid">
+
+      <a href="/cennik" class="post">
+        <div class="post__meta"><span class="cat">Cennik</span></div>
+        <h3>Ceny wszystkich masaży i zabiegów</h3>
+        <p class="note" style="font-style:normal; color:var(--muted); margin-top:10px;">Każdy czas trwania z dokładną ceną — bez „od” i bez gwiazdek.</p>
+      </a>
+
+      <a href="/zabiegi/" class="post">
+        <div class="post__meta"><span class="cat">Zabiegi</span></div>
+        <h3>Pełna oferta studia</h3>
+        <p class="note" style="font-style:normal; color:var(--muted); margin-top:10px;">Masaże ciała, dla dwojga, twarzy, tajskie oraz zabiegi na ciało.</p>
+      </a>
+
+      <a href="/strefa-wiedzy/" class="post">
+        <div class="post__meta"><span class="cat">Strefa wiedzy</span></div>
+        <h3>Artykuły o masażu i regeneracji</h3>
+        <p class="note" style="font-style:normal; color:var(--muted); margin-top:10px;">Praktyczne teksty pisane przez nasze terapeutki.</p>
+      </a>
+
+    </div>
+
+    <div class="offer__more" style="margin-top:clamp(36px,4vw,56px);">
+      <a href="/" class="btn btn--dark">Strona główna</a>
+      <a href="/#rezerwacja" class="btn btn--line">Umów wizytę</a>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="sv-cta">
+    <p class="eyebrow">Wolisz zapytać?</p>
+    <h2>Zadzwoń — doradzimy w&nbsp;kilka minut</h2>
+    <p class="lead">Jesteśmy w Poznaniu na Jeżycach, przy ul. Zeylanda 3/1.</p>
+    <div class="sv-actions">
+      <a href="tel:+48533681901" class="btn btn--solid">+48 533 681 901</a>
+      <a href="mailto:massage4youpoznan@gmail.com" class="btn btn--outline">Napisz do nas</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <section class="contact" style="padding-top:clamp(56px,7vh,90px);">
+    <div class="grid12">
+      <div class="contact__main">
+        <p class="eyebrow" style="color:var(--accent);">Kontakt · Rezerwacja</p>
+        <h2 class="h2" style="font-size:clamp(30px,4vw,54px);">Umów wizytę w&nbsp;naszym studiu</h2>
+        <a href="tel:+48533681901" class="contact__phone">+48 533 681 901</a><br>
+        <a href="mailto:massage4youpoznan@gmail.com" class="contact__mail">massage4youpoznan@gmail.com</a>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Godziny otwarcia</div>
+        <div class="hours-row"><span>Pon – Czw</span><span>09:00 – 20:30</span></div>
+        <div class="hours-row"><span>Pt – Nd</span><span>09:00 – 21:00</span></div>
+      </div>
+      <div class="contact__col">
+        <div class="contact__label">Adres</div>
+        <div class="address">ul. Zeylanda 3/1<br>60-808 Poznań</div>
+      </div>
+    </div>
+    <footer class="footer">
+      <img class="footer__logo" src="/images/logo-light.png" alt="Massage 4 You — Healthy &amp; Relax">
+      <div class="copy">© <span data-year>2026</span> Massage4you · Studio masażu w Poznaniu</div>
+    </footer>
+  </section>
+
+  <script src="/script.js"></script>
+</body>
+</html>
