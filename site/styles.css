@@ -173,6 +173,13 @@ body {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Cormorant defaults to old-style figures, which sit at x-height and give
+     some digits descenders — prices, phone numbers and times came out looking
+     ragged and inconsistent from one block to the next. Lining figures put
+     every digit on the cap line. Inherited, so it reaches all of them at once;
+     Jost is lining by default, so this changes nothing in the sans. Type size
+     is deliberately left alone. */
+  font-variant-numeric: lining-nums;
 }
 img { display: block; max-width: 100%; }
 a { color: var(--accent); }
