@@ -330,7 +330,7 @@ a:hover { color: var(--ink); }
   position: absolute; right: clamp(28px,5vw,72px); bottom: clamp(48px,7vh,96px); z-index: 2;
   color: var(--cream); text-align: right; font-size: 13px; line-height: 1.9; opacity: .85; letter-spacing: .03em;
 }
-.hero__hours .phone { margin-top: 8px; font-size: 15px; letter-spacing: .06em; }
+.hero__hours .phone { margin-top: 8px; font-size: 15px; letter-spacing: .06em; font-variant-numeric: lining-nums tabular-nums; }
 
 /* ---------- Marquee ---------- */
 .marquee { background: var(--ink); color: var(--paper-dark); overflow: hidden; padding: 20px 0; white-space: nowrap; }
@@ -650,7 +650,14 @@ a:hover { color: var(--ink); }
 .contact .grid12 { align-items: start; }
 .contact__main { grid-column: 1 / span 6; }
 .contact .h2 { color: var(--cream); margin-bottom: 40px; }
-.contact__phone { text-decoration: none; color: var(--cream); font-family: var(--serif); font-size: clamp(28px,3vw,40px); font-weight: 500; display: inline-block; margin-bottom: 8px; }
+.contact__phone {
+  text-decoration: none; color: var(--cream); font-family: var(--serif);
+  font-size: clamp(28px,3vw,40px); font-weight: 500; display: inline-block; margin-bottom: 8px;
+  /* lining + tabular so the digits sit on one baseline at an even width,
+     matching the opening hours next to it */
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: .02em;
+}
 .contact__mail { text-decoration: none; color: var(--paper-dark); font-size: 17px; letter-spacing: .02em; border-bottom: 1px solid rgba(232,221,203,.35); padding-bottom: 3px; }
 .contact__col { grid-column: span 3; }
 .contact__label { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
@@ -660,7 +667,23 @@ a:hover { color: var(--ink); }
 .footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: clamp(64px,9vh,120px); padding-top: 32px; border-top: 1px solid rgba(232,221,203,.16); }
 .footer .brand { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--cream); }
 .footer .brand i { font-style: italic; }
-.footer__logo { height: 84px; width: auto; opacity: .92; }
+/* The footer wordmark used to be a PNG at 84px tall, which went soft and was
+   unreadable at the size it actually rendered. As type it stays crisp at any
+   size, can be selected and read aloud, and needs no image request. The mark
+   above it is a drawn symbol, so that stays an image. */
+.footer__lockup { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--cream); }
+.footer__mark { height: 40px; width: auto; opacity: .92; }
+.footer__word {
+  font-family: var(--serif); font-size: 21px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase; line-height: 1;
+  /* the numeral is the brand device, so it keeps the display cut */
+  font-variant-numeric: lining-nums;
+}
+.footer__word b { font-weight: 600; }
+.footer__tag {
+  font-family: var(--serif); font-style: italic; font-size: 13px;
+  letter-spacing: .06em; color: var(--accent); line-height: 1;
+}
 .footer .copy { font-size: 12px; letter-spacing: .1em; color: var(--faint); }
 
 /* ============================================================
@@ -902,7 +925,8 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .hero__hours { display: none; }
   .pcar__slide { flex-basis: min(72vw, 300px); }
   .booking__form { margin-top: 44px; }
-  .footer__logo { height: 66px; }
+  .footer__mark { height: 34px; }
+  .footer__word { font-size: 18px; }
 }
 @media (max-width: 720px) {
   .ptab__row { grid-template-columns: 1fr; }
