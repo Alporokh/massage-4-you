@@ -230,8 +230,20 @@ a:hover { color: var(--ink); }
      old lowercase wordmark, so the header bar keeps its proportions */
   font-size: 20px; font-weight: 500; letter-spacing: .2em; line-height: 1;
   text-transform: uppercase;
+  /* Cormorant defaults to old-style figures, so the 4 rendered at x-height and
+     sat below the caps — the wordmark read as two different lines of type.
+     Lining figures put it back on the cap line. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
 }
 .logo__word { white-space: nowrap; }
+/* The numeral is the brand device: in the supplied artwork it stands taller and
+   heavier than the caps it sits between. The letter-spacing applies after every
+   character, so the 4 needs a touch trimmed off its right side to keep the gaps
+   either side of it optically even. */
+.logo__word b, .voucher-card .brand b {
+  font-weight: 600; font-size: 1.16em; letter-spacing: .1em; margin-right: -.02em;
+}
 .logo__mark { height: 34px; width: auto; transition: height .35s ease; }
 .header--scrolled .logo__mark { height: 30px; }
 .nav { display: flex; gap: 34px; align-items: center; }
@@ -543,6 +555,7 @@ a:hover { color: var(--ink); }
 .voucher-card .brand {
   font-family: var(--serif); font-size: 17px; font-weight: 500;
   letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
+  font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
 }
 .voucher-card .tag { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
 .voucher-card .kicker { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .6; margin-bottom: 8px; }
@@ -685,7 +698,7 @@ a:hover { color: var(--ink); }
   /* the numeral is the brand device, so it keeps the display cut */
   font-variant-numeric: lining-nums;
 }
-.footer__word b { font-weight: 600; }
+.footer__word b { font-weight: 600; font-size: 1.16em; letter-spacing: .09em; margin-right: -.02em; }
 .footer__tag {
   font-family: var(--serif); font-style: italic; font-size: 13px;
   letter-spacing: .06em; color: var(--accent); line-height: 1;
