@@ -103,6 +103,48 @@
     // Percent of the IMAGE's own width, which is 118% of the frame — so 7%
     // here is 7 * 1.18 = 8.3% of the frame, just inside the 9% of slack the
     // overscan leaves on each side. Raising this past 7.6 tears a gap open.
+    /* ---- lenticular reveal ----
+       Two masked copies of each photo, banded so they interlock. They separate
+       as a card moves off the centre of the strip and lock into one clean image
+       as it arrives — the card you are looking at resolves, its neighbours
+       shimmer. Built lazily so the lazy-loading on the original <img> survives
+       and off-screen slides cost nothing. */
+    var LENS_SHIFT = 4;                 // px at the far edge — enough to read as a shimmer, not a tear
+    var canLens = !motionQuery.matches && window.IntersectionObserver &&
+      window.CSS && CSS.supports &&
+      (CSS.supports('mask-image', 'linear-gradient(#000,#000)') ||
+       CSS.supports('-webkit-mask-image', 'linear-gradient(#000,#000)'));
+
+    function buildLens(slide) {
+      var media = slide.querySelector('.pcar__media');
+      if (!media || media.classList.contains('is-lenticular')) return;
+      var src = media.querySelector('img');
+      if (!src) return;
+      ['a', 'b'].forEach(function (k) {
+        var l = src.cloneNode(false);
+        l.className = 'pcar__lens pcar__lens--' + k;
+        l.removeAttribute('loading');
+        l.setAttribute('aria-hidden', 'true');
+        l.alt = '';
+        media.appendChild(l);
+      });
+      media.classList.add('is-lenticular');
+      schedule();
+    }
+
+    if (canLens) {
+      var near = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var im = e.target.querySelector('img');
+          if (im && !im.complete) im.addEventListener('load', function () { buildLens(e.target); }, { once: true });
+          else buildLens(e.target);
+          near.unobserve(e.target);
+        });
+      }, { root: vp, rootMargin: '200px' });
+      slides.forEach(function (sl) { near.observe(sl); });
+    }
+
     var DRIFT = 7;
 
     function paint() {
@@ -118,6 +160,17 @@
           p = Math.max(-1, Math.min(1, p));
           var img = slides[i].querySelector('img');
           if (img) img.style.transform = 'translate3d(' + (p * DRIFT).toFixed(2) + '%,0,0)';
+
+          // the two masked band-sets slide apart off-centre and interlock at p = 0,
+          // so the card in the middle resolves into one clean photo
+          var la = slides[i].querySelector('.pcar__lens--a');
+          if (la) {
+            var lb = slides[i].querySelector('.pcar__lens--b');
+            var base = (p * DRIFT).toFixed(2) + '%';
+            var sep = (p * LENS_SHIFT).toFixed(1) + 'px';
+            la.style.transform = 'translate3d(calc(' + base + ' + ' + sep + '),0,0)';
+            lb.style.transform = 'translate3d(calc(' + base + ' - ' + sep + '),0,0)';
+          }
         }
       }
 
