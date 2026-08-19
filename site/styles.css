@@ -989,38 +989,3 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
 }
 .doc-table td { padding: 10px 14px 10px 0; border-bottom: 1px solid rgba(46,75,55,.1); color: var(--muted); vertical-align: top; }
 .doc-table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--ink); }
-
-/* ---------- Gallery: lenticular reveal ----------
-   A lenticular print shows a different image depending on the angle you view
-   it from. Here the same idea with one photo: two copies masked into
-   complementary horizontal bands, sliding apart as a card moves away from the
-   centre of the strip and interlocking into a single clean image as it
-   arrives. The card you are looking at resolves; its neighbours shimmer.
-
-   Two layers, not ten strips — the banding is done with a repeating mask, so
-   the whole effect is two transforms per slide and stays on the compositor.
-   script.js adds .is-lenticular and the second layer; with JS off, or with
-   reduced motion, the original single <img> is all there is. */
-.pcar__media.is-lenticular .pcar__lens {
-  position: absolute; top: 0; left: -9%;
-  width: 118%; max-width: none; height: 100%;
-  object-fit: cover; will-change: transform;
-}
-/* odd bands */
-.pcar__media.is-lenticular .pcar__lens--a {
-  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 6px, transparent 6px 12px);
-          mask-image: repeating-linear-gradient(to bottom, #000 0 6px, transparent 6px 12px);
-}
-/* even bands — offset by one band so together they cover the whole frame */
-.pcar__media.is-lenticular .pcar__lens--b {
-  -webkit-mask-image: repeating-linear-gradient(to bottom, transparent 0 6px, #000 6px 12px);
-          mask-image: repeating-linear-gradient(to bottom, transparent 0 6px, #000 6px 12px);
-}
-/* the original img is the fallback; once the layers exist it steps aside */
-.pcar__media.is-lenticular > img:not(.pcar__lens) { visibility: hidden; }
-
-@media (prefers-reduced-motion: reduce) {
-  /* no interlacing at all — the plain photo, as before */
-  .pcar__media.is-lenticular .pcar__lens { display: none; }
-  .pcar__media.is-lenticular > img:not(.pcar__lens) { visibility: visible; }
-}
