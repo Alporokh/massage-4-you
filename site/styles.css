@@ -203,12 +203,18 @@ a:hover { color: var(--ink); }
 .btn {
   display: inline-block; text-decoration: none; border-radius: 100px;
   font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
-  padding: 16px 34px; transition: opacity .3s ease, background .3s ease, color .3s ease;
+  padding: 16px 34px;
+  transition: opacity .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
 }
-.btn--solid { background: var(--accent); color: var(--cream); }
+/* The solid variant carries a transparent border of the same width as the
+   outlined one, so the two sit at identical heights side by side instead of
+   the stroked button standing 2px taller. */
+.btn--solid { background: var(--accent); color: var(--cream); border: 1px solid transparent; }
 .btn--solid:hover { opacity: .9; color: var(--cream); }
-.btn--ghost { color: var(--cream); border-bottom: 1px solid rgba(251,245,236,.5); border-radius: 0; padding: 16px 8px; }
-.btn--ghost:hover { color: var(--cream); }
+/* Outlined companion to the solid button: same pill, stroke only, no fill.
+   Matches the border weight and colour of the header CTA. */
+.btn--ghost { color: var(--cream); background: transparent; border: 1px solid rgba(251,245,236,.6); }
+.btn--ghost:hover { color: var(--cream); background: rgba(251,245,236,.12); border-color: var(--cream); }
 /* light booking button — readable on the cream cards and on their dark hover state */
 .btn--light { background: var(--cream); color: var(--ink); border: 1px solid rgba(46,75,55,.16); }
 .btn--light:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
