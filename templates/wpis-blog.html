@@ -189,8 +189,8 @@
     <p class="eyebrow">[[KATEGORIA]] · [[CZAS]]</p>
     <h1 class="h2" style="font-size:clamp(32px,4vw,52px); margin-bottom:28px;">[[TYTUL]]</h1>
 
-    <img class="article__hero" src="../images/[[ZDJECIE]]" alt="[[ALT]]"
-         width="1200" height="800" loading="eager" decoding="async">
+    <img fetchpriority="high" class="article__hero" src="../images/[[ZDJECIE]]" alt="[[ALT]]"
+         width="1200" height="800" decoding="async">
 
     <p class="article__lead">Akapit wprowadzający. Dwa–trzy zdania, które mówią,
     czego czytelnik dowie się z tekstu i dlaczego ma to dla niego znaczenie.</p>
@@ -261,7 +261,7 @@
     </div>
     <footer class="footer">
       <a class="footer__lockup" href="../index.html" aria-label="Massage 4 You — strona główna">
-        <img class="footer__mark" src="../images/logo-mark-light.png" alt="" width="44" height="32">
+        <img decoding="async" loading="lazy" class="footer__mark" src="../images/logo-mark-light.png" alt="" width="44" height="32">
         <span class="footer__word">Massage <b>4</b> You</span>
         <span class="footer__tag">Healthy &amp; Relax</span>
       </a>

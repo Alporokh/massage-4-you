@@ -55,10 +55,13 @@
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#2E4B37">
   <meta name="apple-mobile-web-app-title" content="Massage 4 You">
-
+
   <!-- self-hosted; preloaded because these two carry the first paint -->
   <link rel="preload" href="fonts/jost-300-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/cormorant-garamond-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- the hero is the largest element; start it with the fonts rather than
+       waiting for the parser to reach the image tag in the body -->
+  <link rel="preload" href="images/hero.jpg" as="image" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
   {
@@ -275,8 +278,10 @@
 
   <!-- ============ HERO ============ -->
   <section id="top" class="hero">
-    <!-- new studio photo; falls back to the previous hero until the file is added to images/ -->
-    <img class="hero__img" src="images/hero-studio.jpg" onerror="this.onerror=null;this.src='images/hero.jpg'" alt="Gabinet Massage 4 You w Poznaniu — stoły do masażu dla dwojga">
+    <!-- The LCP element. It must not be reached through an onerror fallback:
+         a missing first src costs a whole round trip before the real image can
+         even start downloading. Swap this src when a new studio photo lands. -->
+    <img decoding="async" fetchpriority="high" class="hero__img" src="images/hero.jpg" alt="Gabinet Massage 4 You w Poznaniu — stoły do masażu dla dwojga">
     <div class="hero__scrim"></div>
     <div class="hero__body">
       <p class="hero__kicker">Studio masażu · Poznań</p>
@@ -316,8 +321,8 @@
       </div>
     </div>
     <div class="about__media">
-      <img class="about__img" src="images/team-group.jpg" alt="Zespół Massage 4 You — terapeutki w studiu przy ul. Zeylanda w Poznaniu">
-      <img class="about__inset" src="images/feature.jpg" alt="Detal — naturalne olejki">
+      <img decoding="async" loading="lazy" class="about__img" src="images/team-group.jpg" alt="Zespół Massage 4 You — terapeutki w studiu przy ul. Zeylanda w Poznaniu">
+      <img decoding="async" loading="lazy" class="about__inset" src="images/feature.jpg" alt="Detal — naturalne olejki">
     </div>
   </section>
 
@@ -431,23 +436,23 @@
     </div>
     <div class="team-grid">
       <div class="team-card team-card--chef">
-        <img src="images/team-tatiana-chef.jpg" alt="Tatiana Popytailenko — szefowa zespołu Massage 4 You w Poznaniu">
+        <img decoding="async" loading="lazy" src="images/team-tatiana-chef.jpg" alt="Tatiana Popytailenko — szefowa zespołu Massage 4 You w Poznaniu">
         <h3>Tatiana Popytailenko</h3><p>Szefowa zespołu</p>
       </div>
       <div class="team-card">
-        <img src="images/team-iryna.jpg" alt="Iryna — mistrzyni masażu w Massage 4 You w Poznaniu">
+        <img decoding="async" loading="lazy" src="images/team-iryna.jpg" alt="Iryna — mistrzyni masażu w Massage 4 You w Poznaniu">
         <h3>Iryna</h3><p>Mistrzyni masażu</p>
       </div>
       <div class="team-card">
-        <img src="images/team-tatiana.jpg" alt="Tatiana — mistrzyni masażu w Massage 4 You w Poznaniu">
+        <img decoding="async" loading="lazy" src="images/team-tatiana.jpg" alt="Tatiana — mistrzyni masażu w Massage 4 You w Poznaniu">
         <h3>Tatiana</h3><p>Mistrzyni masażu</p>
       </div>
       <div class="team-card">
-        <img src="images/team-yulia.jpg" alt="Yulia — mistrzyni masażu w Massage 4 You w Poznaniu">
+        <img decoding="async" loading="lazy" src="images/team-yulia.jpg" alt="Yulia — mistrzyni masażu w Massage 4 You w Poznaniu">
         <h3>Yulia</h3><p>Mistrzyni masażu</p>
       </div>
       <div class="team-card">
-        <img src="images/team-olga.jpg" alt="Olga — mistrzyni masażu w Massage 4 You w Poznaniu">
+        <img decoding="async" loading="lazy" src="images/team-olga.jpg" alt="Olga — mistrzyni masażu w Massage 4 You w Poznaniu">
         <h3>Olga</h3><p>Mistrzyni masażu</p>
       </div>
     </div>
@@ -455,7 +460,7 @@
 
   <!-- ============ FILM ZESPOŁU ============ -->
   <section id="film" class="feature">
-    <img src="images/interior-3.jpg" alt="Atmosfera studia">
+    <img decoding="async" loading="lazy" src="images/interior-3.jpg" alt="Atmosfera studia">
     <div class="scrim"></div>
     <blockquote>
       <!-- vertical clip: poster + play button until the visitor asks for it,
@@ -644,18 +649,18 @@
     </div>
     <div class="post-grid">
       <a href="strefa-wiedzy/jak-masaz-wspiera-regeneracje-po-treningu.html" class="post">
-        <div class="post__thumb"><img src="images/massage-4-you-sport.jpg" alt="Bieganie i regeneracja — masaż po treningu"></div>
+        <div class="post__thumb"><img decoding="async" loading="lazy" src="images/massage-4-you-sport.jpg" alt="Bieganie i regeneracja — masaż po treningu"></div>
         <div class="post__meta"><span class="cat">Regeneracja</span><span>·</span><span>5 min czytania</span></div>
         <h3>Jak masaż wspiera regenerację po treningu</h3>
       </a>
       <!-- zapowiedziane, jeszcze nienapisane — patrz templates/wpis-blog.html -->
       <a href="strefa-wiedzy/5-sygnalow-ze-twoje-cialo-potrzebuje-masazu.html" class="post">
-        <div class="post__thumb"><img src="images/spa-massage.jpg" alt="Kamienie i miska z orchideami — atmosfera zabiegu"></div>
+        <div class="post__thumb"><img decoding="async" loading="lazy" src="images/spa-massage.jpg" alt="Kamienie i miska z orchideami — atmosfera zabiegu"></div>
         <div class="post__meta"><span class="cat">Relaks</span><span>·</span><span>3 min czytania</span></div>
         <h3>5 sygnałów, że Twoje ciało potrzebuje masażu</h3>
       </a>
       <a href="strefa-wiedzy/naturalne-olejki-do-masazu.html" class="post">
-        <div class="post__thumb"><img src="images/feature.jpg" alt="Naturalny olejek do masażu w studiu Massage 4 You"></div>
+        <div class="post__thumb"><img decoding="async" loading="lazy" src="images/feature.jpg" alt="Naturalny olejek do masażu w studiu Massage 4 You"></div>
         <div class="post__meta"><span class="cat">Pielęgnacja</span><span>·</span><span>5 min czytania</span></div>
         <h3>Naturalne olejki — co warto o nich wiedzieć</h3>
       </a>
@@ -829,7 +834,7 @@
     </div>
     <footer class="footer">
       <a class="footer__lockup" href="index.html" aria-label="Massage 4 You — strona główna">
-        <img class="footer__mark" src="images/logo-mark-light.png" alt="" width="44" height="32">
+        <img decoding="async" loading="lazy" class="footer__mark" src="images/logo-mark-light.png" alt="" width="44" height="32">
         <span class="footer__word">Massage <b>4</b> You</span>
         <span class="footer__tag">Healthy &amp; Relax</span>
       </a>
