@@ -628,6 +628,18 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 }
 .article blockquote p { font: inherit; color: inherit; margin: 0; }
 /* health-adjacent copy: the "talk to us first" line must not read as body text */
+/* Mid-article emphasis — the one thing we want a reader to take away from a
+   section. Distinct from .article__note, which closes a piece in small print. */
+.article p.callout {
+  margin: clamp(28px,3vw,38px) 0; padding: 20px 24px;
+  background: var(--paper-dark, rgba(46,75,55,.05));
+  border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0;
+  font-size: 16px; line-height: 1.75; color: var(--ink);
+}
+/* The comparison table reuses the privacy-policy table, but that one styles its
+   first column as monospace for cookie names — wrong for treatment names. */
+.article .doc-table td:first-child { font-family: inherit; font-size: inherit; }
+.article .doc-table { margin-bottom: 24px; }
 .article__note {
   margin-top: clamp(40px, 4vw, 56px); padding-top: 22px;
   border-top: 1px solid rgba(46,75,55,.16);
