@@ -679,6 +679,9 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .form__actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
 .form__actions .btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .form__hint { font-size: 12px; letter-spacing: .04em; color: var(--faint); }
+/* Honeypot: off-screen rather than display:none, since some bots skip fields
+   that are not rendered at all. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form__status { grid-column: 1 / -1; margin: 0; font-size: 14.5px; line-height: 1.6; }
 .form__status:empty { display: none; }
 .form__status--ok { color: var(--ink); border-left: 2px solid var(--accent); padding-left: 14px; }

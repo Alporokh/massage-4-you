@@ -801,6 +801,14 @@
           <label for="bk-note">Wiadomość</label>
           <textarea id="bk-note" name="note" rows="4" placeholder="Napisz, na czym Ci zależy — bolące partie, przeciwwskazania, okazja…"></textarea>
         </div>
+        <!-- Honeypot. Not type="hidden", because bots skip those; it is a real
+             field moved off-screen, hidden from assistive tech and skipped by
+             the tab order, so nobody using the site can reach it. Anything
+             arriving in it is automated and the Worker drops it. -->
+        <div class="hp" aria-hidden="true">
+          <label for="bk-company">Nazwa firmy</label>
+          <input id="bk-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <label class="consent field--full" for="bk-consent">
           <input id="bk-consent" name="consent" type="checkbox" required>
           <span>Wyrażam zgodę na kontakt telefoniczny lub mailowy w celu potwierdzenia rezerwacji. *</span>

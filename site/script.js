@@ -8,7 +8,7 @@
      Getform / own-backend URL here and it will POST the fields as JSON
      instead — no other change needed.
   ------------------------------------------------------------------ */
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = '/api/booking';
   var STUDIO_EMAIL = 'massage4youpoznan@gmail.com';
 
   var toggle = document.querySelector('.nav-toggle');
@@ -269,7 +269,9 @@
         therapist: fd.get('therapist') || '',
         date: fd.get('date') || '',
         time: fd.get('time') || '',
-        note: (fd.get('note') || '').trim()
+        note: (fd.get('note') || '').trim(),
+        // honeypot — hidden from people, so anything here means a bot
+        company: (fd.get('company') || '').trim()
       };
 
       var button = form.querySelector('button[type="submit"]');
