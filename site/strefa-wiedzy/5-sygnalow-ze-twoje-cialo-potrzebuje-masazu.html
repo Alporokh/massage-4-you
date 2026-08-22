@@ -57,6 +57,10 @@
 
   <!-- self-hosted; preloaded because these two carry the first paint -->
   <link rel="preload" href="../fonts/jost-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Polish needs latin-ext, and the browser only discovers it once the
+       stylesheet parses and a unicode-range matches. Every visible string
+       above the fold carries a/c/e/l/z with diacritics. -->
+  <link rel="preload" href="../fonts/jost-300-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/cormorant-garamond-500-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
   <script type="application/ld+json">
