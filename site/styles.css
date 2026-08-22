@@ -414,6 +414,11 @@ a:hover { color: var(--ink); }
   background: #fff; border-radius: 100px; padding: 8px 18px;
   box-shadow: 0 10px 26px -22px rgba(46,75,55,.6);
 }
+/* Each pill is a link into the booking form, so it needs to lose the default
+   underline and gain something that says it can be clicked. */
+a.ptab__opt { text-decoration: none; color: inherit; transition: box-shadow .3s ease, transform .3s ease; }
+a.ptab__opt:hover { box-shadow: 0 16px 30px -18px rgba(46,75,55,.75); transform: translateY(-2px); }
+a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .ptab__min { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
 .ptab__zl { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--accent); }
 .section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: clamp(48px, 7vh, 88px); }

@@ -201,6 +201,23 @@
     if (amount && note && !note.value) {
       note.value = 'Voucher upominkowy na kwotę ' + amount + '.';
     }
+
+    // Price pills on the cennik also carry the chosen length. Package rows use
+    // labels like "6 × 45 min" that no <option> matches — those go in the
+    // message instead of being dropped on the floor.
+    var czas = params.get('czas');
+    var durationSelect = document.getElementById('bk-duration');
+    if (czas && durationSelect) {
+      var hit = Array.prototype.find.call(durationSelect.options, function (o) {
+        return o.value === czas || o.textContent.trim() === czas;
+      });
+      if (hit) {
+        durationSelect.value = hit.value || hit.textContent.trim();
+        durationSelect.dispatchEvent(new Event('change'));
+      } else if (note && !note.value) {
+        note.value = 'Wybrany wariant: ' + czas + '.';
+      }
+    }
   }
 
   // "Rezerwacja" button on a service card — preselect that treatment
