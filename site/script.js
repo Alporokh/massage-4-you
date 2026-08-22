@@ -276,6 +276,18 @@
 
       var button = form.querySelector('button[type="submit"]');
 
+      // Hand the request to the visitor's mail client. This was the original
+      // behaviour and is now also the safety net: if the endpoint is down, the
+      // enquiry still has a way out instead of the visitor hitting a wall.
+      function sendByMail(lead) {
+        var subject = 'Rezerwacja: ' + data.service + ' — ' + data.name;
+        window.location.href = 'mailto:' + STUDIO_EMAIL +
+          '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent(summary(data));
+        say(lead + 'Otworzyliśmy Twój program pocztowy z gotową wiadomością — wyślij ją, a my potwierdzimy termin. ' +
+            'Jeśli okno się nie pojawiło, zadzwoń: +48 533 681 901.', true);
+      }
+
       if (FORM_ENDPOINT) {
         if (button) { button.disabled = true; button.textContent = 'Wysyłanie…'; }
         fetch(FORM_ENDPOINT, {
@@ -283,24 +295,31 @@
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(data)
         }).then(function (r) {
-          if (!r.ok) throw new Error(r.status);
-          form.reset();
-          say('Dziękujemy! Zgłoszenie dotarło — odezwiemy się, żeby potwierdzić termin.', true);
-        }).catch(function () {
-          say('Nie udało się wysłać formularza. Zadzwoń do nas: +48 533 681 901.', false);
+          // Read the body either way — the endpoint explains itself in JSON,
+          // and throwing that away is what made the first failure undiagnosable.
+          return r.json().catch(function () { return null; }).then(function (payload) {
+            return { ok: r.ok, status: r.status, payload: payload };
+          });
+        }).then(function (res) {
+          if (res.ok && res.payload && res.payload.ok) {
+            form.reset();
+            say('Dziękujemy! Zgłoszenie dotarło — odezwiemy się, żeby potwierdzić termin.', true);
+            return;
+          }
+          var reason = (res.payload && (res.payload.description || res.payload.error)) || ('HTTP ' + res.status);
+          if (window.console) console.error('[rezerwacja] wysyłka nie powiodła się:', res.status, res.payload);
+          sendByMail('Nie udało się wysłać zgłoszenia ze strony (' + reason + '). ');
+        }).catch(function (err) {
+          // Network failure, or something in the browser blocked the request.
+          if (window.console) console.error('[rezerwacja] żądanie nie doszło:', err);
+          sendByMail('Nie udało się połączyć z serwerem. ');
         }).then(function () {
           if (button) { button.disabled = false; button.textContent = 'Wyślij zgłoszenie'; }
         });
         return;
       }
 
-      // No endpoint configured — hand the request to the mail client.
-      var subject = 'Rezerwacja: ' + data.service + ' — ' + data.name;
-      window.location.href = 'mailto:' + STUDIO_EMAIL +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(summary(data));
-      say('Otworzyliśmy Twój program pocztowy z gotową wiadomością — wyślij ją, a my potwierdzimy termin. ' +
-          'Jeśli okno się nie pojawiło, zadzwoń: +48 533 681 901.', true);
+      sendByMail('');
     });
   }
 

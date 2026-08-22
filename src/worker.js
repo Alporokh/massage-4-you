@@ -75,6 +75,18 @@ function buildMessage(d) {
 }
 
 async function handleBooking(request, env) {
+  // A cross-origin fetch with a JSON content-type is preflighted; answering
+  // OPTIONS keeps that from surfacing as an opaque failure in the browser.
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "access-control-allow-methods": "POST, OPTIONS",
+        "access-control-allow-headers": "content-type",
+        "access-control-max-age": "86400",
+      },
+    });
+  }
   if (request.method !== "POST") {
     return json({ ok: false, error: "method_not_allowed" }, 405);
   }
