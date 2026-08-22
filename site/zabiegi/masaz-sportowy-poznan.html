@@ -31,22 +31,22 @@
     gtag('config', 'G-KWH7YY91FW');
   </script>
   <!-- SEO ─ blok 0 -->
-  <title>Masaż leczniczy Poznań — masaż zdrowotny całego ciała | Massage 4 You</title>
-  <meta name="description" content="Masaż leczniczy w Poznaniu — masaż zdrowotny całego ciała, 60/80/90/120 minut, od 190 zł. Masaż kręgosłupa i karku, praca z napięciem. Gabinet na Jeżycach, ul. Zeylanda 3.">
-  <link rel="canonical" href="https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan">
+  <title>Masaż sportowy Poznań — regeneracja po treningu | Massage 4 You</title>
+  <meta name="description" content="Masaż sportowy w Poznaniu — 60, 80 lub 90 minut, od 190 zł. Regeneracja po treningu, praca nad przeciążonymi partiami, przygotowanie do startu. Gabinet na Jeżycach, ul. Zeylanda 3.">
+  <link rel="canonical" href="https://massage-4-you.com/zabiegi/masaz-sportowy-poznan">
 
   <!-- Open Graph / social preview. og:image is absolute because scrapers do
        not resolve relative paths; 1200x630 is what Facebook and LinkedIn want. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Massage 4 You">
   <meta property="og:locale" content="pl_PL">
-  <meta property="og:title" content="Masaż leczniczy Poznań — masaż zdrowotny całego ciała | Massage 4 You">
-  <meta property="og:description" content="Masaż zdrowotny całego ciała w Poznaniu — 60, 80, 90 lub 120 minut, od 190 zł. Ukierunkowana praca z napięciem kręgosłupa i karku. Studio na Jeżycach, ul. Zeylanda 3.">
-  <meta property="og:url" content="https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan">
-  <meta property="og:image" content="https://massage-4-you.com/images/og-zdrowotny.jpg">
-  <meta property="og:image:alt" content="Masaż leczniczy karku w studiu Massage 4 You w Poznaniu">
+  <meta property="og:title" content="Masaż sportowy Poznań — regeneracja po treningu | Massage 4 You">
+  <meta property="og:description" content="Masaż sportowy w Poznaniu — 60, 80 lub 90 minut, od 190 zł. Regeneracja po treningu i praca nad przeciążeniami. Studio na Jeżycach, ul. Zeylanda 3.">
+  <meta property="og:url" content="https://massage-4-you.com/zabiegi/masaz-sportowy-poznan">
+  <meta property="og:image" content="https://massage-4-you.com/images/og-sportowy.jpg">
+  <meta property="og:image:alt" content="Masaż sportowy pleców w studiu Massage 4 You w Poznaniu">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://massage-4-you.com/images/og-zdrowotny.jpg">
+  <meta name="twitter:image" content="https://massage-4-you.com/images/og-sportowy.jpg">
 
   <!-- Favicon / ikony aplikacji -->
   <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -70,24 +70,56 @@
     "@graph": [
       {
         "@type": "Service",
-        "name": "Masaż zdrowotny całego ciała",
-        "description": "Masaż leczniczy — ukierunkowana praca z napięciem kręgosłupa, karku i przeciążonych partii. 60, 80, 90 lub 120 minut.",
-        "url": "https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan",
-        "serviceType": "Masaż zdrowotny całego ciała",
+        "@id": "https://massage-4-you.com/zabiegi/masaz-sportowy-poznan#service",
+        "name": "Masaż sportowy",
+        "alternateName": "Masaż sportowy Poznań",
+        "serviceType": "Masaż sportowy",
+        "description": "Masaż sportowy w Poznaniu — regeneracja po treningu, praca nad przeciążonymi partiami mięśniowymi i przygotowanie do startu. Tempo i nacisk dobierane do fazy treningowej.",
+        "url": "https://massage-4-you.com/zabiegi/masaz-sportowy-poznan",
         "provider": {
-          "@id": "https://massage-4-you.com/#business"
+          "@type": "HealthAndBeautyBusiness",
+          "name": "Massage 4 You",
+          "telephone": "+48533681901",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Janusza Zeylanda 3 lok. 1",
+            "postalCode": "60-808",
+            "addressLocality": "Poznań",
+            "addressCountry": "PL"
+          }
         },
         "areaServed": {
           "@type": "City",
           "name": "Poznań"
         },
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "PLN",
-          "price": "190",
-          "availability": "https://schema.org/InStock",
-          "url": "https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan"
-        }
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://massage-4-you.com/#rezerwacja",
+          "servicePhone": "+48533681901"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Masaż sportowy 60 minut",
+            "price": "190",
+            "priceCurrency": "PLN",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "Masaż sportowy 80 minut",
+            "price": "230",
+            "priceCurrency": "PLN",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "Masaż sportowy 90 minut",
+            "price": "270",
+            "priceCurrency": "PLN",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
       },
       {
         "@type": "BreadcrumbList",
@@ -107,8 +139,8 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Masaż zdrowotny całego ciała",
-            "item": "https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan"
+            "name": "Masaż sportowy",
+            "item": "https://massage-4-you.com/zabiegi/masaz-sportowy-poznan"
           }
         ]
       },
@@ -117,42 +149,42 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Czym różni się od masażu relaksacyjnego?",
+            "name": "Czy masaż sportowy jest tylko dla sportowców?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Relaksacyjny prowadzimy równym, spokojnym rytmem nad całym ciałem. Zdrowotny jest ukierunkowany — skupia się na konkretnym napięciu lub bólu, pracuje wolniej i mocniej, i kosztuje 20–40 zł więcej przy tym samym czasie."
+              "text": "Nie. Nazwa mówi o sposobie pracy, nie o tym, kto leży na stole. Przychodzą na niego biegacze i osoby z siłowni, ale też ludzie, którzy dużo chodzą, dźwigają albo pracują fizycznie. Liczy się to, że mięśnie są obciążane regularnie i potrzebują wsparcia w regeneracji."
             }
           },
           {
             "@type": "Question",
-            "name": "Czy masaż zdrowotny boli?",
+            "name": "Ile czasu przed zawodami można się umówić?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Bywa odczuwalny mocniej niż relaksacyjny, ale nie powinien wymagać zaciskania zębów. Jeśli wstrzymujesz oddech, jest za mocno — powiedz o tym od razu, zmienimy nacisk."
+              "text": "Masaż przygotowujący do startu robimy zwykle na 2–3 dni przed zawodami i prowadzimy go lżej, żeby mięśnie zdążyły się wyciszyć. Mocnej, głębokiej pracy tuż przed startem unikamy — potrafi zostawić ciało obolałe na kolejny dzień. Po zawodach najlepiej przyjść po 24–48 godzinach."
             }
           },
           {
             "@type": "Question",
-            "name": "Ile wizyt potrzeba?",
+            "name": "Czy masaż sportowy boli?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Przy świeżym napięciu często wystarczy jedna lub dwie. Przy dolegliwości, która trwa miesiącami, realniej jest zaplanować serię 4–6 spotkań co 1–2 tygodnie."
+              "text": "Bywa intensywny, ale nie powinien być bolesny. Pracujemy na granicy komfortu, którą ustalamy z Tobą na bieżąco — masaż, przy którym trzeba zaciskać zęby, napina mięśnie zamiast je rozluźniać. Nacisk regulujemy w trakcie, wystarczy powiedzieć słowo."
             }
           },
           {
             "@type": "Question",
-            "name": "Czy zastąpi fizjoterapię?",
+            "name": "Czym różni się od masażu tkanek głębokich?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Nie. Masaż zdrowotny dobrze uzupełnia fizjoterapię, ale jej nie zastępuje i nie stawia diagnozy. Przy bólu promieniującym, drętwieniu albo po urazie zacznij od specjalisty."
+              "text": "Tkanki głębokie to sposób pracy — powolny, punktowy nacisk na głębsze warstwy. Masaż sportowy to cel: przygotowanie albo regeneracja ciała, które trenuje. Często korzysta z technik głębokich, ale dokłada do nich szybsze rozgrzewanie, rozciąganie i pracę nad konkretnymi grupami mięśni obciążanymi w Twojej dyscyplinie."
             }
           },
           {
             "@type": "Question",
-            "name": "Co powiedzieć przed zabiegiem?",
+            "name": "Jak często warto przychodzić?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Gdzie boli i od kiedy, co nasila objawy, czy był uraz oraz co zalecił lekarz lub fizjoterapeuta, jeśli już u niego byłeś."
+              "text": "Przy regularnych treningach dobrze działa rytm co 2–3 tygodnie. W okresie zwiększonych obciążeń albo przygotowań startowych część osób przychodzi co tydzień. Jeśli trenujesz rekreacyjnie, raz w miesiącu zwykle wystarcza, żeby napięcia się nie kumulowały."
             }
           }
         ]
@@ -241,44 +273,44 @@
   <nav class="crumbs" aria-label="Ścieżka nawigacji">
     <a href="../index.html">Strona główna</a> &nbsp;/&nbsp;
     <a href="index.html">Zabiegi</a> &nbsp;/&nbsp;
-    <span class="here">Masaż zdrowotny całego ciała</span>
+    <span class="here">Masaż sportowy</span>
   </nav>
 
   <!-- ============ 1 · HERO ============ -->
   <section class="sv-hero">
     <div class="sv-hero__body">
       <p class="eyebrow">Masaże ciała · Poznań</p>
-      <h1>Masaż zdrowotny całego ciała — <i>Poznań</i></h1>
-      <p class="lead">Masaż leczniczy, u nas nazywany zdrowotnym — ukierunkowana praca z napięciem i bólem, wsparcie dla kręgosłupa, karku i przeciążonych partii. Dla ciała, które potrzebuje nie tyle odprężenia, co konkretnej pomocy.</p>
+      <h1>Masaż sportowy — <i>Poznań</i></h1>
+      <p class="lead">Masaż dla ciała, które trenuje. Regeneracja po wysiłku, praca nad partiami, które biorą na siebie najwięcej, i przygotowanie mięśni przed startem. Tempo i nacisk dobieramy do tego, gdzie jesteś w cyklu treningowym.</p>
       <div class="sv-actions">
         <a href="../index.html#rezerwacja" class="btn btn--solid">Umów wizytę</a>
         <a href="#cennik" class="btn btn--line">Czas i cena</a>
       </div>
     </div>
     <div class="sv-hero__media">
-      <img decoding="async" fetchpriority="high" src="../images/zabieg-2.jpg" style="--focus:30%"
-           alt="Terapeutka pracuje nad karkiem klientki podczas masażu zdrowotnego w studiu Massage 4 You w Poznaniu">
+      <img decoding="async" fetchpriority="high" src="../images/sport-massage.jpg" style="--focus:40%"
+           alt="Masaż sportowy pleców — terapeuta pracuje przedramieniem nad mięśniami grzbietu w studiu Massage 4 You w Poznaniu">
     </div>
   </section>
 
   <!-- ============ 2 · SZYBKIE FAKTY ============ -->
   <section class="sv-facts">
-    <div class="sv-fact"><div class="sv-fact__l">Czas trwania</div><div class="sv-fact__v">60 / 80 / 90 / 120 min</div></div>
+    <div class="sv-fact"><div class="sv-fact__l">Czas trwania</div><div class="sv-fact__v">60 / 80 / 90 min</div></div>
     <div class="sv-fact"><div class="sv-fact__l">Cena</div><div class="sv-fact__v">od 190 zł</div></div>
-    <div class="sv-fact"><div class="sv-fact__l">Efekt</div><div class="sv-fact__v">Ulga w napięciu i bólu</div></div>
-    <div class="sv-fact"><div class="sv-fact__l">Dla kogo</div><div class="sv-fact__v">Kręgosłup, kark, przeciążenia</div></div>
+    <div class="sv-fact"><div class="sv-fact__l">Efekt</div><div class="sv-fact__v">Szybsza regeneracja</div></div>
+    <div class="sv-fact"><div class="sv-fact__l">Dla kogo</div><div class="sv-fact__v">Trening, starty, przeciążenia</div></div>
   </section>
 
   <!-- ============ 3 · NA CZYM POLEGA ============ -->
   <section class="sv-section wrap grid12 sv-about" style="align-items:center;">
     <div class="sv-about__copy">
       <p class="eyebrow">Na czym polega</p>
-      <h2 class="h2">Masaż kręgosłupa i karku — praca nad tym, co&nbsp;boli</h2>
-      <p class="lead" style="margin-top:28px;">Masaż zdrowotny zaczynamy od rozmowy dłuższej niż zwykle: gdzie boli, od kiedy, co nasila objawy i co przynosi ulgę. Dopiero potem terapeutka dobiera techniki — wolniejsze i bardziej precyzyjne niż w masażu relaksacyjnym, skupione na konkretnych partiach zamiast na całym ciele po równo.</p>
-      <p class="lead">Pracujemy nad kręgosłupem, karkiem, barkami i biodrami — najczęstszymi miejscami przeciążeń przy pracy siedzącej i powtarzalnym wysiłku. Nacisk jest mocniejszy, ale zawsze w granicach Twojego komfortu, i korygujemy go na bieżąco.</p>
+      <h2 class="h2">Masaż pod trening, nie&nbsp;pod kalendarz</h2>
+      <p class="lead" style="margin-top:28px;">Masaż sportowy zaczynamy od pytania, co robisz i kiedy. Inaczej pracuje się z kimś, kto ma zawody za trzy dni, a inaczej z kimś, kto właśnie skończył sezon. Pytamy o dyscyplinę, objętość treningów, dawne kontuzje i to, która partia odzywa się jako pierwsza, gdy obciążenie rośnie.</p>
+      <p class="lead">Potem pracujemy tam, gdzie Twój sport zbiera daninę: u biegaczy zwykle łydki, uda i biodra, na siłowni grzbiet i obręcz barkowa, u rowerzystów odcinek lędźwiowy i kark. Rozgrzewamy, rozluźniamy głębsze warstwy, w razie potrzeby dokładamy rozciąganie — a nacisk trzymamy na granicy komfortu, nie za nią.</p>
     </div>
     <div class="sv-about__media">
-      <img decoding="async" loading="lazy" src="../images/zabieg-2-2.jpg" alt="Masaż zdrowotny pleców — praca nad napięciem przykręgosłupowym">
+      <img decoding="async" loading="lazy" src="../images/massage-4-you-sport.jpg" alt="Masaż sportowy nóg — praca nad mięśniami po treningu biegowym">
     </div>
   </section>
 
@@ -289,10 +321,10 @@
       <h2 class="h2" style="font-size:clamp(30px,3.4vw,48px);">Dla kogo jest ten&nbsp;masaż</h2>
     </div>
     <div class="sv-ben__grid">
-      <div class="sv-ben__item"><div class="n">01</div><h3>Ból karku i pleców</h3><p>Ukierunkowana praca nad partiami, które przeciąża praca przy biurku i prowadzenie samochodu.</p></div>
-      <div class="sv-ben__item"><div class="n">02</div><h3>Nawracające napięcie</h3><p>Dla napięć, które wracają w to samo miejsce i nie ustępują po zwykłym rozluźnieniu.</p></div>
-      <div class="sv-ben__item"><div class="n">03</div><h3>Większa ruchomość</h3><p>Wsparcie dla zakresu ruchu w barkach, biodrach i odcinku szyjnym kręgosłupa.</p></div>
-      <div class="sv-ben__item"><div class="n">04</div><h3>Po wysiłku</h3><p>Regeneracja po treningu i po długim dniu na nogach, gdy relaksacyjny to za mało.</p></div>
+      <div class="sv-ben__item"><div class="n">01</div><h3>Po treningu</h3><p>Gdy mięśnie zostają ciężkie i spięte dłużej, niż powinny, a kolejna jednostka wychodzi słabiej.</p></div>
+      <div class="sv-ben__item"><div class="n">02</div><h3>Przed startem</h3><p>Lżejsza wersja na 2–3 dni przed zawodami — rozluźnia, nie zostawiając ciała obolałego.</p></div>
+      <div class="sv-ben__item"><div class="n">03</div><h3>Nawracające przeciążenia</h3><p>Dla miejsca, które odzywa się za każdym razem, gdy zwiększasz objętość albo intensywność.</p></div>
+      <div class="sv-ben__item"><div class="n">04</div><h3>Praca fizyczna</h3><p>Nie tylko dla sportowców — także jeśli dźwigasz, stoisz cały dzień albo pracujesz rękami.</p></div>
     </div>
   </section>
 
@@ -300,13 +332,13 @@
   <section class="sv-section wrap">
     <div style="max-width:560px; margin-bottom:clamp(40px,5vw,64px);">
       <p class="eyebrow">Jak przebiega zabieg</p>
-      <h2 class="h2">Cztery kroki do&nbsp;realnej ulgi</h2>
+      <h2 class="h2">Cztery kroki do&nbsp;lepszej regeneracji</h2>
     </div>
     <div class="sv-steps__grid">
-      <div class="sv-step"><div class="n">1</div><h3>Wywiad</h3><p>Pytamy o dolegliwości, tryb dnia i wcześniejsze urazy — dłużej niż przy masażu relaksacyjnym.</p></div>
-      <div class="sv-step"><div class="n">2</div><h3>Plan</h3><p>Ustalamy, nad którymi partiami pracujemy i jak mocno, oraz czego tego dnia unikamy.</p></div>
-      <div class="sv-step"><div class="n">3</div><h3>Masaż</h3><p>Wolniejsza, precyzyjna praca nad wybranymi obszarami, z bieżącą korektą nacisku.</p></div>
-      <div class="sv-step"><div class="n">4</div><h3>Wskazówki</h3><p>Podpowiadamy, co robić między wizytami i kiedy warto wrócić.</p></div>
+      <div class="sv-step"><div class="n">1</div><h3>Wywiad</h3><p>Dyscyplina, objętość treningów, najbliższe starty i historia kontuzji.</p></div>
+      <div class="sv-step"><div class="n">2</div><h3>Plan</h3><p>Ustalamy partie i intensywność — inne przed zawodami, inne w okresie budowania formy.</p></div>
+      <div class="sv-step"><div class="n">3</div><h3>Masaż</h3><p>Rozgrzanie, praca nad wybranymi grupami mięśni, w razie potrzeby rozciąganie.</p></div>
+      <div class="sv-step"><div class="n">4</div><h3>Wskazówki</h3><p>Co robić w kolejnych 48 godzinach i kiedy wrócić przy Twoim planie treningowym.</p></div>
     </div>
   </section>
 
@@ -315,24 +347,20 @@
     <div class="sv-price__copy">
       <p class="eyebrow">Czas trwania i cena</p>
       <h2 class="h2" style="font-size:clamp(30px,3.6vw,52px);">Wybierz długość, jakiej&nbsp;potrzebujesz</h2>
-      <p class="lead" style="margin-top:20px;">Przy jednej, konkretnej dolegliwości wystarczy krótszy wariant. Przy kilku obszarach naraz warto zarezerwować więcej czasu — inaczej praca będzie powierzchowna.</p>
+      <p class="lead" style="margin-top:20px;">Na jedną partię — nogi po długim biegu albo obręcz barkowa — wystarczy godzina. Jeśli chcesz objąć całe ciało i zostawić czas na rozciąganie, wybierz dłuższy wariant.</p>
     </div>
     <div class="sv-price__list">
       <div class="sv-price__row">
-        <div><div class="sv-price__t">60 minut</div><div class="sv-price__n">Jedna, konkretna partia ciała</div></div>
+        <div><div class="sv-price__t">60 minut</div><div class="sv-price__n">Jedna partia — nogi albo góra ciała</div></div>
         <div class="sv-price__p">190 zł</div>
       </div>
       <div class="sv-price__row">
-        <div><div class="sv-price__t">80 minut</div><div class="sv-price__n">Plecy, kark i barki bez pośpiechu</div></div>
-        <div class="sv-price__p">240 zł</div>
+        <div><div class="sv-price__t">80 minut</div><div class="sv-price__n">Szersza praca z rozciąganiem</div></div>
+        <div class="sv-price__p">230 zł</div>
       </div>
       <div class="sv-price__row">
-        <div><div class="sv-price__t">90 minut</div><div class="sv-price__n">Całe ciało z naciskiem na problem</div></div>
+        <div><div class="sv-price__t">90 minut</div><div class="sv-price__n">Całe ciało bez pośpiechu</div></div>
         <div class="sv-price__p">270 zł</div>
-      </div>
-      <div class="sv-price__row">
-        <div><div class="sv-price__t">120 minut</div><div class="sv-price__n">Kilka obszarów w jednej wizycie</div></div>
-        <div class="sv-price__p">370 zł</div>
       </div>
       <a href="../index.html#rezerwacja" class="btn btn--dark" style="margin-top:14px;">Zarezerwuj termin</a>
     </div>
@@ -347,13 +375,13 @@
     <div class="sv-contra__body">
       <div class="sv-contra__grid">
         <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Gorączka i infekcje</span></div>
-        <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Świeże urazy i złamania</span></div>
+        <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Świeży uraz i obrzęk</span></div>
+        <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Naderwanie mięśnia lub więzadła</span></div>
         <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Zakrzepica i choroby żył</span></div>
-        <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Drętwienie i ból promieniujący</span></div>
         <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>Zaawansowana choroba nowotworowa</span></div>
         <div class="sv-contra__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C08B4E" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C08B4E" stroke-width="1.8" stroke-linecap="round"/></svg><span>I trymestr ciąży (konsultacja)</span></div>
       </div>
-      <p class="note">Masaż zdrowotny nie zastępuje diagnozy. Jeśli ból promieniuje do ręki lub nogi, towarzyszy mu drętwienie albo zaczął się po urazie — najpierw skonsultuj się z lekarzem lub fizjoterapeutą, a potem wróć do nas z zaleceniami.</p>
+      <p class="note">Świeży uraz to nie zadanie dla masażu. Jeśli coś strzeliło w trakcie treningu, spuchło albo boli przy każdym ruchu — najpierw lekarz lub fizjoterapeuta. Do nas wróć z rozpoznaniem, wtedy praca nad okolicą urazu ma sens i jest bezpieczna.</p>
     </div>
   </section>
 
@@ -364,17 +392,17 @@
       <a href="index.html" class="link-underline">Wszystkie zabiegi</a>
     </div>
     <div class="sv-rel-grid">
-      <a href="masaz-relaksacyjny-poznan.html" class="sv-rel">
-        <img decoding="async" loading="lazy" src="../images/zabieg-1.jpg" alt="Masaż relaksacyjny całego ciała">
-        <div class="sv-rel__body"><h3>Masaż relaksacyjny całego ciała</h3><div class="sv-rel__meta">od 170 zł · 60–120 min</div></div>
+      <a href="masaz-zdrowotny-poznan.html" class="sv-rel">
+        <img decoding="async" loading="lazy" src="../images/zabieg-2.jpg" alt="Masaż zdrowotny całego ciała">
+        <div class="sv-rel__body"><h3>Masaż zdrowotny całego ciała</h3><div class="sv-rel__meta">od 190 zł · 60–120 min</div></div>
       </a>
       <a href="../cennik.html#masaze-ciala" class="sv-rel">
         <img decoding="async" loading="lazy" src="../images/massage-template.jpg" alt="">
         <div class="sv-rel__body"><h3>Masaż tkanek głębokich</h3><div class="sv-rel__meta">od 140 zł · 40–90 min</div></div>
       </a>
-      <a href="masaz-sportowy-poznan.html" class="sv-rel">
-        <img decoding="async" loading="lazy" src="../images/sport-massage.jpg" alt="Masaż sportowy w Poznaniu">
-        <div class="sv-rel__body"><h3>Masaż sportowy</h3><div class="sv-rel__meta">od 190 zł · 60–90 min</div></div>
+      <a href="masaz-relaksacyjny-poznan.html" class="sv-rel">
+        <img decoding="async" loading="lazy" src="../images/zabieg-1.jpg" alt="Masaż relaksacyjny całego ciała">
+        <div class="sv-rel__body"><h3>Masaż relaksacyjny całego ciała</h3><div class="sv-rel__meta">od 170 zł · 60–120 min</div></div>
       </a>
     </div>
   </section>
@@ -383,34 +411,35 @@
   <section class="sv-section wrap sv-faq">
     <div class="sv-faq__inner">
       <p class="eyebrow" style="text-align:center;">FAQ</p>
-      <h2 class="h2" style="text-align:center; margin-bottom:clamp(36px,4vw,56px);">Masaż zdrowotny — częste&nbsp;pytania</h2>
+      <h2 class="h2" style="text-align:center; margin-bottom:clamp(36px,4vw,56px);">Masaż sportowy — częste&nbsp;pytania</h2>
       <div class="sv-faq__item">
-        <h3>Czym różni się od masażu relaksacyjnego?</h3>
-        <p>Relaksacyjny prowadzimy równym, spokojnym rytmem nad całym ciałem. Zdrowotny jest ukierunkowany — skupia się na konkretnym napięciu lub bólu, pracuje wolniej i mocniej, i kosztuje 20–40 zł więcej przy tym samym czasie.</p>
+        <h3>Czy masaż sportowy jest tylko dla sportowców?</h3>
+        <p>Nie. Nazwa mówi o sposobie pracy, nie o tym, kto leży na stole. Przychodzą na niego biegacze i osoby z siłowni, ale też ludzie, którzy dużo chodzą, dźwigają albo pracują fizycznie. Liczy się to, że mięśnie są obciążane regularnie i potrzebują wsparcia w regeneracji.</p>
       </div>
       <div class="sv-faq__item">
-        <h3>Czy masaż zdrowotny boli?</h3>
-        <p>Bywa odczuwalny mocniej niż relaksacyjny, ale nie powinien wymagać zaciskania zębów. Jeśli wstrzymujesz oddech, jest za mocno — powiedz o tym od razu, zmienimy nacisk.</p>
+        <h3>Ile czasu przed zawodami można się umówić?</h3>
+        <p>Masaż przygotowujący do startu robimy zwykle na 2–3 dni przed zawodami i prowadzimy go lżej, żeby mięśnie zdążyły się wyciszyć. Mocnej, głębokiej pracy tuż przed startem unikamy — potrafi zostawić ciało obolałe na kolejny dzień. Po zawodach najlepiej przyjść po 24–48 godzinach.</p>
       </div>
       <div class="sv-faq__item">
-        <h3>Ile wizyt potrzeba?</h3>
-        <p>Przy świeżym napięciu często wystarczy jedna lub dwie. Przy dolegliwości, która trwa miesiącami, realniej jest zaplanować serię 4–6 spotkań co 1–2 tygodnie.</p>
+        <h3>Czy masaż sportowy boli?</h3>
+        <p>Bywa intensywny, ale nie powinien być bolesny. Pracujemy na granicy komfortu, którą ustalamy z Tobą na bieżąco — masaż, przy którym trzeba zaciskać zęby, napina mięśnie zamiast je rozluźniać. Nacisk regulujemy w trakcie, wystarczy powiedzieć słowo.</p>
       </div>
       <div class="sv-faq__item">
-        <h3>Czy zastąpi fizjoterapię?</h3>
-        <p>Nie. Masaż zdrowotny dobrze uzupełnia fizjoterapię, ale jej nie zastępuje i nie stawia diagnozy. Przy bólu promieniującym, drętwieniu albo po urazie zacznij od specjalisty.</p>
+        <h3>Czym różni się od masażu tkanek głębokich?</h3>
+        <p>Tkanki głębokie to sposób pracy — powolny, punktowy nacisk na głębsze warstwy. Masaż sportowy to cel: przygotowanie albo regeneracja ciała, które trenuje. Często korzysta z technik głębokich, ale dokłada do nich szybsze rozgrzewanie, rozciąganie i pracę nad grupami mięśni obciążanymi w Twojej dyscyplinie.</p>
       </div>
       <div class="sv-faq__item">
-        <h3>Co powiedzieć przed zabiegiem?</h3>
-        <p>Gdzie boli i od kiedy, co nasila objawy, czy był uraz oraz co zalecił lekarz lub fizjoterapeuta, jeśli już u niego byłeś.</p>
+        <h3>Jak często warto przychodzić?</h3>
+        <p>Przy regularnych treningach dobrze działa rytm co 2–3 tygodnie. W okresie zwiększonych obciążeń albo przygotowań startowych część osób przychodzi co tydzień. Jeśli trenujesz rekreacyjnie, raz w miesiącu zwykle wystarcza, żeby napięcia się nie kumulowały.</p>
       </div>
+      <p class="note" style="margin-top:32px;">Więcej o tym, co dzieje się z mięśniami po wysiłku, piszemy w artykule <a href="../strefa-wiedzy/jak-masaz-wspiera-regeneracje-po-treningu">Jak masaż wspiera regenerację po treningu</a>.</p>
     </div>
   </section>
 
   <!-- ============ 10 · CTA ============ -->
   <section class="sv-cta">
     <p class="eyebrow">Rezerwacja online</p>
-    <h2>Zarezerwuj masaż zdrowotny w&nbsp;Poznaniu</h2>
+    <h2>Zarezerwuj masaż sportowy w&nbsp;Poznaniu</h2>
     <p class="lead">Wybierz dogodny termin online — potwierdzenie otrzymasz od razu.</p>
     <div class="sv-actions">
       <a href="../index.html#rezerwacja" class="btn btn--solid">Umów wizytę</a>
@@ -418,7 +447,6 @@
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
   <section class="contact" style="padding-top:clamp(56px,7vh,90px);">
     <div class="grid12">
       <div class="contact__main">
