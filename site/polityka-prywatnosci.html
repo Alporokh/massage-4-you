@@ -21,12 +21,13 @@
     });
   </script>
 
-  <!-- Google tag (gtag.js) — type="text/plain" so the browser will NOT run it.
-       consent.js rewrites these into live scripts only after the visitor
-       accepts analytics. Nothing reaches Google before that. -->
-  <script type="text/plain" data-cc="analytics"
-          async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
-  <script type="text/plain" data-cc="analytics">
+  <!-- Google tag (gtag.js). Standard Consent Mode v2: the tag loads on every
+       visit, but the defaults declared above hold analytics_storage at denied,
+       so it writes no cookies and records no visit until the banner is
+       accepted — consent.js then flips it to granted. Parking the tag instead
+       kept it inert, which is why Google's own tag check could not see it. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
+  <script>
     gtag('js', new Date());
     gtag('config', 'G-KWH7YY91FW');
   </script>
@@ -176,7 +177,8 @@
     <p>Jeśli dzwonisz lub piszesz, przetwarzamy dane, które sam podasz, w celu udzielenia odpowiedzi. Podstawa prawna: art. 6 ust. 1 lit. f RODO — nasz prawnie uzasadniony interes polegający na obsłudze zapytań.</p>
 
     <h3>Statystyki odwiedzin</h3>
-    <p>Za Twoją zgodą korzystamy z Google Analytics 4, żeby wiedzieć, które strony są przydatne. Narzędzie zbiera dane o wizycie w formie zagregowanej: odwiedzone podstrony, czas, przybliżoną lokalizację, typ urządzenia i przeglądarki. <strong>Bez Twojej zgody Google Analytics w ogóle się nie uruchamia.</strong></p>
+    <p>Za Twoją zgodą korzystamy z Google Analytics 4, żeby wiedzieć, które strony są przydatne. Narzędzie zbiera dane o wizycie w formie zagregowanej: odwiedzone podstrony, czas, przybliżoną lokalizację, typ urządzenia i przeglądarki.</p>
+    <p><strong>Zanim wyrazisz zgodę, Google Analytics nie zapisuje żadnych plików cookies</strong> i nie rozpoznaje Cię przy kolejnych wizytach. Skrypt Google wczytuje się jednak na każdej stronie w trybie ograniczonym (Google Consent Mode v2) i już przy wejściu wysyła do Google jedno zdarzenie odsłony strony. Zawiera ono adres odwiedzanej podstrony, adres strony odsyłającej, język i rozdzielczość ekranu, informacje o przeglądarce i urządzeniu, Twój adres IP oraz tymczasowy identyfikator, który nie jest nigdzie zapisywany — przy następnej wizycie jest już inny. Dopiero po kliknięciu „Akceptuję wszystkie” narzędzie zapisuje pliki cookies i zaczyna budować spójne statystyki. Jeśli wybierzesz „Odrzucam”, pozostaje w trybie ograniczonym.</p>
     <ul>
       <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. a RODO — Twoja zgoda, którą możesz wycofać w każdej chwili.</li>
       <li><strong>Okres przechowywania:</strong> 14 miesięcy (ustawienie Google Analytics).</li>
@@ -186,7 +188,7 @@
     <p>Nie sprzedajemy danych i nie przekazujemy ich w celach marketingowych. Korzystamy z następujących dostawców:</p>
     <ul>
       <li><strong>Cloudflare, Inc.</strong> — hosting strony i ochrona przed atakami. Przetwarza adres IP w logach technicznych.</li>
-      <li><strong>Google Ireland Ltd.</strong> — Google Analytics, wyłącznie po wyrażeniu zgody.</li>
+      <li><strong>Google Ireland Ltd.</strong> — Google Analytics. Statystyki zbierane są wyłącznie po wyrażeniu zgody; sam skrypt wczytuje się wcześniej w trybie ograniczonym, co opisujemy wyżej.</li>
       <li><strong>Google Ireland Ltd. (Gmail)</strong> — poczta, przez którą odbieramy wiadomości e-mail.</li>
       <li><strong>Telegram FZ-LLC</strong> — komunikator, na który trafiają zgłoszenia wysłane przez formularz rezerwacji.</li>
       <li><strong>Booksy International sp. z o.o.</strong> — rezerwacje online, jeśli skorzystasz z przycisku „Rezerwacja Booksy”. Booksy jest wtedy odrębnym administratorem i obowiązuje jego polityka prywatności.</li>

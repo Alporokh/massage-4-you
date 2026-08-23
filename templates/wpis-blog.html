@@ -71,12 +71,13 @@
     });
   </script>
 
-  <!-- Google tag (gtag.js) — type="text/plain" so the browser will NOT run it.
-       consent.js rewrites these into live scripts only after the visitor
-       accepts analytics. Nothing reaches Google before that. -->
-  <script type="text/plain" data-cc="analytics"
-          async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
-  <script type="text/plain" data-cc="analytics">
+  <!-- Google tag (gtag.js). Standard Consent Mode v2: the tag loads on every
+       visit, but the defaults declared above hold analytics_storage at denied,
+       so it writes no cookies and records no visit until the banner is
+       accepted — consent.js then flips it to granted. Parking the tag instead
+       kept it inert, which is why Google's own tag check could not see it. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
+  <script>
     gtag('js', new Date());
     gtag('config', 'G-KWH7YY91FW');
   </script>

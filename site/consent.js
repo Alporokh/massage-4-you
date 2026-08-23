@@ -1,7 +1,14 @@
 /* Massage 4 You — GDPR / ePrivacy consent.
-   Non-essential scripts are written as <script type="text/plain" data-cc="...">
-   so the browser never runs them. They are rewritten into live scripts only
-   after an affirmative choice, so nothing reaches Google before consent. */
+
+   Analytics runs on Google Consent Mode v2: the Google tag loads on every page,
+   but every storage type is declared denied before it does, so it writes no
+   cookies and records no visit until an affirmative choice is made here. This
+   file flips analytics_storage to granted on accept.
+
+   The parking mechanism below is still live for anything added later: a script
+   written as <script type="text/plain" data-cc="category"> is never executed by
+   the browser and is rewritten into a real script only once that category is
+   accepted. Nothing is parked at the moment. */
 (function () {
   'use strict';
 
@@ -40,6 +47,8 @@
     });
   }
 
+  // The tag is already loaded and sitting at denied; this is what turns
+  // collection on. Without it an accepted banner would change nothing.
   function tellGoogle(consent) {
     if (typeof gtag !== 'function') return;
     gtag('consent', 'update', { analytics_storage: consent.analytics ? 'granted' : 'denied' });
