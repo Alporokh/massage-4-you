@@ -56,6 +56,12 @@
 
   function apply(consent, persist) {
     if (persist) write(consent);
+    // Keep the checkbox in step with the decision. Reopening the panel already
+    // re-reads the stored choice, so nothing depends on this today — but that
+    // makes correctness rest on a second code path repairing the first, and
+    // anything else that reads the box would read it stale.
+    var box = document.getElementById('cc-analytics');
+    if (box) box.checked = !!consent.analytics;
     tellGoogle(consent);
     activate(consent);
   }
