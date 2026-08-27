@@ -1,4 +1,4 @@
-/* Massage 4 You — GDPR / ePrivacy consent.
+/* Massage 4 You - GDPR / ePrivacy consent.
 
    Analytics runs on Google Consent Mode v2: the Google tag loads on every page,
    but every storage type is declared denied before it does, so it writes no
@@ -30,7 +30,7 @@
   function write(consent) {
     try {
       localStorage.setItem(KEY, JSON.stringify({ ts: Date.now(), version: 1, consent: consent }));
-    } catch (e) { /* storage blocked — banner simply reappears */ }
+    } catch (e) { /* storage blocked - banner simply reappears */ }
   }
 
   // turn the parked scripts into real ones, in document order
@@ -57,7 +57,7 @@
   function apply(consent, persist) {
     if (persist) write(consent);
     // Keep the checkbox in step with the decision. Reopening the panel already
-    // re-reads the stored choice, so nothing depends on this today — but that
+    // re-reads the stored choice, so nothing depends on this today - but that
     // makes correctness rest on a second code path repairing the first, and
     // anything else that reads the box would read it stale.
     var box = document.getElementById('cc-analytics');
@@ -114,7 +114,7 @@
       apply({ analytics: !!(box && box.checked) }, true); close();
     });
 
-    // Esc closes only once a choice exists — otherwise there is nothing to fall back on
+    // Esc closes only once a choice exists - otherwise there is nothing to fall back on
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && banner.hasAttribute('data-open') && read()) close();
     });

@@ -6,7 +6,7 @@
   Cloudflare serves foo.html at /foo, so service pages are extensionless. A
   directory index is different: /zabiegi 307-redirects to /zabiegi/, so the
   hub carries the trailing slash. Add a <url> block per service page as it
-  ships — those are files, so they take no trailing slash.
+  ships - those are files, so they take no trailing slash.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 

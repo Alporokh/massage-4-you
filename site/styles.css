@@ -2,13 +2,13 @@
    Self-hosted fonts
    ------------------------------------------------------------
    Previously loaded from fonts.googleapis.com, which sends every
-   visitor's IP to Google before they have consented to anything —
+   visitor's IP to Google before they have consented to anything -
    the same class of problem as an unconsented analytics tag, and
    the subject of the 2022 Munich ruling.
 
    Only what the site actually uses: Cormorant Garamond 400/500/600
    plus 400/500 italic, and Jost 300/400/500. Latin and latin-ext
-   only — latin-ext carries ą ć ę ł ń ó ś ź ż, so Polish needs it;
+   only - latin-ext carries ą ć ę ł ń ó ś ź ż, so Polish needs it;
    cyrillic and vietnamese were dropped.
 
    unicode-range is kept from Google's own CSS so a browser fetches
@@ -146,7 +146,7 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* ============================================================
-   Massage4you — premium studio website
+   Massage4you - premium studio website
    ============================================================ */
 
 :root {
@@ -163,7 +163,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-/* the header is fixed — keep anchor targets clear of it */
+/* the header is fixed - keep anchor targets clear of it */
 [id] { scroll-margin-top: 96px; }
 body {
   margin: 0;
@@ -174,7 +174,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   /* Cormorant defaults to old-style figures, which sit at x-height and give
-     some digits descenders — prices, phone numbers and times came out looking
+     some digits descenders - prices, phone numbers and times came out looking
      ragged and inconsistent from one block to the next. Lining figures put
      every digit on the cap line. Inherited, so it reaches all of them at once;
      Jost is lining by default, so this changes nothing in the sans. Type size
@@ -215,7 +215,7 @@ a:hover { color: var(--ink); }
    Matches the border weight and colour of the header CTA. */
 .btn--ghost { color: var(--cream); background: transparent; border: 1px solid rgba(251,245,236,.6); }
 .btn--ghost:hover { color: var(--cream); background: rgba(251,245,236,.12); border-color: var(--cream); }
-/* light booking button — readable on the cream cards and on their dark hover state */
+/* light booking button - readable on the cream cards and on their dark hover state */
 .btn--light { background: var(--cream); color: var(--ink); border: 1px solid rgba(46,75,55,.16); }
 .btn--light:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
 .btn--sm { padding: 12px 24px; font-size: 11px; letter-spacing: .18em; }
@@ -239,12 +239,12 @@ a:hover { color: var(--ink); }
 .logo {
   display: inline-flex; align-items: center; gap: 12px;
   text-decoration: none; color: var(--cream); font-family: var(--serif);
-  /* the brand lockup is caps with wide tracking — a smaller point size than the
+  /* the brand lockup is caps with wide tracking - a smaller point size than the
      old lowercase wordmark, so the header bar keeps its proportions */
   font-size: 20px; font-weight: 500; letter-spacing: .2em; line-height: 1;
   text-transform: uppercase;
   /* Cormorant defaults to old-style figures, so the 4 rendered at x-height and
-     sat below the caps — the wordmark read as two different lines of type.
+     sat below the caps - the wordmark read as two different lines of type.
      Lining figures put it back on the cap line. */
   font-variant-numeric: lining-nums;
   font-feature-settings: "lnum" 1;
@@ -276,7 +276,7 @@ a:hover { color: var(--ink); }
 .nav-toggle { display: none; background: none; border: 0; color: var(--cream); cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--cream); margin: 5px 0; transition: .3s; }
 
-/* ---------- Nav dropdown — the "Zabiegi" folder ---------- */
+/* ---------- Nav dropdown - the "Zabiegi" folder ---------- */
 .menu { position: relative; display: flex; align-items: center; }
 .menu__label { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
 .menu__label::after {
@@ -306,7 +306,7 @@ a:hover { color: var(--ink); }
   margin: 0 0 14px; font-weight: 500; white-space: nowrap;
 }
 /* Six categories flow into a 3x2 grid, so the divider follows column position
-   rather than source order — otherwise the first item of row two draws a rule
+   rather than source order - otherwise the first item of row two draws a rule
    against nothing. .menu__all is child 7, which 3n+1 also clears. */
 .menu__col { border-left: 1px solid rgba(46, 75, 55, .12); padding-left: clamp(22px, 2.2vw, 40px); }
 .menu__col:nth-child(3n+1) { border-left: 0; padding-left: 0; }
@@ -331,7 +331,7 @@ a:hover { color: var(--ink); }
 
 /* the head of the team gets her role in the accent tone */
 .team-card--chef p { color: var(--accent); }
-/* Solid header — used on every page that is not the homepage */
+/* Solid header - used on every page that is not the homepage */
 .header--solid {
   position: sticky; top: 0; right: auto; bottom: auto; left: auto;
   background: var(--ink);
@@ -374,7 +374,7 @@ a:hover { color: var(--ink); }
 /* ---------- About ---------- */
 .about__media { grid-column: 8 / span 5; position: relative; }
 .about__copy { grid-column: 1 / span 6; }
-/* anchored near the top so the group shot keeps everyone's head in frame —
+/* anchored near the top so the group shot keeps everyone's head in frame -
    a centred cover crop clips the tallest of them */
 .about__img { width: 100%; height: clamp(420px, 40vw, 620px); object-fit: cover; object-position: 50% 6%; }
 .about__inset {
@@ -390,7 +390,7 @@ a:hover { color: var(--ink); }
 .price-group + .price-group { margin-top: clamp(48px, 6vw, 84px); }
 .price-group .hub-group__head { margin-bottom: clamp(20px, 2.4vw, 32px); }
 
-/* Price table — every duration and its exact price, so nothing hides behind "od".
+/* Price table - every duration and its exact price, so nothing hides behind "od".
    Name on the left, duration/price pills on the right; they stack under the name
    on narrow screens rather than wrapping into an unreadable column. */
 .ptab { border-top: 1px solid rgba(42,37,30,.16); }
@@ -466,7 +466,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 /* ---------- Team ---------- */
 .team { background: var(--cream-2); }
 .center-head { text-align: center; max-width: 640px; margin: 0 auto clamp(48px, 7vh, 80px); }
-/* five therapists — minmax lets all five sit on one row on a wide screen,
+/* five therapists - minmax lets all five sit on one row on a wide screen,
    then reflow to 4 / 3 / 2 / 1 as it narrows */
 .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(20px, 2.4vw, 34px); max-width: 1280px; margin: 0 auto; }
 .team-card img { width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; border-radius: 4px; }
@@ -504,7 +504,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .feature q { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(28px, 4vw, 52px); line-height: 1.3; text-wrap: balance; quotes: "„" "”"; }
 .feature footer { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; margin-top: 32px; opacity: .8; }
 
-/* ---------- Gallery — parallax carousel ---------- */
+/* ---------- Gallery - parallax carousel ---------- */
 .pcar { position: relative; }
 .pcar__viewport {
   display: flex; gap: clamp(12px, 1.4vw, 22px);
@@ -522,7 +522,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
   aspect-ratio: 853 / 1280; background: var(--cream-2);
 }
 /* Overscanned so the parallax nudge never exposes an edge: 118% wide, pulled
-   9% left, leaving 9% of slack on each side. max-width:none is required —
+   9% left, leaving 9% of slack on each side. max-width:none is required -
    the global `img { max-width: 100% }` reset would otherwise clamp this back
    to 118% -> 100% and the drift would tear a gap open at the frame edge. */
 .pcar__media img {
@@ -605,7 +605,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .post--soon .cat { color: var(--faint); }
 
 /* ---------- Strefa wiedzy: article body ---------- */
-/* One column, ~68 characters per line — long-form reading, not a landing page. */
+/* One column, ~68 characters per line - long-form reading, not a landing page. */
 .article { max-width: 740px; margin: 0 auto; padding: clamp(44px, 5vw, 76px) clamp(24px, 5vw, 40px) clamp(56px, 7vw, 96px); }
 .article__hero { width: 100%; height: clamp(240px, 42vw, 460px); object-fit: cover; border-radius: 6px; margin-bottom: clamp(32px, 4vw, 52px); }
 .article p { font-size: 17px; line-height: 1.85; color: var(--muted); margin: 0 0 24px; }
@@ -628,7 +628,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 }
 .article blockquote p { font: inherit; color: inherit; margin: 0; }
 /* health-adjacent copy: the "talk to us first" line must not read as body text */
-/* Mid-article emphasis — the one thing we want a reader to take away from a
+/* Mid-article emphasis - the one thing we want a reader to take away from a
    section. Distinct from .article__note, which closes a piece in small print. */
 .article p.callout {
   margin: clamp(28px,3vw,38px) 0; padding: 20px 24px;
@@ -637,7 +637,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
   font-size: 16px; line-height: 1.75; color: var(--ink);
 }
 /* The comparison table reuses the privacy-policy table, but that one styles its
-   first column as monospace for cookie names — wrong for treatment names. */
+   first column as monospace for cookie names - wrong for treatment names. */
 .article .doc-table td:first-child { font-family: inherit; font-size: inherit; }
 .article .doc-table { margin-bottom: 24px; }
 .article__note {
@@ -739,7 +739,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .footer .copy { font-size: 12px; letter-spacing: .1em; color: var(--faint); }
 
 /* ============================================================
-   ZABIEGI — service pages (/zabiegi/*.html)
+   ZABIEGI - service pages (/zabiegi/*.html)
    ============================================================ */
 .sv-section { padding: clamp(64px, 9vw, 120px) clamp(24px, 5vw, 72px); }
 .crumbs { padding: 18px clamp(24px, 5vw, 72px); font-size: 12px; letter-spacing: .08em; color: var(--faint); }
@@ -767,8 +767,8 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .sv-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* A 2:3 portrait photo in a landscape panel loses roughly 480px off the top
    and bottom. Centred, that slices the therapist's crown. --focus moves the
-   crop window up so her face and her hands — the part that shows the actual
-   work — both stay in frame; set it per page as the photo demands. */
+   crop window up so her face and her hands - the part that shows the actual
+   work - both stay in frame; set it per page as the photo demands. */
 .sv-hero__media img { object-position: 50% var(--focus, 50%); }
 .sv-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
@@ -903,7 +903,7 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
    header condenses here rather than dropping straight to a hamburger. */
 /* The caps lockup is about 70px wider than the lowercase wordmark it replaced,
    which pushed the eight-item nav onto a second line everywhere below ~1400px.
-   Scale the logo down, and start tightening the nav at 1280px rather than 1100px —
+   Scale the logo down, and start tightening the nav at 1280px rather than 1100px -
    the nav is already at its tightest by 980px. */
 @media (max-width: 1400px) {
   .logo { font-size: 15px; letter-spacing: .11em; gap: 8px; }
@@ -948,14 +948,19 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .nav.open .menu { display: block; width: 100%; }
   .nav.open .menu__label { color: var(--cream); }
   .menu__panel {
-    position: static; transform: none; display: block; min-width: 0;
+    position: static; transform: none; min-width: 0;
     margin: 12px 0 0; padding: 0 0 0 14px; background: none; box-shadow: none;
     border-left: 1px solid rgba(246, 243, 236, .2); border-radius: 0;
     max-height: 42vh; overflow-y: auto;
+    /* On desktop this panel is absolutely positioned, so hiding it with
+       opacity costs no space. Folded into the burger menu it becomes part of
+       the flow, and opacity alone left its full 42vh reserved - a blank gap
+       between "Zabiegi" and "Cennik". Taking it out of the flow closes it. */
+    display: none;
   }
-  /* hover must not open it on a touch screen — only the tap toggle may */
-  .menu:hover .menu__panel, .menu:focus-within .menu__panel { opacity: 0; visibility: hidden; pointer-events: none; }
-  .menu.open .menu__panel { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+  /* hover must not open it on a touch screen - only the tap toggle may */
+  .menu:hover .menu__panel, .menu:focus-within .menu__panel { display: none; }
+  .menu.open .menu__panel { display: block; opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
   .menu__panel::before { display: none; }
   /* stacked on phones: clear the desktop grid dividers on every column, not
      just siblings, since the rule above now targets .menu__col directly */

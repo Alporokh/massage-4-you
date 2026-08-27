@@ -5,7 +5,7 @@
  * straight back to the asset layer, so html_handling and the 404 page behave
  * exactly as they did before.
  *
- * Required Cloudflare variables (set as Secrets, not plain text — the token
+ * Required Cloudflare variables (set as Secrets, not plain text - the token
  * lets anyone post as the bot):
  *   BOT_TOKEN  (also accepted: TELEGRAM_BOT_TOKEN)
  *   CHAT_ID    (also accepted: TELEGRAM_CHAT_ID)
@@ -123,7 +123,7 @@ async function handleBooking(request, env) {
   const token = pick(env, ["BOT_TOKEN", "TELEGRAM_BOT_TOKEN"]);
   const chatId = pick(env, ["CHAT_ID", "TELEGRAM_CHAT_ID"]);
   if (!token || !chatId) {
-    // Names only — never echo the values.
+    // Names only - never echo the values.
     return json(
       {
         ok: false,

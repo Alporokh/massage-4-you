@@ -1,6 +1,6 @@
 <!--
   ============================================================================
-  SZABLON WPISU — Strefa wiedzy
+  SZABLON WPISU - Strefa wiedzy
   ============================================================================
 
   Ten plik NIE jest publikowany. wrangler.toml wysyła na serwer wyłącznie
@@ -13,30 +13,30 @@
      Slug bez polskich znaków, myślniki zamiast spacji, np.
      "5-sygnalow-ze-twoje-cialo-potrzebuje-masazu".
 
-  2. Uzupełnij wszystkie miejsca oznaczone [[...]] — jest ich siedem:
+  2. Uzupełnij wszystkie miejsca oznaczone [[...]] - jest ich siedem:
      [[TYTUL]]          tytuł wpisu (w <title>, <h1> i okruszkach)
      [[OPIS]]           meta description, 140–160 znaków, pełne zdanie
-     [[SLUG]]           nazwa pliku bez .html — trafia do rel="canonical"
+     [[SLUG]]           nazwa pliku bez .html - trafia do rel="canonical"
      [[KATEGORIA]]      np. Regeneracja, Relaks, Pielęgnacja
      [[CZAS]]           np. "5 min czytania"
      [[ZDJECIE]]        plik z images/, proporcje ok. 3:2
      [[ALT]]            opis zdjęcia dla czytników ekranu i Google
 
   3. Napisz treść w <article class="article">. Dostępne style:
-     <p class="article__lead">   — akapit wprowadzający, większy
-     <h2> <h3>                   — śródtytuły (h1 jest tylko jeden, tytuł wpisu)
-     <ul> <ol> <li>              — listy
-     <blockquote><p>…</p></...>  — wyróżniony cytat
-     <p class="article__note">   — zastrzeżenie na końcu, mniejsze i szare
+     <p class="article__lead">   - akapit wprowadzający, większy
+     <h2> <h3>                   - śródtytuły (h1 jest tylko jeden, tytuł wpisu)
+     <ul> <ol> <li>              - listy
+     <blockquote><p>…</p></...>  - wyróżniony cytat
+     <p class="article__note">   - zastrzeżenie na końcu, mniejsze i szare
 
   4. Dodaj kafelek wpisu w site/strefa-wiedzy/index.html (skopiuj istniejący
-     <a class="post">). Jeśli wpis był zapowiedziany — usuń z niego klasę
+     <a class="post">). Jeśli wpis był zapowiedziany - usuń z niego klasę
      post--soon oraz aria-disabled i tabindex.
 
   5. Dopisz adres w site/sitemap.xml z dzisiejszą datą w <lastmod>:
      <url><loc>https://massage-4-you.com/strefa-wiedzy/<slug></loc>
           <lastmod>RRRR-MM-DD</lastmod></url>
-     Bez rozszerzenia .html — Cloudflare serwuje foo.html pod /foo.
+     Bez rozszerzenia .html - Cloudflare serwuje foo.html pod /foo.
 
   6. Jeśli wpis pojawia się też na stronie głównej, zaktualizuj kafelki
      w sekcji <section id="blog"> w site/index.html.
@@ -54,7 +54,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Consent Mode v2 — defaults DENIED, set before any Google tag.
+  <!-- Google Consent Mode v2 - defaults DENIED, set before any Google tag.
        Required in the EEA since March 2024. -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -74,7 +74,7 @@
   <!-- Google tag (gtag.js). Standard Consent Mode v2: the tag loads on every
        visit, but the defaults declared above hold analytics_storage at denied,
        so it writes no cookies and records no visit until the banner is
-       accepted — consent.js then flips it to granted. Parking the tag instead
+       accepted - consent.js then flips it to granted. Parking the tag instead
        kept it inert, which is why Google's own tag check could not see it. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWH7YY91FW"></script>
   <script>
@@ -211,7 +211,7 @@
     <p>Treść akapitu.</p>
 
     <blockquote>
-      <p>Zdanie, które warto wyróżnić — jedna myśl, nie cały akapit.</p>
+      <p>Zdanie, które warto wyróżnić - jedna myśl, nie cały akapit.</p>
     </blockquote>
 
     <h2>Trzeci śródtytuł</h2>
@@ -220,7 +220,7 @@
     <!-- Zostaw to zastrzeżenie w każdym tekście dotyczącym zdrowia. -->
     <p class="article__note">Ten tekst ma charakter informacyjny i nie zastępuje
     porady lekarza ani fizjoterapeuty. Jeśli odczuwasz ostry ból, masz świeży
-    uraz albo chorobę przewlekłą, skonsultuj wizytę ze specjalistą — a przed
+    uraz albo chorobę przewlekłą, skonsultuj wizytę ze specjalistą - a przed
     zabiegiem powiedz o tym terapeutce, dobierzemy bezpieczny wariant.</p>
 
     <div class="article__cta">
@@ -233,7 +233,7 @@
   <section class="sv-cta">
     <p class="eyebrow">Nie wiesz, co wybrać?</p>
     <h2>Dobierzemy zabieg podczas&nbsp;rozmowy</h2>
-    <p class="lead">Napisz lub zadzwoń — zapytamy o kilka rzeczy i zaproponujemy masaż, którego naprawdę potrzebujesz.</p>
+    <p class="lead">Napisz lub zadzwoń - zapytamy o kilka rzeczy i zaproponujemy masaż, którego naprawdę potrzebujesz.</p>
     <div class="sv-actions">
       <a href="../index.html#rezerwacja" class="btn btn--solid">Umów wizytę</a>
       <a href="tel:+48533681901" class="btn btn--outline">+48 533 681 901</a>
@@ -265,7 +265,7 @@
       </div>
     </div>
     <footer class="footer">
-      <a class="footer__lockup" href="../index.html" aria-label="Massage 4 You — strona główna">
+      <a class="footer__lockup" href="../index.html" aria-label="Massage 4 You - strona główna">
         <img decoding="async" loading="lazy" class="footer__mark" src="../images/logo-mark-light.png" alt="" width="44" height="32">
         <span class="footer__word">Massage <b>4</b> You</span>
         <span class="footer__tag">Healthy &amp; Relax</span>
@@ -288,7 +288,7 @@
         </div>
         <div class="cc__cat">
           <input type="checkbox" id="cc-analytics">
-          <div><label for="cc-analytics">Analityka</label><p>Google Analytics — zagregowane statystyki odwiedzin. Domyślnie wyłączone.</p></div>
+          <div><label for="cc-analytics">Analityka</label><p>Google Analytics - zagregowane statystyki odwiedzin. Domyślnie wyłączone.</p></div>
         </div>
       </div>
       <div class="cc__actions">

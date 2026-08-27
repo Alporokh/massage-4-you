@@ -1,4 +1,4 @@
-/* Massage4you — interactions */
+/* Massage4you - interactions */
 (function () {
 
   /* ------------------------------------------------------------------
@@ -6,7 +6,7 @@
      Leave FORM_ENDPOINT empty and the form falls back to opening the
      visitor's mail client with the request pre-filled. Paste a Formspree /
      Getform / own-backend URL here and it will POST the fields as JSON
-     instead — no other change needed.
+     instead - no other change needed.
   ------------------------------------------------------------------ */
   var FORM_ENDPOINT = '/api/booking';
   var STUDIO_EMAIL = 'massage4youpoznan@gmail.com';
@@ -23,7 +23,7 @@
     });
     nav.addEventListener('click', function (e) {
       // inside the folded panel the Zabiegi label expands its list instead of
-      // navigating away — there is no hover on a touch screen
+      // navigating away - there is no hover on a touch screen
       var label = e.target.closest('.menu__label');
       if (label && window.matchMedia('(max-width: 860px)').matches) {
         e.preventDefault();
@@ -43,7 +43,7 @@
     });
   }
 
-  // Transparent over the hero, solid once the page scrolls — keeps the logo
+  // Transparent over the hero, solid once the page scrolls - keeps the logo
   // and the nav readable over the light sections underneath.
   if (header && !header.classList.contains('header--solid')) {
     var onScroll = function () {
@@ -73,7 +73,7 @@
     }
 
     // The clip loops, so 'ended' never fires and pausing is the only way back
-    // to rest — the old handler waited for an end that no longer arrives.
+    // to rest - the old handler waited for an end that no longer arrives.
     // 'ended' stays wired so pulling the loop attribute still behaves.
     video.addEventListener('pause', rest);
     video.addEventListener('ended', function () {
@@ -84,9 +84,9 @@
 
   /* ---------------- Gallery: parallax carousel ----------------
      The strip itself is plain CSS scroll-snap and works with this script
-     switched off. What is added here is the parallax — each photo is 118%
+     switched off. What is added here is the parallax - each photo is 118%
      of its frame and slides against the scroll direction, so the images
-     drift inside their frames instead of moving as flat tiles — plus the
+     drift inside their frames instead of moving as flat tiles - plus the
      arrows and the progress rule.
   ------------------------------------------------------------------- */
   var pcar = document.querySelector('[data-carousel]');
@@ -100,7 +100,7 @@
     var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     var queued = false;
 
-    // Percent of the IMAGE's own width, which is 118% of the frame — so 7%
+    // Percent of the IMAGE's own width, which is 118% of the frame - so 7%
     // here is 7 * 1.18 = 8.3% of the frame, just inside the 9% of slack the
     // overscan leaves on each side. Raising this past 7.6 tears a gap open.
     var DRIFT = 7;
@@ -203,7 +203,7 @@
     }
 
     // Price pills on the cennik also carry the chosen length. Package rows use
-    // labels like "6 × 45 min" that no <option> matches — those go in the
+    // labels like "6 × 45 min" that no <option> matches - those go in the
     // message instead of being dropped on the floor.
     var czas = params.get('czas');
     var durationSelect = document.getElementById('bk-duration');
@@ -220,7 +220,7 @@
     }
   }
 
-  // "Rezerwacja" button on a service card — preselect that treatment
+  // "Rezerwacja" button on a service card - preselect that treatment
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-service]');
     if (!trigger || !serviceSelect) return;
@@ -270,7 +270,7 @@
         date: fd.get('date') || '',
         time: fd.get('time') || '',
         note: (fd.get('note') || '').trim(),
-        // honeypot — hidden from people, so anything here means a bot
+        // honeypot - hidden from people, so anything here means a bot
         company: (fd.get('company') || '').trim()
       };
 
@@ -280,11 +280,11 @@
       // behaviour and is now also the safety net: if the endpoint is down, the
       // enquiry still has a way out instead of the visitor hitting a wall.
       function sendByMail(lead) {
-        var subject = 'Rezerwacja: ' + data.service + ' — ' + data.name;
+        var subject = 'Rezerwacja: ' + data.service + ' - ' + data.name;
         window.location.href = 'mailto:' + STUDIO_EMAIL +
           '?subject=' + encodeURIComponent(subject) +
           '&body=' + encodeURIComponent(summary(data));
-        say(lead + 'Otworzyliśmy Twój program pocztowy z gotową wiadomością — wyślij ją, a my potwierdzimy termin. ' +
+        say(lead + 'Otworzyliśmy Twój program pocztowy z gotową wiadomością - wyślij ją, a my potwierdzimy termin. ' +
             'Jeśli okno się nie pojawiło, zadzwoń: +48 533 681 901.', true);
       }
 
@@ -295,7 +295,7 @@
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(data)
         }).then(function (r) {
-          // Read the body either way — the endpoint explains itself in JSON,
+          // Read the body either way - the endpoint explains itself in JSON,
           // and throwing that away is what made the first failure undiagnosable.
           return r.json().catch(function () { return null; }).then(function (payload) {
             return { ok: r.ok, status: r.status, payload: payload };
@@ -303,7 +303,7 @@
         }).then(function (res) {
           if (res.ok && res.payload && res.payload.ok) {
             form.reset();
-            say('Dziękujemy! Zgłoszenie dotarło — odezwiemy się, żeby potwierdzić termin.', true);
+            say('Dziękujemy! Zgłoszenie dotarło - odezwiemy się, żeby potwierdzić termin.', true);
             return;
           }
           var reason = (res.payload && (res.payload.description || res.payload.error)) || ('HTTP ' + res.status);
