@@ -788,6 +788,18 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .sv-about__media img { width: 100%; height: clamp(320px, 32vw, 480px); object-fit: cover; border-radius: 4px; }
 .sv-about__copy p + p { margin-top: 18px; }
 
+/* 3b · wariant z dwoma kadrami pod tekstem, zamiast jednego obok niego.
+   Zdjęcia do stron "dla dwojga" przyszły jako jeden szeroki dyptyk, więc oba
+   kadry stoją tu obok siebie tak jak w oryginale. Poniżej 860px układają się
+   jeden pod drugim - w dwóch kolumnach każdy kadr zrobiłby się paskiem, na
+   którym nie widać już, co się na nim dzieje. aspect-ratio zamiast stałej
+   wysokości, żeby kadr szedł w całości i nic nie uciekało z boków. */
+.sv-about--split .sv-about__media {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.4vw, 20px);
+}
+.sv-about--split .sv-about__media img { height: auto; aspect-ratio: 1000 / 728; }
+
 /* 4 · korzyści */
 .sv-benefits { background: var(--ink); color: var(--cream); }
 .sv-benefits .h2 { color: var(--cream); }
@@ -984,6 +996,7 @@ a.hub-card:hover .hub-card__go { transform: translateX(4px); }
   .sv-hero { grid-template-columns: 1fr; min-height: 0; }
   .sv-hero__media { min-height: 56vh; order: -1; }
   .sv-about__media { margin-top: 40px; }
+  .sv-about--split .sv-about__media { grid-template-columns: 1fr; }
   .about__media { margin-bottom: 56px; }
   .about__inset { left: 0; }
   .why__grid { grid-template-columns: 1fr 1fr; }
