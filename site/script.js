@@ -43,6 +43,33 @@
     });
   }
 
+  // Keep the Zabiegi dropdown on screen. It is centred under its label, and on
+  // narrower desktops the label sits left of centre, so a panel sized to its
+  // content can hang off the left edge. Worked out from layout offsets, not
+  // getBoundingClientRect: the panel's transform is animated, and a rect read
+  // mid-transition would still include the shift being replaced.
+  var menuWrap = document.querySelector('.menu');
+  var menuPanel = menuWrap && menuWrap.querySelector('.menu__panel');
+  if (menuPanel) {
+    var placeMenu = function () {
+      if (window.matchMedia('(max-width: 860px)').matches) {
+        menuPanel.style.removeProperty('--menu-shift');   // folded into the burger menu
+        return;
+      }
+      var gutter = 16;
+      var vw = document.documentElement.clientWidth;
+      var left = menuWrap.getBoundingClientRect().left + menuPanel.offsetLeft - menuPanel.offsetWidth / 2;
+      var right = left + menuPanel.offsetWidth;
+      var shift = 0;
+      if (left < gutter) shift = gutter - left;
+      else if (right > vw - gutter) shift = vw - gutter - right;
+      menuPanel.style.setProperty('--menu-shift', Math.round(shift) + 'px');
+    };
+    placeMenu();
+    window.addEventListener('resize', placeMenu, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeMenu);
+  }
+
   // Transparent over the hero, solid once the page scrolls - keeps the logo
   // and the nav readable over the light sections underneath.
   if (header && !header.classList.contains('header--solid')) {
