@@ -10,6 +10,112 @@
   ------------------------------------------------------------------ */
   var FORM_ENDPOINT = '/api/booking';
   var STUDIO_EMAIL = 'massage4youpoznan@gmail.com';
+  /* ------------------------------------------------------------------
+     GA4 events.
+     Each page's <head> holds analytics_storage at denied until the cookie
+     banner is accepted; until then Google receives these only as cookieless
+     pings. No event carries the visitor's name, phone, email or message.
+  ------------------------------------------------------------------ */
+  function track(name, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
+
+  // Lead value in PLN, copied from cennik.html on 2026-09-14 (single sessions
+  // only, no packages). When a price changes on the cennik page, change it here.
+  var PRICES = {
+    'Masaż relaksacyjny całego ciała': { '60 min': 170, '80 min': 220, '90 min': 240, '120 min': 330 },
+    'Masaż zdrowotny całego ciała': { '60 min': 190, '80 min': 240, '90 min': 270, '120 min': 370 },
+    'Masaż tkanek głębokich': { '40 min': 140, '60 min': 190, '80 min': 250, '90 min': 270 },
+    'Masaż sportowy': { '60 min': 190, '80 min': 230, '90 min': 270 },
+    'Masaż drenażu limfatycznego': { '60 min': 170, '80 min': 220 },
+    'Masaż kamieniami gorącymi': { '60 min': 180, '80 min': 230 },
+    'Masaż na 4 ręce': { '60 min': 330 },
+    'Masaż relaksacyjny ciała + twarzy': { '120 min': 330, '140 min': 380 },
+    'Masaż pleców': { '30 min': 90, '45 min': 130, '60 min': 170 },
+    'Masaż karku': { '30 min': 90 },
+    'Masaż karku + głowa': { '40 min': 120 },
+    'Masaż biurowy': { '50 min': 140 },
+    'Masaż stóp klasyczny': { '20 min': 70 },
+    'Masaż dla dwojga relaksacyjny': { '60 min': 320, '80 min': 420, '90 min': 460, '120 min': 640 },
+    'Masaż dla dwojga zdrowotny': { '60 min': 360, '80 min': 460, '90 min': 520, '120 min': 720 },
+    'Masaż dla dwojga relaksacyjny ciała + twarzy': { '120 min': 640, '140 min': 740 },
+    'Masaż dla dwojga kamieniami gorącymi': { '60 min': 340, '80 min': 440 },
+    'Masaż Kobido dla dwojga': { '60 min': 340, '75 min': 400 },
+    'Masaż Kobido': { '60 min': 180, '75 min': 210 },
+    'Masaż autorski skulpturalny twarzy': { '80 min': 250 },
+    'Masaż mioplastyczny + transbukalny twarzy': { '60 min': 180 },
+    'Masaż transbukalny twarzy': { '40 min': 120 },
+    'Masaż karku + mioplastyczny twarzy': { '90 min': 250 },
+    'Masaż tajski klasyczny na matach': { '60 min': 180, '90 min': 240 },
+    'Masaż tajski stóp': { '45 min': 130 },
+    'Masaż tajski stóp + głowy': { '60 min': 170 },
+    'Masaż antycellulitowy': { '60 min': 180, '80 min': 240 },
+    'Masaż antycellulitowy + presoterapia': { '80 min': 240 },
+    'Endosfera': { '20 min': 90, '30 min': 110, '45 min': 150 },
+    'Presoterapia': { '30 min': 90 },
+    'Lipolaser': { '20 min': 50, '40 min': 90 },
+    'Liposukcja ultradźwiękowa': { '30 min': 90 },
+    'Kriolipoliza': { '60 min': 310 },
+    'Fala radiowa z vacuum': { '30 min': 90, '60 min': 150 },
+    'Endermologia (LPG)': { '30 min': 120, '60 min': 180 }
+  };
+
+  // The price of the chosen length; with no length chosen, the cheapest single
+  // session, so the value never overstates the lead. A voucher is worth the
+  // amount the cennik link wrote into the message.
+  function leadValue(d) {
+    var byLength = PRICES[d.service];
+    if (byLength) {
+      if (byLength[d.duration]) return byLength[d.duration];
+      return Math.min.apply(null, Object.keys(byLength).map(function (k) { return byLength[k]; }));
+    }
+    if (d.service === 'Voucher upominkowy') {
+      var amount = /na kwotę\s*(\d[\d\s]*)/.exec(d.note || '');
+      if (amount) return parseInt(amount[1].replace(/\s/g, ''), 10);
+    }
+    return null;
+  }
+
+  function leadParams(d) {
+    var params = {
+      lead_source: 'booking_form',
+      service: d.service || 'nie_wybrano',
+      duration: d.duration || 'bez_preferencji',
+      therapist: d.therapist || 'bez_preferencji'
+    };
+    var value = leadValue(d);
+    if (value) { params.value = value; params.currency = 'PLN'; }
+    return params;
+  }
+
+  // Contact and booking clicks, on every page
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!link) return;
+    var href = link.getAttribute('href') || '';
+    var host = (link.hostname || '').replace(/^www\./, '');
+    var area = link.closest('[id], header, nav, footer');
+    var params = { link_placement: area ? (area.id || area.tagName.toLowerCase()) : 'page' };
+
+    if (href.indexOf('tel:') === 0) {
+      track('phone_click', params);
+    } else if (href.indexOf('mailto:') === 0 || href.indexOf('/cdn-cgi/l/email-protection') !== -1) {
+      track('email_click', params);
+    } else if (/(^|\.)booksy\.com$/.test(host)) {
+      track('booksy_click', params);
+    } else if (/(^|\.)instagram\.com$/.test(host)) {
+      track('instagram_click', params);
+    } else if (/(^|\.)facebook\.com$/.test(host)) {
+      track('facebook_click', params);
+    } else if (host === 'share.google' || host === 'g.page' || host === 'maps.app.goo.gl') {
+      track('google_profile_click', params);
+    } else if (href.indexOf('#rezerwacja') !== -1) {
+      var query = new URLSearchParams(link.search);
+      params.service = link.getAttribute('data-service') || query.get('zabieg') || 'nie_wybrano';
+      if (query.get('czas')) params.duration = query.get('czas');
+      track('booking_button_click', params);
+    }
+  });
 
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
@@ -329,16 +435,20 @@
           });
         }).then(function (res) {
           if (res.ok && res.payload && res.payload.ok) {
+            // The Worker confirmed Telegram accepted the message - a real lead
+            track('generate_lead', leadParams(data));
             form.reset();
             say('Dziękujemy! Zgłoszenie dotarło - odezwiemy się, żeby potwierdzić termin.', true);
             return;
           }
           var reason = (res.payload && (res.payload.description || res.payload.error)) || ('HTTP ' + res.status);
           if (window.console) console.error('[rezerwacja] wysyłka nie powiodła się:', res.status, res.payload);
+          track('booking_email_fallback', { service: data.service || 'nie_wybrano', failure_reason: String(reason).slice(0, 100) });
           sendByMail('Nie udało się wysłać zgłoszenia ze strony (' + reason + '). ');
         }).catch(function (err) {
           // Network failure, or something in the browser blocked the request.
           if (window.console) console.error('[rezerwacja] żądanie nie doszło:', err);
+          track('booking_email_fallback', { service: data.service || 'nie_wybrano', failure_reason: 'network' });
           sendByMail('Nie udało się połączyć z serwerem. ');
         }).then(function () {
           if (button) { button.disabled = false; button.textContent = 'Wyślij zgłoszenie'; }
