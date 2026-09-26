@@ -609,7 +609,8 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .post:hover .post__thumb img { transform: scale(1.04); }
 .post__meta { display: flex; gap: 12px; align-items: center; margin: 20px 0 12px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
 .post__meta .cat { color: var(--accent); }
-.post h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; margin: 0; letter-spacing: -.005em; transition: color .3s ease; }
+/* h2 on the listing pages, h3 where the cards sit under a section head */
+.post h3, .post .post__title { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; margin: 0; letter-spacing: -.005em; transition: color .3s ease; }
 .post:hover h3 { color: var(--accent); }
 /* planned but unwritten, same treatment the unbuilt zabiegi get */
 .post--soon { opacity: .6; pointer-events: none; }
