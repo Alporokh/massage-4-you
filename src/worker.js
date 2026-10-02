@@ -9,6 +9,11 @@
  * lets anyone post as the bot):
  *   BOT_TOKEN  (also accepted: TELEGRAM_BOT_TOKEN)
  *   CHAT_ID    (also accepted: TELEGRAM_CHAT_ID)
+ *
+ * Optional - copy every lead into the Google Sheet as well. Both must be set,
+ * otherwise the sheet step is skipped and Telegram works as before:
+ *   SHEETS_WEBHOOK_URL  the Apps Script web app URL (ends in /exec)
+ *   SHEETS_SECRET       the same random string as SECRET in the Apps Script
  */
 
 const ENDPOINT = "/api/booking";
@@ -74,7 +79,25 @@ function buildMessage(d) {
   return lines.join("\n");
 }
 
-async function handleBooking(request, env) {
+// The Apps Script decides the tab: vouchers go to "Bony", everything else to
+// "Website form". A failure here is swallowed - Telegram already has the lead,
+// and the visitor must not see an error for a spreadsheet hiccup.
+async function logToSheet(d, env) {
+  const url = pick(env, ["SHEETS_WEBHOOK_URL"]);
+  const secret = pick(env, ["SHEETS_SECRET"]);
+  if (!url || !secret) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(Object.assign({ secret: secret }, d)),
+    });
+  } catch (e) {
+    // nothing to do - the lead is safe in Telegram
+  }
+}
+
+async function handleBooking(request, env, ctx) {
   // A cross-origin fetch with a JSON content-type is preflighted; answering
   // OPTIONS keeps that from surfacing as an opaque failure in the browser.
   if (request.method === "OPTIONS") {
@@ -161,13 +184,16 @@ async function handleBooking(request, env) {
     );
   }
 
+  // Runs after the response is sent, so the form does not wait on Google.
+  ctx.waitUntil(logToSheet(d, env));
+
   return json({ ok: true });
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === ENDPOINT) return handleBooking(request, env);
+    if (url.pathname === ENDPOINT) return handleBooking(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
 };
