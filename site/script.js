@@ -10,6 +10,10 @@
   ------------------------------------------------------------------ */
   var FORM_ENDPOINT = '/api/booking';
   var STUDIO_EMAIL = 'massage4youpoznan@gmail.com';
+  // English pages carry <html lang="en">: visitor-facing messages switch to
+  // English and the lead is flagged so the studio replies in English.
+  var EN = /^en/i.test(document.documentElement.lang || '');
+  function tr(pl, en) { return EN ? en : pl; }
   /* ------------------------------------------------------------------
      GA4 events.
      Each page's <head> holds analytics_storage at denied until the cookie
@@ -20,13 +24,13 @@
     if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
   }
 
-  // Lead value in PLN, copied from cennik.html on 2026-09-14 (single sessions
+  // Lead value in PLN, re-synced with cennik.html on 2026-11-14 (single sessions
   // only, no packages). When a price changes on the cennik page, change it here.
   var PRICES = {
     'Masaż relaksacyjny całego ciała': { '60 min': 170, '80 min': 220, '90 min': 240, '120 min': 330 },
     'Masaż zdrowotny całego ciała': { '60 min': 190, '80 min': 240, '90 min': 270, '120 min': 370 },
-    'Masaż tkanek głębokich': { '40 min': 140, '60 min': 190, '80 min': 250, '90 min': 270 },
-    'Masaż sportowy': { '60 min': 190, '80 min': 230, '90 min': 270 },
+    'Masaż tkanek głębokich': { '40 min': 140, '60 min': 200, '80 min': 250, '90 min': 280 },
+    'Masaż sportowy': { '60 min': 190, '80 min': 240, '90 min': 270 },
     'Masaż drenażu limfatycznego': { '60 min': 170, '80 min': 220 },
     'Masaż kamieniami gorącymi': { '60 min': 180, '80 min': 230 },
     'Masaż na 4 ręce': { '60 min': 330 },
@@ -38,14 +42,14 @@
     'Masaż stóp klasyczny': { '20 min': 70 },
     'Masaż dla dwojga relaksacyjny': { '60 min': 320, '80 min': 420, '90 min': 460, '120 min': 640 },
     'Masaż dla dwojga zdrowotny': { '60 min': 360, '80 min': 460, '90 min': 520, '120 min': 720 },
-    'Masaż dla dwojga relaksacyjny ciała + twarzy': { '120 min': 640, '140 min': 740 },
-    'Masaż dla dwojga kamieniami gorącymi': { '60 min': 340, '80 min': 440 },
-    'Masaż Kobido dla dwojga': { '60 min': 340, '75 min': 400 },
-    'Masaż Kobido': { '60 min': 180, '75 min': 210 },
+    'Masaż dla dwojga relaksacyjny ciała + twarzy': { '90 min': 500, '120 min': 640, '140 min': 740 },
+    'Masaż dla dwojga kamieniami gorącymi': { '60 min': 350, '80 min': 420 },
+    'Masaż Kobido dla dwojga': { '60 min': 340, '75 min': 420 },
+    'Masaż Kobido': { '60 min': 180, '75 min': 220 },
     'Masaż autorski skulpturalny twarzy': { '80 min': 250 },
     'Masaż mioplastyczny + transbukalny twarzy': { '60 min': 180 },
     'Masaż transbukalny twarzy': { '40 min': 120 },
-    'Masaż karku + mioplastyczny twarzy': { '90 min': 250 },
+    'Masaż karku + mioplastyczny twarzy': { '90 min': 260 },
     'Masaż tajski klasyczny na matach': { '60 min': 180, '90 min': 240 },
     'Masaż tajski stóp': { '45 min': 130 },
     'Masaż tajski stóp + głowy': { '60 min': 170 },
@@ -325,8 +329,8 @@
     var params = new URLSearchParams(window.location.search);
     var wantedFromUrl = params.get('zabieg');
     if (wantedFromUrl && selectService(wantedFromUrl)) {
-      var target = document.getElementById('rezerwacja');
-      if (target && window.location.hash !== '#rezerwacja') {
+      var target = document.getElementById('rezerwacja') || document.getElementById('booking');
+      if (target && !/^#(rezerwacja|booking)$/.test(window.location.hash)) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
     }
@@ -334,7 +338,7 @@
     var amount = params.get('kwota');
     var note = document.getElementById('bk-note');
     if (amount && note && !note.value) {
-      note.value = 'Voucher upominkowy na kwotę ' + amount + '.';
+      note.value = tr('Voucher upominkowy na kwotę ' + amount + '.', 'Gift voucher for ' + amount + '.');
     }
 
     // Price pills on the cennik also carry the chosen length. Package rows use
@@ -350,8 +354,17 @@
         durationSelect.value = hit.value || hit.textContent.trim();
         durationSelect.dispatchEvent(new Event('change'));
       } else if (note && !note.value) {
-        note.value = 'Wybrany wariant: ' + czas + '.';
+        note.value = tr('Wybrany wariant: ' + czas + '.', 'Chosen option: ' + czas + '.');
       }
+    }
+  }
+
+  // Voucher pages: ?kwota=320 (or "320 zł") preselects the amount dropdown.
+  var amountSelect = document.getElementById('bk-amount');
+  if (amountSelect) {
+    var kw = (new URLSearchParams(window.location.search).get('kwota') || '').replace(/\D/g, '');
+    if (kw && Array.prototype.some.call(amountSelect.options, function (o) { return o.value === kw; })) {
+      amountSelect.value = kw;
     }
   }
 
@@ -395,6 +408,19 @@
       if (!form.reportValidity()) return;
 
       var fd = new FormData(form);
+
+      // The voucher pages ask for amount, format and recipient in their own
+      // fields. The Worker and the sheet only know "note", so those go in
+      // front of it - in Polish, because the studio reads them, and the
+      // amount keeps the "na kwotę N zł" shape the sheet's Kwota column parses.
+      var extra = [];
+      var amt = (fd.get('amount') || '').trim();
+      if (amt) extra.push(/^\d+$/.test(amt) ? 'Voucher upominkowy na kwotę ' + amt + ' zł.' : 'Kwota: ' + amt + '.');
+      if (fd.get('format')) extra.push('Forma: ' + fd.get('format') + '.');
+      if ((fd.get('recipient') || '').trim()) extra.push('Dla: ' + fd.get('recipient').trim() + '.');
+      var userNote = (fd.get('note') || '').trim();
+      var fullNote = extra.length ? extra.join('\n') + (userNote ? '\n\n' + userNote : '') : userNote;
+
       var data = {
         name: (fd.get('name') || '').trim(),
         phone: (fd.get('phone') || '').trim(),
@@ -404,7 +430,8 @@
         therapist: fd.get('therapist') || '',
         date: fd.get('date') || '',
         time: fd.get('time') || '',
-        note: (fd.get('note') || '').trim(),
+        note: fullNote,
+        lang: EN ? 'en' : 'pl',
         // honeypot - hidden from people, so anything here means a bot
         company: (fd.get('company') || '').trim()
       };
@@ -415,16 +442,18 @@
       // behaviour and is now also the safety net: if the endpoint is down, the
       // enquiry still has a way out instead of the visitor hitting a wall.
       function sendByMail(lead) {
-        var subject = 'Rezerwacja: ' + data.service + ' - ' + data.name;
+        var subject = (EN ? '[EN] ' : '') + 'Rezerwacja: ' + data.service + ' - ' + data.name;
         window.location.href = 'mailto:' + STUDIO_EMAIL +
           '?subject=' + encodeURIComponent(subject) +
           '&body=' + encodeURIComponent(summary(data));
-        say(lead + 'Otworzyliśmy Twój program pocztowy z gotową wiadomością - wyślij ją, a my potwierdzimy termin. ' +
-            'Jeśli okno się nie pojawiło, zadzwoń: +48 533 681 901.', true);
+        say(lead + tr('Otworzyliśmy Twój program pocztowy z gotową wiadomością - wyślij ją, a my potwierdzimy termin. ' +
+            'Jeśli okno się nie pojawiło, zadzwoń: +48 533 681 901.',
+            'We opened your e-mail app with the message ready - send it and we will confirm the time. ' +
+            'If nothing opened, message us on WhatsApp or call +48 533 681 901.'), true);
       }
 
       if (FORM_ENDPOINT) {
-        if (button) { button.disabled = true; button.textContent = 'Wysyłanie…'; }
+        if (button) { button.disabled = true; button.textContent = tr('Wysyłanie…', 'Sending…'); }
         fetch(FORM_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -440,20 +469,21 @@
             // The Worker confirmed Telegram accepted the message - a real lead
             track('generate_lead', leadParams(data));
             form.reset();
-            say('Dziękujemy! Zgłoszenie dotarło - odezwiemy się, żeby potwierdzić termin.', true);
+            say(tr('Dziękujemy! Zgłoszenie dotarło - odezwiemy się, żeby potwierdzić termin.',
+                'Thank you! We have your request and will get back to you to confirm the time.'), true);
             return;
           }
           var reason = (res.payload && (res.payload.description || res.payload.error)) || ('HTTP ' + res.status);
           if (window.console) console.error('[rezerwacja] wysyłka nie powiodła się:', res.status, res.payload);
           track('booking_email_fallback', { service: data.service || 'nie_wybrano', failure_reason: String(reason).slice(0, 100) });
-          sendByMail('Nie udało się wysłać zgłoszenia ze strony (' + reason + '). ');
+          sendByMail(tr('Nie udało się wysłać zgłoszenia ze strony (', 'The form could not be sent (') + reason + '). ');
         }).catch(function (err) {
           // Network failure, or something in the browser blocked the request.
           if (window.console) console.error('[rezerwacja] żądanie nie doszło:', err);
           track('booking_email_fallback', { service: data.service || 'nie_wybrano', failure_reason: 'network' });
-          sendByMail('Nie udało się połączyć z serwerem. ');
+          sendByMail(tr('Nie udało się połączyć z serwerem. ', 'Could not reach the server. '));
         }).then(function () {
-          if (button) { button.disabled = false; button.textContent = 'Wyślij zgłoszenie'; }
+          if (button) { button.disabled = false; button.textContent = tr('Wyślij zgłoszenie', 'Send request'); }
         });
         return;
       }
@@ -479,10 +509,10 @@
   wa.id = 'whatsapp';
   wa.className = 'wa-float';
   wa.href = 'https://wa.me/' + WHATSAPP + '?text=' +
-    encodeURIComponent('Dzień dobry! Piszę ze strony Massage 4 You.');
+    encodeURIComponent(tr('Dzień dobry! Piszę ze strony Massage 4 You.', 'Hello! I am writing from the Massage 4 You website.'));
   wa.target = '_blank';
   wa.rel = 'noopener';
-  wa.setAttribute('aria-label', 'Napisz do nas na WhatsApp');
+  wa.setAttribute('aria-label', tr('Napisz do nas na WhatsApp', 'Message us on WhatsApp'));
   wa.innerHTML = '<svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false">' +
     '<path fill="currentColor" d="M16.02 3C8.84 3 3 8.83 3 16c0 2.29.6 4.53 1.74 6.5L3 29l6.68-1.75A13 13 0 0 0 16.02 29C23.2 29 29 23.17 29 16S23.2 3 16.02 3Zm0 23.8c-1.95 0-3.86-.52-5.53-1.51l-.4-.24-3.96 1.04 1.06-3.86-.26-.4A10.77 10.77 0 0 1 5.2 16c0-5.96 4.85-10.8 10.82-10.8 5.96 0 10.8 4.84 10.8 10.8 0 5.96-4.84 10.8-10.8 10.8Zm5.93-8.09c-.33-.16-1.93-.95-2.23-1.06-.3-.11-.52-.16-.73.17-.22.32-.84 1.05-1.03 1.27-.19.22-.38.24-.7.08-.33-.16-1.38-.51-2.62-1.62-.97-.86-1.62-1.93-1.81-2.26-.19-.32-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.22-.32.33-.54.11-.22.05-.4-.03-.57-.08-.16-.73-1.76-1-2.41-.27-.63-.53-.55-.73-.56h-.62c-.22 0-.57.08-.87.4-.3.33-1.14 1.12-1.14 2.72s1.17 3.15 1.33 3.37c.16.22 2.3 3.5 5.57 4.91.78.34 1.39.54 1.86.69.78.25 1.5.21 2.06.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.42.19-1.55-.08-.14-.3-.22-.62-.38Z"/>' +
     '</svg>';

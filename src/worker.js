@@ -71,7 +71,12 @@ function clean(value, max) {
 }
 
 function buildMessage(d) {
-  const lines = ["<b>Nowe zgłoszenie ze strony</b>", ""];
+  // English pages send lang "en": flag it first, so whoever picks up the
+  // lead knows to answer in English.
+  const head = d.lang === "en"
+    ? "🇬🇧 <b>EN - klient pisze po angielsku, odpowiedz po angielsku</b>\n<b>Nowe zgłoszenie ze strony (EN)</b>"
+    : "<b>Nowe zgłoszenie ze strony</b>";
+  const lines = [head, ""];
   for (const key of ["service", "name", "phone", "email", "duration", "therapist", "date", "time"]) {
     if (d[key]) lines.push("<b>" + LABELS[key] + ":</b> " + esc(d[key]));
   }
@@ -90,7 +95,10 @@ async function logToSheet(d, env) {
     await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(Object.assign({ secret: secret }, d)),
+      // The sheet has no language column; tagging the note keeps the Apps
+      // Script unchanged (and the voucher "na kwotę" parse still matches).
+      body: JSON.stringify(Object.assign({ secret: secret }, d,
+        d.lang === "en" ? { note: "[EN] " + (d.note || "") } : {})),
     });
   } catch (e) {
     // nothing to do - the lead is safe in Telegram
@@ -140,6 +148,7 @@ async function handleBooking(request, env, ctx) {
 
   const d = {};
   for (const key of Object.keys(LIMITS)) d[key] = clean(data[key], LIMITS[key]);
+  d.lang = data.lang === "en" ? "en" : "pl";
 
   if (!d.name || !d.phone) return json({ ok: false, error: "missing_fields" }, 400);
 

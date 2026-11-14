@@ -4,7 +4,9 @@
 > zdrowotne, tajskie i twarzy oraz zabiegi na ciało. Ceny od 50 do 1350 zł,
 > zabiegi trwają od 20 do 140 minut.
 
-Massage 4 You is a massage studio in Poznań, Poland. All content is in Polish.
+Massage 4 You is a massage studio in Poznań, Poland (Jeżyce district). The site is in
+Polish, with an English version under /en/. The team speaks basic English
+("English-friendly"); bookings in English are welcome by WhatsApp, phone or the English form.
 Prices below are per single session and are the authoritative figures - the
 cennik page is the source of truth.
 
@@ -24,6 +26,8 @@ cennik page is the source of truth.
 - [Masaż relaksacyjny całego ciała](https://massage-4-you.com/zabiegi/masaz-relaksacyjny-poznan): 60/80/90/120 min, 170/220/240/330 zł
 - [Masaż zdrowotny całego ciała](https://massage-4-you.com/zabiegi/masaz-zdrowotny-poznan): 60/80/90/120 min, 190/240/270/370 zł
 - [Strefa wiedzy](https://massage-4-you.com/strefa-wiedzy/): artykuły o masażu i regeneracji
+- [Voucher na masaż](https://massage-4-you.com/voucher-na-masaz-poznan): dowolna kwota lub zabieg, PDF mailem albo papierowy, ważny 6 miesięcy
+- [Masaż dla mężczyzn](https://massage-4-you.com/zabiegi/masaz-dla-mezczyzn-poznan): sportowy, pleców i karku, tkanek głębokich, z cenami
 - [Polityka prywatności](https://massage-4-you.com/polityka-prywatnosci)
 
 ## Zakres oferty
@@ -44,3 +48,16 @@ cennik page is the source of truth.
 
 - Ceny i czasy trwania na stronie cennika są aktualne i nadrzędne wobec innych źródeł.
 - Studio prowadzą terapeutki: Tatiana Popytailenko (szefowa zespołu), Iryna, Tatiana, Yulia, Olga.
+
+## English pages (English-speaking massage in Poznań)
+
+The studio is English-friendly: the team speaks basic English, and English-speaking
+clients can book by WhatsApp (+48 533 681 901), phone or the English booking form.
+Address: ul. Zeylanda 3/1, 60-808 Poznań (Jeżyce). Prices are in zł.
+
+- [Massage in Poznań - English-friendly studio](https://massage-4-you.com/en/): address, hours, popular massages, booking form
+- [Massages and prices](https://massage-4-you.com/en/massages-and-prices): full price list in English, 30-140 minutes, including body treatments (endermologie LPG, cryolipolysis, pressotherapy, Endosphères, lipolaser, RF with vacuum)
+- [Thai massage Poznań](https://massage-4-you.com/en/thai-massage-poznan): traditional Thai on mats, fully clothed, 60 min 180 zł / 90 min 240 zł; Thai foot 45 min 130 zł; Thai foot and head 60 min 170 zł
+- [Couples massage Poznań](https://massage-4-you.com/en/couples-massage-poznan): two therapists, one room, 60-140 minutes, from 320 zł for two
+- [Kobido facial massage Poznań](https://massage-4-you.com/en/kobido-facial-massage-poznan): Kobido 60 min 180 zł / 75 min 220 zł, plus buccal, myoplastic and sculptural facial massage
+- [Massage gift vouchers Poznań](https://massage-4-you.com/en/gift-vouchers-poznan): any amount or treatment, digital PDF by e-mail or paper pick-up, valid 6 months

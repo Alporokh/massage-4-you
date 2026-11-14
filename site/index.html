@@ -35,6 +35,9 @@
   <title>Masaż Poznań - salon masażu na Jeżycach | Massage 4 You</title>
   <meta name="description" content="Masaż Poznań - kameralny salon masażu na Jeżycach, ul. Zeylanda 3. Masaże relaksacyjne, zdrowotne, tajskie i twarzy oraz zabiegi na ciało.">
   <link rel="canonical" href="https://massage-4-you.com/">
+  <link rel="alternate" hreflang="pl" href="https://massage-4-you.com/">
+  <link rel="alternate" hreflang="en" href="https://massage-4-you.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://massage-4-you.com/">
 
   <!-- Open Graph / social preview. og:image is absolute because scrapers do
        not resolve relative paths; 1200x630 is what Facebook and LinkedIn want. -->
@@ -94,6 +97,7 @@
         "image": "https://massage-4-you.com/images/og-default.jpg",
         "logo": "https://massage-4-you.com/images/logo.png",
         "priceRange": "50–1350 zł",
+        "availableLanguage": ["pl", "en"],
         "currenciesAccepted": "PLN",
         "address": {
           "@type": "PostalAddress",
@@ -226,6 +230,7 @@
             <a href="zabiegi/masaz-na-4-rece-poznan.html">Masaż na 4 ręce</a>
             <a href="zabiegi/masaz-plecow-i-karku-poznan.html">Masaż karku i pleców</a>
             <a href="zabiegi/masaz-biurowy-poznan.html">Masaż biurowy</a>
+            <a href="zabiegi/masaz-dla-mezczyzn-poznan.html">Masaż dla mężczyzn</a>
           </div>
           <div class="menu__col">
             <p class="menu__title">Masaże dla dwojga</p>
@@ -274,6 +279,7 @@
       <!-- the pill CTA is hidden on phones; this stands in inside the folded menu -->
       <a href="#rezerwacja" class="nav__book">Rezerwacja</a>
     </nav>
+    <div class="lang-switch"><a href="index.html" hreflang="pl" lang="pl" aria-current="true">PL</a><span aria-hidden="true">|</span><a href="en/index.html" hreflang="en" lang="en">EN</a></div>
     <a href="#rezerwacja" class="nav-cta">Rezerwacja</a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
@@ -291,7 +297,8 @@
     <div class="hero__scrim"></div>
     <div class="hero__body">
       <p class="hero__kicker">Studio masażu · Poznań</p>
-      <h1>Chwila spokoju, której&nbsp;potrzebuje <i>Twoje ciało</i></h1>
+      <h1>Masaż Poznań - salon masażu na&nbsp;<i>Jeżycach</i></h1>
+      <p class="hero__slogan">Chwila spokoju, której&nbsp;potrzebuje Twoje ciało</p>
       <p class="hero__text">Profesjonalny masaż w Poznaniu - relaksacyjny, zdrowotny i tajski, w kameralnym gabinecie na Jeżycach. Indywidualne podejście do każdego ciała.</p>
       <div class="hero__actions">
         <a href="#rezerwacja" class="btn btn--solid">Zarezerwuj wizytę</a>
@@ -381,6 +388,7 @@
         <div class="svc__foot"><span class="svc__time">60 / 80 / 90 / 120 min</span><span class="svc__price">od 320 zł</span></div>
         <div class="svc__cta">
           <a href="#rezerwacja" class="btn btn--light btn--sm" data-service="Masaż dla dwojga relaksacyjny">Rezerwacja</a>
+          <a href="zabiegi/masaz-dla-dwojga-poznan.html" class="svc__more">Więcej &rarr;</a>
         </div>
       </article>
 
@@ -438,8 +446,9 @@
   <!-- ============ ZESPÓŁ ============ -->
   <section id="zespol" class="section wrap team">
     <div class="center-head">
-      <p class="eyebrow" style="color:var(--accent);">Zespół</p>
+      <p class="eyebrow" style="color:var(--accent);">Nasi masażyści</p>
       <h2 class="h2">Terapeuci, którym powierzysz&nbsp;swoje ciało</h2>
+      <p class="lead team__lead">Każda masażystka i masażysta w naszym zespole pracuje w studiu na Jeżycach na co dzień, więc zna gabinety, stałych gości i ich historię. Jeśli masz już swoją ulubioną osobę, wskaż ją w formularzu rezerwacji, a ułożymy termin pod jej grafik.</p>
     </div>
     <div class="team-grid">
       <div class="team-card team-card--chef">
@@ -645,7 +654,7 @@
       <p class="eyebrow">Vouchery</p>
       <h2 class="h2" style="font-size:clamp(32px,4vw,56px);">Podaruj spokój, który&nbsp;zostaje w pamięci</h2>
       <p class="lead" style="margin:28px 0 36px; max-width:520px;">Voucher upominkowy Massage 4 You to gotowy pomysł na prezent na każdą okazję. Wybierz kwotę lub konkretny zabieg - resztą zajmiemy się my.</p>
-      <a href="#rezerwacja" class="btn btn--solid" data-service="Voucher upominkowy">Zamów voucher</a>
+      <a href="voucher-na-masaz-poznan.html" class="btn btn--solid">Voucher na masaż &rarr;</a>
     </div>
   </section>
 
