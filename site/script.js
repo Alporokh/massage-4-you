@@ -506,6 +506,27 @@
      use the arrows to rotate, click a photo to open it large. Nine photos make
      a cramped ring, so they repeat until there are 24+ cards - the clones are hidden from
      assistive tech, and the counter always reports the real photo (1-9). */
+  /* Specular header button: the light on the glass pill drifts toward the
+     cursor while it moves anywhere over the header (clamped just past the
+     pill's edges), and settles back to the top rim when the cursor leaves.
+     The glide itself is a CSS transition on --mx / --my. */
+  var cta = document.querySelector('.nav-cta');
+  var headerEl = document.querySelector('.header');
+  if (cta && headerEl && window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+    headerEl.addEventListener('pointermove', function (e) {
+      var r = cta.getBoundingClientRect();
+      if (!r.width) return;
+      var x = Math.max(-15, Math.min(115, (e.clientX - r.left) / r.width * 100));
+      var y = Math.max(-40, Math.min(140, (e.clientY - r.top) / r.height * 100));
+      cta.style.setProperty('--mx', x.toFixed(1) + '%');
+      cta.style.setProperty('--my', y.toFixed(1) + '%');
+    });
+    headerEl.addEventListener('pointerleave', function () {
+      cta.style.removeProperty('--mx');
+      cta.style.removeProperty('--my');
+    });
+  }
+
   var ringEl = document.querySelector('[data-ring]');
   if (ringEl) (function () {
     var stage = ringEl.querySelector('.ring__stage');
