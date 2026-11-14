@@ -527,6 +527,72 @@
     });
   }
 
+  /* ---------------- Team: chroma spotlight ----------------
+     Each photo gets a colour copy on top of its black-and-white base, masked
+     to a soft circle. One light travels a slow looping path over the whole
+     grid, so colour sweeps from person to person; while the cursor is over
+     the grid the light eases toward it instead. */
+  var teamGrid = document.querySelector('.team-grid');
+  if (teamGrid && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) (function () {
+    var cards = Array.prototype.slice.call(teamGrid.querySelectorAll('.team-card'));
+    var medias = [];
+    cards.forEach(function (card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'team-card__media';
+      img.parentNode.insertBefore(wrap, img);
+      wrap.appendChild(img);
+      img.classList.add('team-card__base');
+      var color = img.cloneNode();
+      color.className = 'team-card__color';
+      color.alt = '';
+      color.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(color);
+      medias.push({ card: card, el: wrap });
+    });
+    if (!medias.length) return;
+    teamGrid.classList.add('chroma');
+
+    var lx = 0, ly = 0, mouse = null, visible = true, t0 = performance.now();
+    teamGrid.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var g = teamGrid.getBoundingClientRect();
+      mouse = { x: e.clientX - g.left, y: e.clientY - g.top };
+    });
+    teamGrid.addEventListener('pointerleave', function () { mouse = null; });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(teamGrid);
+    }
+
+    function frame(now) {
+      requestAnimationFrame(frame);
+      if (!visible || document.hidden) return;
+      var g = teamGrid.getBoundingClientRect();
+      var t = (now - t0) / 1000;
+      // A slow Lissajous loop that covers the whole grid, rows included
+      var tx = g.width * (0.5 + 0.48 * Math.sin(t * 0.32));
+      var ty = g.height * (0.5 + 0.42 * Math.sin(t * 0.51 + 1.2));
+      if (mouse) { tx = mouse.x; ty = mouse.y; }
+      lx += (tx - lx) * (mouse ? 0.14 : 0.06);
+      ly += (ty - ly) * (mouse ? 0.14 : 0.06);
+      var r = Math.max(180, Math.min(320, g.width * 0.22));
+      medias.forEach(function (m) {
+        var b = m.el.getBoundingClientRect();
+        var x = lx - (b.left - g.left), y = ly - (b.top - g.top);
+        m.el.style.setProperty('--lx', x.toFixed(1) + 'px');
+        m.el.style.setProperty('--ly', y.toFixed(1) + 'px');
+        m.el.style.setProperty('--r', r.toFixed(0) + 'px');
+        var dx = Math.max(0, Math.abs(x - b.width / 2) - b.width / 2);
+        var dy = Math.max(0, Math.abs(y - b.height / 2) - b.height / 2);
+        var glow = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / (r * 0.6));
+        m.card.style.setProperty('--glow', glow.toFixed(2));
+        m.el.style.setProperty('--glow', glow.toFixed(2));
+      });
+    }
+    requestAnimationFrame(frame);
+  })();
+
   var ringEl = document.querySelector('[data-ring]');
   if (ringEl) (function () {
     var stage = ringEl.querySelector('.ring__stage');

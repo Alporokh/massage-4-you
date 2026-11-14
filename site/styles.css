@@ -1326,3 +1326,29 @@ a.rating-badge:hover { background: #E4DBC9; transform: translateY(-2px); }
 /* hero phone is a real tel: link now - keep the quiet look, show it is tappable */
 .hero__hours a.phone { display: inline-block; color: inherit; text-decoration: none; border-bottom: 1px solid rgba(251,245,236,.35); padding: 6px 0 2px; transition: border-color .25s ease, color .25s ease; }
 .hero__hours a.phone:hover { color: var(--cream); border-bottom-color: currentColor; }
+
+/* ---------- Team: chroma spotlight ----------
+   Photos rest in black and white. One soft light wanders across the whole
+   grid on its own (or follows the cursor while it is over the grid) and
+   brings colour back wherever it passes. script.js adds the colour copy of
+   each photo and moves the light; without JS the photos stay in colour. */
+.team-grid.chroma .team-card__media { position: relative; border-radius: 6px; overflow: hidden; isolation: isolate;
+  box-shadow: 0 0 0 1px rgba(192,139,78, calc(var(--glow, 0) * .55)), 0 18px 40px -22px rgba(192,139,78, calc(var(--glow, 0) * .9));
+  transition: box-shadow .3s ease; }
+.team-grid.chroma .team-card__media img { display: block; border-radius: 0; }
+.team-grid.chroma .team-card__base { filter: grayscale(1) contrast(1.04) brightness(.97); }
+.team-grid.chroma .team-card__color {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle var(--r, 260px) at var(--lx, -999px) var(--ly, -999px), #000 0%, rgba(0,0,0,.85) 35%, rgba(0,0,0,.35) 62%, transparent 82%);
+          mask-image: radial-gradient(circle var(--r, 260px) at var(--lx, -999px) var(--ly, -999px), #000 0%, rgba(0,0,0,.85) 35%, rgba(0,0,0,.35) 62%, transparent 82%);
+}
+/* a warm sheen where the light touches the photo */
+.team-grid.chroma .team-card__media::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: radial-gradient(circle calc(var(--r, 260px) * .7) at var(--lx, -999px) var(--ly, -999px), rgba(255,236,205,.55), rgba(255,236,205,0) 70%);
+}
+.team-grid.chroma .team-card h3 { transition: color .4s ease; color: color-mix(in srgb, var(--ink) calc(100% - var(--glow, 0) * 35%), var(--accent)); }
+@media (prefers-reduced-motion: reduce) {
+  .team-grid.chroma .team-card__base { filter: none; }
+  .team-grid.chroma .team-card__color, .team-grid.chroma .team-card__media::after { display: none; }
+}
