@@ -16,7 +16,7 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-awNwftkFhSNXZrhgDG69/1RnQVunbGtr7eCKBSD0oN8=' 'sha256-+lKMRxmANbNBP+Q+8HuUwv3tpILGhHNyuK+6AULvU5A=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://pagead2.googlesyndication.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com; media-src 'self'; frame-src 'none'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-awNwftkFhSNXZrhgDG69/1RnQVunbGtr7eCKBSD0oN8=' 'sha256-+lKMRxmANbNBP+Q+8HuUwv3tpILGhHNyuK+6AULvU5A=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://pagead2.googlesyndication.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com; media-src 'self'; frame-src https://www.google.com https://maps.google.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'
 
 # Photography and brand assets change rarely. Filenames are NOT content-hashed,
 # so no `immutable` here — a week of caching with revalidation means a replaced

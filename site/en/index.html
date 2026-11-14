@@ -227,9 +227,11 @@
       <p class="hero__kicker">Massage studio · Jeżyce, Poznań</p>
       <h1>Massage in Poznań - <i>we speak English</i></h1>
       <p class="hero__text">A calm, English-friendly massage studio in Jeżyce, ul. Zeylanda 3/1, a short walk from the city centre. Relaxing, deep tissue, Thai and couples massage from 170 zł.</p>
-      <div class="hero__actions">
-        <a href="https://wa.me/48533681901" class="btn btn--solid" target="_blank" rel="noopener">WhatsApp us</a>
-        <a href="#booking" class="btn btn--ghost">Booking form</a>
+      <div class="hero__actions cta3">
+        <a href="https://wa.me/48533681901" class="btn btn--solid" target="_blank" rel="noopener" data-placement="hero">WhatsApp</a>
+        <a href="#booking" class="btn btn--ghost" data-book data-placement="hero">Book now</a>
+        <a href="tel:+48533681901" class="btn btn--ghost" data-placement="hero" aria-label="Call +48 533 681 901">Call</a>
+        <a class="cta3__alt cta3__alt--light" href="#map" data-placement="hero">See us on the map &rarr;</a>
       </div>
     </div>
     <div class="hero__hours">
@@ -613,6 +615,29 @@
   </section>
 
   <!-- ============ CONTACT ============ -->
+  <!-- ============ MAPA ============ -->
+  <!-- Google Maps loads only after a click: the embed sets Google cookies,
+       so nothing is fetched from Google until the visitor asks for the map. -->
+  <section id="map" class="section wrap map grid12">
+    <div class="map__copy">
+      <p class="eyebrow">Getting here</p>
+      <h2 class="h2" style="font-size:clamp(30px,4vw,52px);">How to find&nbsp;us</h2>
+      <p class="lead" style="margin:24px 0 28px; max-width:440px;">The studio is in Jeżyce, at ul. Zeylanda 3 (unit no. 1). Tap "Get directions" and Google Maps will guide you to the door - on foot, by car or by tram and bus.</p>
+      <div class="map__addr">Massage 4 You<br>ul. Zeylanda 3/1<br>60-808 Poznań (Jeżyce)</div>
+      <div class="map__links">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Massage+4+You%2C+Zeylanda+3%2C+60-808+Pozna%C5%84" class="btn btn--dark" target="_blank" rel="noopener" data-placement="map">Get directions</a>
+        <a href="https://share.google/sd8kYZ4ViBhNyMEgA" class="link-underline" target="_blank" rel="noopener" data-placement="map">Open in Google Maps &rarr;</a>
+      </div>
+    </div>
+    <div class="map__frame" data-map data-src="https://www.google.com/maps?q=Massage+4+You,+Zeylanda+3,+60-808+Pozna%C5%84&z=16&hl=en&output=embed" data-title="Map to Massage 4 You, ul. Zeylanda 3, Poznań">
+      <button type="button" class="map__load" data-map-load>
+        <span class="map__pin"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="9.5" r="2.6" stroke="currentColor" stroke-width="1.4"/></svg></span>
+        <span class="map__btn">Show the map</span>
+        <span class="map__note">Google Maps loads when you click</span>
+      </button>
+    </div>
+  </section>
+
   <section id="contact" class="contact" style="padding-top:clamp(56px,7vh,90px);">
     <div class="grid12">
       <div class="contact__main">
@@ -633,6 +658,7 @@
         <div class="contact__label" style="margin-top:26px;">Find us</div>
         <div class="social">
           <a class="social__link" href="https://wa.me/48533681901" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="social__link" href="https://booksy.com/pl-pl/235928_massage-4-you_masaz_15608_poznan" target="_blank" rel="noopener">Booksy</a>
           <a class="social__link" href="https://share.google/sd8kYZ4ViBhNyMEgA" target="_blank" rel="noopener">Google Maps</a>
           <a class="social__link" href="https://www.instagram.com/studio_massage__4__you/" target="_blank" rel="noopener">Instagram</a>
           <a class="social__link" href="https://www.facebook.com/massage.4.you.2025" target="_blank" rel="noopener">Facebook</a>

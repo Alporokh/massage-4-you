@@ -99,7 +99,7 @@
     var href = link.getAttribute('href') || '';
     var host = (link.hostname || '').replace(/^www\./, '');
     var area = link.closest('[id], header, nav, footer');
-    var params = { link_placement: area ? (area.id || area.tagName.toLowerCase()) : 'page' };
+    var params = { link_placement: link.getAttribute('data-placement') || (area ? (area.id || area.tagName.toLowerCase()) : 'page') };
 
     if (href.indexOf('tel:') === 0) {
       track('phone_click', params);
@@ -115,7 +115,7 @@
       track('facebook_click', params);
     } else if (host === 'share.google' || host === 'g.page' || host === 'maps.app.goo.gl') {
       track('google_profile_click', params);
-    } else if (href.indexOf('#rezerwacja') !== -1) {
+    } else if (href.indexOf('#rezerwacja') !== -1 || href.indexOf('#booking') !== -1 || link.hasAttribute('data-book')) {
       var query = new URLSearchParams(link.search);
       params.service = link.getAttribute('data-service') || query.get('zabieg') || 'nie_wybrano';
       if (query.get('czas')) params.duration = query.get('czas');
@@ -306,6 +306,138 @@
 
     schedule();
   }
+
+  /* ---------------- Booking pop-up, mobile bar, map ----------------
+     Only the homepages carry the booking form. Everywhere else "Zarezerwuj"
+     opens the same form in a pop-up instead of sending people to another
+     page; it is built here (one copy for 80 pages) before the booking code
+     below wires it up, and it posts to the same endpoint. The service and
+     length come from the button: data-service, ?zabieg= and &czas=. */
+  var SERVICES = [["Masaże ciała", "Body massages", [["Masaż relaksacyjny całego ciała", "Relaxing full-body massage"], ["Masaż zdrowotny całego ciała", "Health (therapeutic) full-body massage"], ["Masaż tkanek głębokich", "Deep tissue massage"], ["Masaż sportowy", "Sports massage"], ["Masaż drenażu limfatycznego", "Lymphatic drainage massage"], ["Masaż kamieniami gorącymi", "Hot stone massage"], ["Masaż na 4 ręce", "Four-hands massage"], ["Masaż relaksacyjny ciała + twarzy", "Relaxing body + face massage"], ["Masaż pleców", "Back massage"], ["Masaż karku", "Neck massage"], ["Masaż karku + głowa", "Neck + head massage"], ["Masaż biurowy", "Office massage (neck and shoulders)"], ["Masaż stóp klasyczny", "Classic foot massage"]]], ["Masaże dla dwojga", "Massages for two", [["Masaż dla dwojga relaksacyjny", "Relaxing couples massage"], ["Masaż dla dwojga zdrowotny", "Health couples massage"], ["Masaż dla dwojga relaksacyjny ciała + twarzy", "Body + face for two"], ["Masaż dla dwojga kamieniami gorącymi", "Hot stones for two"], ["Masaż Kobido dla dwojga", "Kobido for two"]]], ["Masaże twarzy", "Facial massages", [["Masaż Kobido", "Kobido facial massage"], ["Masaż autorski skulpturalny twarzy", "Sculptural facial massage"], ["Masaż mioplastyczny + transbukalny twarzy", "Myoplastic + buccal facial massage"], ["Masaż transbukalny twarzy", "Buccal facial massage"], ["Masaż karku + mioplastyczny twarzy", "Neck + myoplastic facial massage"]]], ["Masaże tajskie", "Thai massages", [["Masaż tajski klasyczny na matach", "Thai massage on mats"], ["Masaż tajski stóp", "Thai foot massage"], ["Masaż tajski stóp + głowy", "Thai foot + head massage"]]], ["Masaże antycellulitowe", "Anti-cellulite", [["Masaż antycellulitowy", "Anti-cellulite massage"], ["Masaż antycellulitowy + presoterapia", "Anti-cellulite massage + pressotherapy"]]], ["Zabiegi na ciało", "Body treatments", [["Endosfera", "Endosphères therapy"], ["Presoterapia", "Pressotherapy"], ["Lipolaser", "Lipolaser"], ["Liposukcja ultradźwiękowa", "Ultrasound cavitation"], ["Kriolipoliza", "Cryolipolysis"], ["Fala radiowa z vacuum", "Radiofrequency with vacuum"], ["Endermologia (LPG)", "Endermologie (LPG)"]]], ["Inne", "Other", [["Voucher upominkowy", "Gift voucher"], ["Nie wiem - proszę o doradztwo", "Not sure - please advise me"]]]];
+  var DURATIONS = ['20 min', '30 min', '40 min', '45 min', '50 min', '60 min', '75 min', '80 min', '90 min', '120 min', '140 min'];
+  var bookModal = null;
+  if (!document.getElementById('booking-form')) {
+    var opt = function (v, l) { return '<option value="' + v + '">' + l + '</option>'; };
+    var svcHtml = '<option value="" disabled selected>' + tr('Wybierz zabieg', 'Choose a treatment') + '</option>' +
+      SERVICES.map(function (g) {
+        return '<optgroup label="' + tr(g[0], g[1]) + '">' + g[2].map(function (o) { return opt(o[0], tr(o[0], o[1])); }).join('') + '</optgroup>';
+      }).join('');
+    var times = ['<option value="" selected>' + tr('Bez preferencji', 'No preference') + '</option>'];
+    for (var hh = 9; hh <= 20; hh++) for (var mm = 0; mm < 60; mm += 15) {
+      var tt = (hh < 10 ? '0' : '') + hh + ':' + (mm ? mm : '00');
+      if (hh === 20 && mm === 15) continue;
+      times.push('<option>' + tt + '</option>');
+    }
+    bookModal = document.createElement('div');
+    bookModal.className = 'bkm';
+    bookModal.hidden = true;
+    bookModal.setAttribute('role', 'dialog');
+    bookModal.setAttribute('aria-modal', 'true');
+    bookModal.setAttribute('aria-labelledby', 'bkm-title');
+    bookModal.innerHTML =
+      '<div class="bkm__panel">' +
+        '<button type="button" class="bkm__close" data-bkm-close aria-label="' + tr('Zamknij', 'Close') + '">&times;</button>' +
+        '<h2 class="h2" id="bkm-title">' + tr('Zarezerwuj wizytę', 'Book a visit') + '</h2>' +
+        '<p class="lead">' + tr('Wypełnij formularz - odezwiemy się, żeby potwierdzić termin. Zwykle odpowiadamy tego samego dnia.',
+                                'Fill in the form and we will get back to you to confirm the time, usually the same day. We speak English.') + '</p>' +
+        '<form class="form" id="booking-form" novalidate>' +
+          '<div class="field"><label for="bk-name">' + tr('Imię i nazwisko *', 'Your name *') + '</label><input id="bk-name" name="name" type="text" autocomplete="name" required></div>' +
+          '<div class="field"><label for="bk-phone">' + tr('Telefon *', 'Phone or WhatsApp *') + '</label><input id="bk-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+48 600 000 000"></div>' +
+          '<div class="field field--full"><label for="bk-email">E-mail</label><input id="bk-email" name="email" type="email" autocomplete="email"></div>' +
+          '<div class="field field--full"><label for="bk-service">' + tr('Zabieg *', 'Treatment *') + '</label><select id="bk-service" name="service" required>' + svcHtml + '</select></div>' +
+          '<div class="field"><label for="bk-duration">' + tr('Długość zabiegu', 'Length') + '</label><select id="bk-duration" name="duration"><option value="" selected>' + tr('Bez preferencji', 'No preference') + '</option>' + DURATIONS.map(function (d) { return '<option>' + d + '</option>'; }).join('') + '</select></div>' +
+          '<div class="field"><label for="bk-date">' + tr('Preferowana data', 'Preferred date') + '</label><input id="bk-date" name="date" type="date"></div>' +
+          '<div class="field field--full"><label for="bk-time">' + tr('Preferowana godzina', 'Preferred time') + '</label><select id="bk-time" name="time">' + times.join('') + '</select></div>' +
+          '<div class="field field--full"><label for="bk-note">' + tr('Wiadomość', 'Message') + '</label><textarea id="bk-note" name="note" rows="3"></textarea></div>' +
+          '<div class="hp" aria-hidden="true"><label for="bk-company">Company</label><input id="bk-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>' +
+          '<label class="consent field--full" for="bk-consent"><input id="bk-consent" name="consent" type="checkbox" required><span>' +
+            tr('Wyrażam zgodę na kontakt telefoniczny lub mailowy w celu potwierdzenia rezerwacji. *', 'I agree to be contacted by phone, WhatsApp or e-mail to confirm my booking. *') + '</span></label>' +
+          '<div class="field--full form__actions"><button type="submit" class="btn btn--solid">' + tr('Wyślij zgłoszenie', 'Send request') + '</button>' +
+            '<span class="form__hint">' + tr('* pola wymagane', '* required fields') + '</span></div>' +
+          '<p class="form__status field--full" id="booking-status" role="status" aria-live="polite"></p>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(bookModal);
+
+    var lastFocusBk = null;
+    var closeBk = function () {
+      bookModal.hidden = true;
+      document.body.classList.remove('bkm-open');
+      if (lastFocusBk) lastFocusBk.focus({ preventScroll: true });
+    };
+    var openBk = function (svc, czas) {
+      lastFocusBk = document.activeElement;
+      var sel = document.getElementById('bk-service');
+      var dur = document.getElementById('bk-duration');
+      if (svc) {
+        var hit = Array.prototype.find.call(sel.options, function (o) { return o.value === svc; });
+        if (hit) sel.value = hit.value;
+      }
+      if (czas) {
+        var dh = Array.prototype.find.call(dur.options, function (o) { return o.textContent.trim() === czas; });
+        if (dh) dur.value = dh.textContent.trim();
+        else { var nt = document.getElementById('bk-note'); if (nt && !nt.value) nt.value = tr('Wybrany wariant: ', 'Chosen option: ') + czas + '.'; }
+      }
+      bookModal.hidden = false;
+      document.body.classList.add('bkm-open');
+      document.getElementById('bk-name').focus();
+    };
+    bookModal.addEventListener('click', function (e) {
+      if (e.target === bookModal || e.target.closest('[data-bkm-close]')) closeBk();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !bookModal.hidden) closeBk(); });
+    // Any link to the booking form (#rezerwacja / #booking, with or without
+    // ?zabieg=&czas=) opens the pop-up instead of leaving the page.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var h = a.getAttribute('href') || '';
+      if (!/#(rezerwacja|booking)$/.test(h) && !a.hasAttribute('data-book')) return;
+      if (a.hostname && a.hostname !== location.hostname) return;
+      e.preventDefault();
+      var q = new URLSearchParams(a.search);
+      openBk(a.getAttribute('data-service') || q.get('zabieg'), q.get('czas'));
+    });
+  }
+
+  // Mobile action bar: Zarezerwuj / WhatsApp / Zadzwoń, fixed to the bottom.
+  // It replaces the floating WhatsApp button on phones (hidden in CSS).
+  (function () {
+    var bar = document.createElement('nav');
+    bar.className = 'actionbar';
+    bar.setAttribute('aria-label', tr('Szybki kontakt', 'Quick contact'));
+    var bookHref = document.getElementById('rezerwacja') ? '#rezerwacja'
+      : document.getElementById('booking') ? '#booking'
+      : (EN ? '/en/#booking' : '/#rezerwacja');
+    var ico = {
+      book: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+      wa: '<svg width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.8A13 13 0 1 0 16 3Zm0 23.8c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1 1.1-3.8-.3-.4A10.8 10.8 0 1 1 16 26.8Z"/></svg>',
+      tel: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+    };
+    bar.innerHTML =
+      '<a class="actionbar__book" href="' + bookHref + '" data-book data-placement="sticky-bar">' + ico.book + tr('Zarezerwuj', 'Book now') + '</a>' +
+      '<a href="https://wa.me/48533681901" target="_blank" rel="noopener" data-placement="sticky-bar">' + ico.wa + 'WhatsApp</a>' +
+      '<a href="tel:+48533681901" data-placement="sticky-bar">' + ico.tel + tr('Zadzwoń', 'Call') + '</a>';
+    document.body.appendChild(bar);
+    document.body.classList.add('has-actionbar');
+  })();
+
+  // Map: the Google embed loads only after a click (it sets Google cookies).
+  Array.prototype.forEach.call(document.querySelectorAll('[data-map]'), function (box) {
+    var btn = box.querySelector('[data-map-load]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = box.getAttribute('data-src');
+      f.title = box.getAttribute('data-title') || 'Mapa';
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.allowFullscreen = true;
+      box.innerHTML = '';
+      box.appendChild(f);
+      track('map_open', { link_placement: 'map' });
+    });
+  });
 
   /* ---------------- Booking ---------------- */
   var form = document.getElementById('booking-form');
