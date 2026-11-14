@@ -571,12 +571,12 @@
       var g = teamGrid.getBoundingClientRect();
       var t = (now - t0) / 1000;
       // A slow Lissajous loop that covers the whole grid, rows included
-      var tx = g.width * (0.5 + 0.48 * Math.sin(t * 0.32));
-      var ty = g.height * (0.5 + 0.42 * Math.sin(t * 0.51 + 1.2));
+      var tx = g.width * (0.5 + 0.48 * Math.sin(t * 0.55));
+      var ty = g.height * (0.5 + 0.42 * Math.sin(t * 0.86 + 1.2));
       if (mouse) { tx = mouse.x; ty = mouse.y; }
-      lx += (tx - lx) * (mouse ? 0.14 : 0.06);
-      ly += (ty - ly) * (mouse ? 0.14 : 0.06);
-      var r = Math.max(180, Math.min(320, g.width * 0.22));
+      lx += (tx - lx) * (mouse ? 0.14 : 0.09);
+      ly += (ty - ly) * (mouse ? 0.14 : 0.09);
+      var r = Math.max(260, Math.min(480, g.width * 0.34));
       medias.forEach(function (m) {
         var b = m.el.getBoundingClientRect();
         var x = lx - (b.left - g.left), y = ly - (b.top - g.top);
