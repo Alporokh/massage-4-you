@@ -501,6 +501,168 @@
       String(t.getDate()).padStart(2, '0');
   }
 
+  /* ---------------- 3D ring gallery ----------------
+     The photos stand around a cylinder that turns slowly on its own. Drag or
+     use the arrows to rotate, click a photo to open it large. Nine photos make
+     a cramped ring, so they repeat until there are 24+ cards - the clones are hidden from
+     assistive tech, and the counter always reports the real photo (1-9). */
+  var ringEl = document.querySelector('[data-ring]');
+  if (ringEl) (function () {
+    var stage = ringEl.querySelector('.ring__stage');
+    var inner = ringEl.querySelector('.ring__inner');
+    var originals = Array.prototype.slice.call(inner.querySelectorAll('.ring__item'));
+    var REAL = originals.length;
+    if (!REAL) return;
+    var copies = Math.max(1, Math.ceil(24 / REAL));
+    for (var c = 1; c < copies; c++) {
+      originals.forEach(function (fig) {
+        var clone = fig.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.querySelector('img').alt = '';
+        inner.appendChild(clone);
+      });
+    }
+    var items = Array.prototype.slice.call(inner.querySelectorAll('.ring__item'));
+    var N = items.length, STEP = 360 / N;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nEl = ringEl.querySelector('[data-ring-n]');
+    var capEl = ringEl.querySelector('[data-ring-cap]');
+    var pauseBtn = ringEl.querySelector('[data-ring-pause]');
+    var angle = 0, target = null, R = 900, front = -1;
+    var paused = reduce, hovering = false, visible = true, dragging = false;
+    var SPEED = 3; // degrees per second of auto-rotation
+
+    ringEl.classList.add('is-3d');
+
+    function layout() {
+      var w = items[0].offsetWidth || 300;
+      R = Math.round((w + 24) / (2 * Math.tan(Math.PI / N)));
+      items.forEach(function (it, i) { it.dataset.base = 'rotateY(' + (i * STEP) + 'deg) translateZ(' + R + 'px)'; });
+      front = -1; render();
+    }
+    function mod(a, n) { return ((a % n) + n) % n; }
+    function render() {
+      inner.style.transform = 'translateZ(' + (-R) + 'px) rotateY(' + angle + 'deg)';
+      var f = mod(Math.round(-angle / STEP), N);
+      if (f === front) return;
+      front = f;
+      items.forEach(function (it, i) {
+        var isFront = i === f;
+        it.classList.toggle('is-front', isFront);
+        it.style.transform = it.dataset.base + (isFront ? ' scale(1.08)' : '');
+      });
+      var real = f % REAL;
+      if (nEl) nEl.textContent = (real + 1 < 10 ? '0' : '') + (real + 1);
+      if (capEl) capEl.textContent = originals[real].querySelector('figcaption').textContent;
+    }
+    function snapTo(delta) {
+      var base = Math.round(angle / STEP) * STEP;
+      target = base - delta * STEP;
+    }
+
+    var last = performance.now();
+    function tick(now) {
+      var dt = Math.min(64, now - last) / 1000; last = now;
+      if (target !== null) {
+        var d = target - angle;
+        if (Math.abs(d) < 0.05) { angle = target; target = null; }
+        else angle += d * Math.min(1, dt * 7);
+        render();
+      } else if (!paused && !hovering && !dragging && visible && !document.hidden) {
+        angle -= SPEED * dt;
+        render();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Drag to rotate. A press that barely moves is a click and opens the photo.
+    var startX = 0, startAngle = 0, moved = 0, pressItem = null;
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      dragging = true; target = null; moved = 0;
+      startX = e.clientX; startAngle = angle;
+      pressItem = e.target.closest('.ring__item');
+      stage.setPointerCapture(e.pointerId);
+      stage.classList.add('is-dragging');
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      angle = startAngle + dx * STEP / ((items[0].offsetWidth || 300) * 1.1);
+      render();
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      stage.classList.remove('is-dragging');
+      if (moved < 6 && pressItem) {
+        openBox(items.indexOf(pressItem) % REAL);
+      }
+      snapTo(0);
+    }
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+    stage.addEventListener('mouseenter', function () { hovering = true; });
+    stage.addEventListener('mouseleave', function () { hovering = false; });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { snapTo(1); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft') { snapTo(-1); e.preventDefault(); }
+      else if (e.key === 'Enter') { openBox(front % REAL); }
+    });
+    ringEl.querySelector('[data-ring-next]').addEventListener('click', function () { snapTo(1); });
+    ringEl.querySelector('[data-ring-prev]').addEventListener('click', function () { snapTo(-1); });
+    if (pauseBtn) {
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+      pauseBtn.addEventListener('click', function () {
+        paused = !paused;
+        pauseBtn.setAttribute('aria-pressed', String(paused));
+        pauseBtn.setAttribute('aria-label', paused ? 'Wznów obracanie' : 'Zatrzymaj obracanie');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
+    }
+    window.addEventListener('resize', layout);
+
+    // Lightbox
+    var box = document.querySelector('[data-lbox]');
+    var boxImg = box && box.querySelector('[data-lbox-img]');
+    var boxCap = box && box.querySelector('[data-lbox-cap]');
+    var boxIdx = 0, lastFocus = null;
+    function showBox(k) {
+      boxIdx = mod(k, REAL);
+      var img = originals[boxIdx].querySelector('img');
+      boxImg.src = img.currentSrc || img.src; boxImg.alt = img.alt;
+      boxCap.textContent = originals[boxIdx].querySelector('figcaption').textContent;
+    }
+    function openBox(k) {
+      if (!box) return;
+      lastFocus = document.activeElement;
+      showBox(k); box.hidden = false; document.body.style.overflow = 'hidden';
+      box.querySelector('[data-lbox-close]').focus();
+    }
+    function closeBox() {
+      box.hidden = true; document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }
+    if (box) {
+      box.querySelector('[data-lbox-close]').addEventListener('click', closeBox);
+      box.querySelector('[data-lbox-prev]').addEventListener('click', function () { showBox(boxIdx - 1); });
+      box.querySelector('[data-lbox-next]').addEventListener('click', function () { showBox(boxIdx + 1); });
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (box.hidden) return;
+        if (e.key === 'Escape') closeBox();
+        else if (e.key === 'ArrowRight') showBox(boxIdx + 1);
+        else if (e.key === 'ArrowLeft') showBox(boxIdx - 1);
+      });
+    }
+
+    layout();
+    requestAnimationFrame(tick);
+  })();
+
   // WhatsApp button, on every page. Built here rather than in the HTML so the
   // number and wording live in one place instead of 45 copies. The id doubles
   // as link_placement in the whatsapp_click event.

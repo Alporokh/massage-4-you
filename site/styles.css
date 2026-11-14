@@ -1199,3 +1199,82 @@ a.rating-badge { color: inherit; text-decoration: none; transition: background .
 a.rating-badge:hover { background: #E4DBC9; transform: translateY(-2px); }
 .rating-badge__more { margin-top: 8px; font-size: 13px; color: var(--accent); }
 @media (prefers-reduced-motion: reduce) { a.rating-badge:hover { transform: none; } }
+
+/* ---------- Gallery: 3D ring (homepage #galeria) ----------
+   Without JS: a horizontal scroll strip. script.js adds .is-3d, clones the
+   photos so the ring has enough cards, and stands them around a cylinder. */
+.ring { --ring-w: 300px; --ring-h: 400px; position: relative; }
+.ring__stage { position: relative; outline: none; }
+.ring__inner { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+.ring__item { flex: 0 0 auto; width: 240px; margin: 0; scroll-snap-align: start; }
+.ring__item img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; }
+.ring__item figcaption { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-top: 10px; }
+.ring__fog, .ring__bar, .ring__hint { display: none; }
+
+.ring.is-3d .ring__stage {
+  height: calc(var(--ring-h) * 1.1 + 70px);
+  perspective: 1080px; perspective-origin: 50% 50%;
+  overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+}
+.ring.is-3d .ring__stage.is-dragging { cursor: grabbing; }
+.ring.is-3d .ring__inner {
+  display: block; overflow: visible; padding: 0;
+  position: absolute; left: 50%; top: 50%; width: 0; height: 0;
+  transform-style: preserve-3d;
+}
+.ring.is-3d .ring__item {
+  position: absolute; width: var(--ring-w); height: var(--ring-h);
+  left: calc(var(--ring-w) / -2); top: calc(var(--ring-h) / -2);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+  filter: saturate(.75) brightness(.92);
+}
+.ring.is-3d .ring__item.is-front { filter: none; }
+.ring.is-3d .ring__item img {
+  width: 100%; height: 100%; aspect-ratio: auto; border-radius: 10px; pointer-events: none;
+  box-shadow: 0 30px 50px -30px rgba(23, 38, 28, .55);
+}
+.ring.is-3d .ring__item figcaption { display: none; }
+.ring.is-3d .ring__fog {
+  display: block; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, var(--cream) 0%, rgba(246,243,236,0) 16%, rgba(246,243,236,0) 84%, var(--cream) 100%);
+}
+.ring.is-3d .ring__bar { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.ring.is-3d .ring__hint { display: block; margin: 12px 0 0; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.ring__btn {
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(46,75,55,.25);
+  background: transparent; color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  transition: background .25s ease, color .25s ease;
+}
+.ring__btn:hover { background: var(--ink); color: var(--cream); }
+.ring__btn .i-play { display: none; }
+.ring__btn[aria-pressed="true"] .i-play { display: block; }
+.ring__btn[aria-pressed="true"] .i-pause { display: none; }
+.ring__count { font-size: 12px; letter-spacing: .14em; color: var(--faint); font-variant-numeric: tabular-nums; }
+.ring__count b { color: var(--ink); font-weight: 500; }
+.ring__cap { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); min-width: 0; flex: 0 1 auto; padding: 0 6px; border-left: 1px solid rgba(46,75,55,.2); margin-left: 4px; padding-left: 14px; }
+@media (max-width: 640px) {
+  .ring { --ring-w: 200px; --ring-h: 267px; }
+  .ring.is-3d .ring__bar { flex-wrap: wrap; gap: 10px; }
+  .ring__cap { order: 5; flex-basis: 100%; border-left: 0; margin: 0; padding: 0; }
+}
+
+/* Lightbox for the ring */
+.lbox {
+  position: fixed; inset: 0; z-index: 90; background: rgba(23, 30, 24, .94);
+  display: flex; align-items: center; justify-content: center; padding: 56px 16px;
+}
+.lbox[hidden] { display: none; }
+.lbox__fig { margin: 0; max-width: min(92vw, 900px); text-align: center; }
+.lbox__fig img { max-width: 100%; max-height: 80vh; width: auto; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
+.lbox__fig figcaption { color: var(--cream); opacity: .8; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; margin-top: 14px; }
+.lbox__close, .lbox__nav {
+  position: absolute; background: none; border: 0; color: var(--cream); cursor: pointer; line-height: 1; opacity: .85;
+}
+.lbox__close:hover, .lbox__nav:hover { opacity: 1; }
+.lbox__close { top: 14px; right: 18px; font-size: 40px; width: 48px; height: 48px; }
+.lbox__nav { top: 50%; transform: translateY(-50%); font-size: 56px; width: 56px; height: 72px; }
+.lbox__nav--prev { left: 8px; }
+.lbox__nav--next { right: 8px; }
+/* the ring runs edge to edge like a filmstrip, out of the .wrap column */
+.ring.is-3d .ring__stage { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
