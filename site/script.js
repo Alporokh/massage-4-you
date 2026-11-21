@@ -882,6 +882,63 @@
     requestAnimationFrame(tick);
   })();
 
+  /* ---------------- Certificates ----------------
+     Only the first eight cards show until the button opens the rest. Each
+     card is a link to the full scan, so without JS it still opens; with JS
+     it opens in a lightbox that steps through the cards currently shown. */
+  var certGrid = document.querySelector('[data-certs]');
+  if (certGrid) (function () {
+    var cards = Array.prototype.slice.call(certGrid.querySelectorAll('[data-cert]'));
+    var toggle = document.querySelector('[data-certs-toggle]');
+    if (toggle && certGrid.querySelector('.cert--extra')) {
+      certGrid.classList.add('is-collapsed');
+      toggle.hidden = false;
+      toggle.addEventListener('click', function () {
+        var open = certGrid.classList.toggle('is-collapsed') === false;
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? toggle.dataset.less : toggle.dataset.more;
+        if (!open) certGrid.closest('section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    var box = document.querySelector('[data-cbox]');
+    if (!box) return;
+    var boxImg = box.querySelector('[data-lbox-img]');
+    var boxCap = box.querySelector('[data-lbox-cap]');
+    var list = [], idx = 0, lastFocus = null;
+    function visibleCards() { return cards.filter(function (c) { return c.offsetParent !== null; }); }
+    function show(k) {
+      idx = (k + list.length) % list.length;
+      var card = list[idx], img = card.querySelector('img');
+      boxImg.src = card.getAttribute('href'); boxImg.alt = img.alt;
+      boxCap.textContent = card.querySelector('.cert__cap').textContent.replace(/\s+/g, ' ').trim();
+    }
+    function close() {
+      box.hidden = true; document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }
+    cards.forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        list = visibleCards(); lastFocus = card;
+        show(list.indexOf(card));
+        box.hidden = false; document.body.style.overflow = 'hidden';
+        box.querySelector('[data-lbox-close]').focus();
+      });
+    });
+    box.querySelector('[data-lbox-close]').addEventListener('click', close);
+    box.querySelector('[data-lbox-prev]').addEventListener('click', function () { show(idx - 1); });
+    box.querySelector('[data-lbox-next]').addEventListener('click', function () { show(idx + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (box.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') show(idx + 1);
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+    });
+  })();
+
   // WhatsApp button, on every page. Built here rather than in the HTML so the
   // number and wording live in one place instead of 45 copies. The id doubles
   // as link_placement in the whatsapp_click event.

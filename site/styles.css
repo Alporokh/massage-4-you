@@ -1431,3 +1431,58 @@ body.bkm-open { overflow: hidden; }
 .map__load:hover .map__btn { background: var(--accent); }
 .map__note { font-size: 12px; color: var(--muted); }
 @media (max-width: 860px) { .map__copy, .map__frame { grid-column: 1 / -1; } }
+
+/* ---------- Certificates (homepage) ----------
+   White cards on the cream page (the team block above is cream-2), black-and-white scans shown whole (contain), with
+   the issuer and course under each. Cards past the eighth carry
+   .cert--extra and are hidden by script.js until the button opens them. */
+.certs .h2 em { font-style: italic; color: var(--accent); }
+/* Flex, not grid: portrait scans come first, then a .certs__break forces the
+   landscape ones onto a fresh row, and an incomplete last row is centred. */
+.certs__grid {
+  --cols: 4; --gap: clamp(14px, 2vw, 28px);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--gap);
+  max-width: 1280px; margin: 0 auto;
+}
+.certs__grid > .cert { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); min-width: 0; }
+.certs__break { flex-basis: 100%; height: 0; margin-top: calc(-1 * var(--gap)); }
+.cert {
+  display: flex; flex-direction: column; text-decoration: none; color: var(--muted);
+  background: #fff; border: 1px solid rgba(46, 75, 55, .12); border-radius: 2px;
+  padding: clamp(18px, 2vw, 30px) clamp(16px, 1.8vw, 26px) clamp(20px, 2.2vw, 30px);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.cert:hover, .cert:focus-visible {
+  transform: translateY(-4px); border-color: rgba(192, 139, 78, .45);
+  box-shadow: 0 24px 46px -26px rgba(46, 75, 55, .45); color: var(--muted);
+}
+/* the scan sits on a soft drop shadow, like a sheet laid on the card */
+.cert__img { display: block; position: relative; aspect-ratio: 3 / 4; }
+.cert--wide .cert__img { aspect-ratio: 4 / 3; }
+.cert__img img {
+  position: absolute; inset: 0; margin: auto;
+  max-width: 100%; max-height: 100%; width: auto; height: auto; display: block;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 12px 24px -14px rgba(46, 75, 55, .45);
+}
+.cert__cap {
+  display: block; text-align: center; margin-top: 22px; padding-top: 18px;
+  border-top: 1px solid rgba(46, 75, 55, .12);
+  font-size: 11.5px; line-height: 1.6; letter-spacing: .14em; text-transform: uppercase; color: var(--faint);
+}
+.cert__cap span {
+  display: block; margin-bottom: 4px; color: var(--ink);
+  font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.25;
+  letter-spacing: 0; text-transform: none;
+}
+.certs__grid.is-collapsed .cert--extra { display: none; }
+.certs__more { text-align: center; margin-top: clamp(32px, 5vh, 56px); }
+.btn--ink { background: transparent; color: var(--ink); border: 1px solid var(--ink); cursor: pointer; font-family: inherit; }
+.btn--ink:hover { background: var(--ink); color: var(--cream); }
+.lbox__fig--doc img { background: #fff; border-radius: 2px; max-height: 84vh; }
+.lbox__fig--doc figcaption { text-transform: none; letter-spacing: .02em; font-size: 15px; }
+@media (max-width: 1024px) { .certs__grid { --cols: 3; } }
+@media (max-width: 680px) {
+  .certs__grid { --cols: 2; }
+  .cert__cap { font-size: 10.5px; letter-spacing: .1em; }
+  .cert__cap span { font-size: 17px; }
+}
