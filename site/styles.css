@@ -625,6 +625,7 @@ a.ptab__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3p
 .article__fig { margin: clamp(30px, 3.6vw, 46px) 0; }
 .article__fig img { width: 100%; height: auto; display: block; border-radius: 6px; }
 .article__fig figcaption { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--faint); }
+.article__fig--tall img { max-height: 560px; object-fit: cover; }
 .article p { font-size: 17px; line-height: 1.85; color: var(--muted); margin: 0 0 24px; }
 .article p.article__lead { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.7; color: var(--ink); margin-bottom: 34px; }
 .article h2 {
